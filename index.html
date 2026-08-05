@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mot Buchanan — Media producer & trainer who builds his own tools</title>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#2f3237; --panel:#212327; --card:#1c1e21; --line:#494d55;
+  --ink:#ebedef; --soft:#a0a5b1; --teal:#4cf0e0; --teal-soft:rgba(76,240,224,.12); --orange:#f59847; --green:#6fd98a;
+}
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:'Archivo',Arial,sans-serif;font-size:18px;line-height:1.6}
+.mono{font-family:'JetBrains Mono',monospace}
+.wrap{max-width:640px;margin:0 auto;padding:0 20px}
+button{font-family:inherit}
+.sq{transition:transform .1s cubic-bezier(.34,1.56,.64,1)}
+.sq:active{transform:scale(.94)}
+svg.icn{width:26px;height:26px;stroke:var(--teal);stroke-width:1.7;fill:none;stroke-linecap:round;stroke-linejoin:round}
+
+header{padding:52px 0 20px}
+.hello{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--teal);letter-spacing:.13em;margin-bottom:16px;min-height:1.3em}
+h1{font-size:clamp(2.5rem,10vw,3.9rem);font-weight:900;line-height:.98;letter-spacing:-.02em}
+.headline{font-size:clamp(1.12rem,4.4vw,1.45rem);font-weight:800;margin-top:16px;line-height:1.32}
+.headline .hl{color:var(--teal)}
+.subline{color:var(--soft);font-size:.93rem;margin-top:9px}
+.hook{margin-top:20px;border-left:3px solid var(--orange);padding:4px 0 4px 14px;font-size:1.02rem;line-height:1.55;font-weight:800}
+.hook small{display:block;font-family:'JetBrains Mono',monospace;font-size:.6rem;font-weight:400;color:var(--soft);letter-spacing:.14em;text-transform:uppercase;margin-top:5px}
+#stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:26px 0 4px}
+.stat{background:var(--card);border:1.5px solid var(--line);border-radius:12px;padding:13px 5px;text-align:center}
+.stat .n{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:1.25rem;color:var(--teal)}
+.stat .l{font-size:.55rem;letter-spacing:.06em;text-transform:uppercase;color:var(--soft);margin-top:3px;line-height:1.3}
+
+.eyebrow{font-family:'JetBrains Mono',monospace;font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--soft);margin:34px 0 4px}
+.sdesc{color:var(--soft);font-size:.84rem;margin-bottom:14px}
+
+/* builds board */
+#builds{display:grid;grid-template-columns:1fr 1fr;gap:11px}
+.btile{background:var(--card);border:1.5px solid var(--line);border-radius:14px;padding:15px 14px;cursor:pointer;text-align:left;color:var(--ink);transition:border-color .2s,transform .1s cubic-bezier(.34,1.56,.64,1),background .2s}
+.btile:active{transform:scale(.95)}
+.btile.open{border-color:var(--teal);background:var(--panel)}
+.btile .ic{width:38px;height:38px;border-radius:10px;background:var(--panel);border:1.5px solid var(--line);display:grid;place-items:center;margin-bottom:11px;transition:background .2s,border-color .2s}
+.btile.open .ic{background:var(--teal-soft);border-color:var(--teal)}
+.btile b{font-size:.9rem;font-weight:800;line-height:1.25;display:block}
+.btile .bt{font-family:'JetBrains Mono',monospace;font-size:.55rem;color:var(--soft);margin-top:6px;letter-spacing:.06em}
+#bdetail{grid-column:1/-1;background:var(--panel);border:1.5px solid var(--teal);border-radius:14px;padding:17px 16px;display:none;animation:rise .35s cubic-bezier(.3,1.3,.5,1)}
+#bdetail.show{display:block}
+@keyframes rise{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
+#bdetail .dh{display:flex;align-items:center;gap:11px;margin-bottom:11px}
+#bdetail .dh .dic{width:40px;height:40px;border-radius:10px;background:var(--teal-soft);border:1.5px solid var(--teal);display:grid;place-items:center;flex:none}
+#bdetail h3{font-size:1.12rem;font-weight:900;line-height:1.1}
+#bdetail .dtag{font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--teal);margin-top:2px}
+#bdetail p{font-size:.92rem;line-height:1.6;color:var(--ink);margin-bottom:8px}
+#bdetail p.who{color:var(--soft)}
+#bdetail .phone{margin-top:8px;font-size:.82rem;color:var(--orange);font-weight:800;display:flex;align-items:center;gap:7px}
+
+/* claims */
+.claim{background:var(--card);border:1.5px solid var(--line);border-radius:14px;margin-bottom:14px;overflow:hidden;transition:border-color .3s}
+.claim.done{border-color:var(--teal)}
+.chead{display:flex;align-items:center;gap:10px;padding:12px 15px;border-bottom:1.5px solid var(--line)}
+.cnum{font-family:'JetBrains Mono',monospace;font-size:.62rem;font-weight:700;background:var(--panel);border:1px solid var(--line);color:var(--soft);padding:3px 8px;border-radius:6px;transition:all .3s}
+.claim.done .cnum{background:var(--teal);border-color:var(--teal);color:#0e2b27}
+.chead h3{font-size:.68rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--soft)}
+.cbody{padding:16px 15px}
+.cq{font-size:1.1rem;font-weight:800;line-height:1.42;margin-bottom:13px}
+.cq .hl{color:var(--teal)}
+.verify{display:block;width:100%;background:var(--teal);color:#0e2b27;border:0;border-radius:10px;padding:14px;font-weight:900;font-size:.92rem;cursor:pointer}
+.ev{display:none}
+.claim.done .ev{display:block}
+.claim.done .verify{display:none}
+.ev li{list-style:none;padding:8px 0 8px 26px;position:relative;font-size:.93rem;line-height:1.55;opacity:0;transform:translateX(-8px)}
+.ev li.in{opacity:1;transform:none;transition:all .35s ease}
+.ev li::before{content:"";position:absolute;left:2px;top:14px;width:12px;height:12px;border-radius:50%;background:var(--teal)}
+.ev li b{font-weight:800}
+.ev li .o{color:var(--orange);font-weight:800}
+.stampwrap{height:44px;margin-top:8px;position:relative}
+.stamp{position:absolute;left:0;border:3px solid var(--teal);color:var(--teal);padding:5px 14px;border-radius:8px;font-weight:900;font-size:.76rem;letter-spacing:.17em;transform:rotate(-3deg) scale(0);opacity:0}
+.stamp.slam{animation:slam .38s cubic-bezier(.2,.9,.3,1.2) forwards}
+@keyframes slam{0%{transform:rotate(-3deg) scale(2.8);opacity:0}60%{transform:rotate(-3deg) scale(.95);opacity:1}100%{transform:rotate(-3deg) scale(1);opacity:1}}
+body.shake{animation:shk .18s linear}
+@keyframes shk{25%{transform:translate(2px,-1px)}50%{transform:translate(-2px,1px)}75%{transform:translate(1px,1px)}}
+.pp{position:fixed;width:9px;height:9px;border-radius:50%;pointer-events:none;z-index:300}
+#ctally{font-family:'JetBrains Mono',monospace;font-size:.7rem;color:var(--teal)}
+
+/* extras modules */
+.mods{display:flex;flex-wrap:wrap;gap:9px;margin-bottom:12px}
+.modbtn{background:var(--card);border:1.5px solid var(--line);color:var(--ink);border-radius:24px;padding:11px 16px;font-size:.86rem;font-weight:700;cursor:pointer}
+.modbtn.seen{border-color:var(--teal);color:var(--teal)}
+.modbtn .sl{color:var(--orange);font-family:'JetBrains Mono',monospace}
+#modout .mod{background:var(--card);border:1.5px solid var(--line);border-radius:14px;margin-bottom:14px;padding:17px 15px;animation:rise .35s cubic-bezier(.3,1.3,.5,1)}
+.mod h3{font-size:1.12rem;font-weight:900;margin-bottom:2px}
+.mod .mh{font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--teal);margin-bottom:11px}
+#eraName{font-size:1rem;font-weight:900;margin-top:2px}
+#eraSub{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--orange);margin:3px 0 8px}
+#eraTxt{font-size:.87rem;line-height:1.62;min-height:6em}
+.slider{width:100%;margin:13px 0 4px;-webkit-appearance:none;appearance:none;height:7px;border-radius:4px;background:linear-gradient(90deg,var(--teal),var(--orange));outline:none}
+.slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:29px;height:29px;border-radius:50%;background:var(--ink);border:4px solid var(--card);cursor:pointer}
+.slider::-moz-range-thumb{width:25px;height:25px;border-radius:50%;background:var(--ink);border:4px solid var(--card);cursor:pointer}
+.ticks{display:flex;justify-content:space-between;font-family:'JetBrains Mono',monospace;font-size:.56rem;color:var(--soft)}
+/* toolkit tap-for-more */
+.skgrp{margin-bottom:14px}
+.skgrp b.gl{font-size:.66rem;letter-spacing:.12em;text-transform:uppercase;color:var(--soft);display:block;margin-bottom:8px}
+.sk{display:inline-flex;align-items:center;gap:6px;background:var(--panel);border:1.5px solid var(--line);border-radius:17px;padding:7px 12px 7px 13px;font-size:.8rem;font-weight:700;margin:0 6px 7px 0;cursor:pointer;color:var(--ink);transition:border-color .2s,transform .1s cubic-bezier(.34,1.56,.64,1)}
+.sk:active{transform:scale(.94)}
+.sk .plus{font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--teal);font-weight:700;line-height:1;transition:transform .25s}
+.sk.open{border-color:var(--teal)}
+.sk.open .plus{transform:rotate(45deg)}
+#skblurb{background:var(--panel);border:1.5px solid var(--teal);border-radius:11px;padding:13px 14px;margin-top:4px;display:none;font-size:.86rem;line-height:1.55;animation:rise .3s ease}
+#skblurb.show{display:block}
+#skblurb b{color:var(--teal)}
+/* spec */
+table{width:100%;border-collapse:collapse;font-size:.85rem}
+th{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px 6px;border-bottom:2px solid var(--line)}
+td{padding:10px 6px;border-bottom:1px solid var(--line);vertical-align:top}
+td.u{font-weight:800;color:var(--teal)}
+tr:last-child td{border-bottom:0}
+/* contact */
+.clink{display:flex;align-items:center;gap:12px;background:var(--panel);border:1.5px solid var(--line);border-radius:11px;padding:13px 14px;margin-bottom:9px;text-decoration:none;color:var(--ink);font-weight:700;font-size:.9rem}
+.clink .ci{font-family:'JetBrains Mono',monospace;color:var(--teal);font-size:.78rem;width:42px;flex:none}
+.cmdlbl{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--soft);letter-spacing:.14em;text-transform:uppercase;margin:14px 0 8px}
+.cmdrow{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:10px}
+.cmd{background:var(--card);border:1.5px solid var(--line);color:var(--teal);font-family:'JetBrains Mono',monospace;font-size:.78rem;border-radius:9px;padding:10px 13px;cursor:pointer;transition:transform .1s cubic-bezier(.34,1.56,.64,1),border-color .2s}
+.cmd:active{transform:scale(.93)}
+.cmd.on{border-color:var(--teal);background:var(--teal-soft)}
+.cmd .s{color:var(--orange)}
+#cmdout{background:#17191c;border:1px solid var(--line);border-radius:10px;padding:13px;font-family:'JetBrains Mono',monospace;font-size:.8rem;line-height:1.7;min-height:3.2em;color:var(--soft)}
+#cmdout .ok{color:var(--green)}
+.cur{display:inline-block;width:8px;height:14px;background:var(--orange);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+
+footer{text-align:center;padding:38px 0 110px}
+footer .ship{font-family:'JetBrains Mono',monospace;font-size:.64rem;color:var(--soft);line-height:1.9}
+footer .ship b{color:var(--teal)}
+#egghot{display:inline-block;margin-top:14px;font-size:1rem;opacity:.32;cursor:pointer}
+
+#utilbar{position:fixed;bottom:0;left:0;right:0;z-index:100;background:rgba(28,30,33,.96);border-top:1px solid var(--line)}
+#utilbar .wrap{display:flex;align-items:center;gap:9px;padding:11px 20px}
+.ub{background:var(--card);border:1.5px solid var(--line);border-radius:10px;padding:11px 13px;font-size:.78rem;font-weight:800;cursor:pointer;color:var(--ink)}
+#pdfbtn{flex:1}
+#badgebtn .bn{color:var(--orange);font-family:'JetBrains Mono',monospace}
+#tray{position:fixed;left:0;right:0;bottom:0;z-index:150;background:var(--card);border-top:2px solid var(--orange);border-radius:18px 18px 0 0;padding:20px;transform:translateY(105%);transition:transform .35s cubic-bezier(.3,1.1,.4,1)}
+#tray.open{transform:none}
+#tray h3{font-size:1.1rem;font-weight:900;margin-bottom:3px}
+#tray .th{font-size:.8rem;color:var(--soft);margin-bottom:14px}
+.badges{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.badge{text-align:center;opacity:.28;transition:opacity .3s}
+.badge.got{opacity:1}
+.badge .bi2{width:48px;height:48px;margin:0 auto 6px;border-radius:50%;border:2.5px solid var(--orange);display:grid;place-items:center;font-size:1.25rem;background:var(--panel)}
+.badge.got .bi2{animation:bpop .45s cubic-bezier(.3,1.6,.5,1)}
+@keyframes bpop{0%{transform:scale(.4)}70%{transform:scale(1.15)}100%{transform:scale(1)}}
+.badge span{font-size:.56rem;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--soft);line-height:1.25;display:block}
+#trayclose{margin-top:16px;width:100%;background:var(--ink);color:#17181b;border:0;border-radius:10px;padding:13px;font-weight:900;cursor:pointer}
+#toast{position:fixed;top:14px;left:50%;transform:translate(-50%,-140%);z-index:300;background:var(--orange);color:#221204;border-radius:24px;padding:10px 18px;font-size:.8rem;font-weight:800;transition:transform .4s cubic-bezier(.3,1.3,.4,1)}
+#toast.show{transform:translate(-50%,0)}
+#egg{position:fixed;inset:0;z-index:250;background:rgba(10,12,14,.78);display:none;align-items:flex-end;justify-content:center}
+#egg.show{display:flex}
+#eggcard{background:var(--card);border-radius:18px 18px 0 0;max-width:640px;width:100%;padding:26px 22px 34px;border-top:3px solid var(--orange);animation:rise .4s ease}
+#eggcard h3{font-size:1.2rem;font-weight:900;margin-bottom:8px}
+#eggcard p{font-size:.93rem;line-height:1.62;margin-bottom:10px}
+#eggcard .dim{color:var(--soft);font-size:.84rem}
+#eggclose{margin-top:12px;width:100%;background:var(--orange);color:#221204;border:0;border-radius:10px;padding:13px;font-weight:900;cursor:pointer}
+.vb{position:fixed;top:9px;right:12px;z-index:110;font-family:'JetBrains Mono',monospace;font-size:.58rem;color:var(--soft);cursor:pointer}
+.rv{opacity:0;transform:translateY(20px);transition:opacity .55s ease,transform .55s ease}
+.rv.in{opacity:1;transform:none}
+
+/* plain view overlay (screen) */
+#plainview{position:fixed;inset:0;z-index:200;background:var(--bg);display:none;flex-direction:column}
+#plainview.show{display:flex}
+#pvbar{flex:none;display:flex;align-items:center;gap:10px;padding:12px 16px;background:var(--panel);border-bottom:1px solid var(--line)}
+#pvbar .t{font-family:'JetBrains Mono',monospace;font-size:.68rem;color:var(--soft);flex:1;letter-spacing:.1em}
+#pvbar button{border:1.5px solid var(--line);background:var(--card);color:var(--ink);border-radius:9px;padding:10px 14px;font-family:inherit;font-weight:800;font-size:.8rem;cursor:pointer}
+#pvbar #pvprint{border-color:var(--teal);color:var(--teal)}
+#pvscroll{flex:1;overflow-y:auto;padding:22px 20px 40px}
+#printres{max-width:640px;margin:0 auto;background:#fff;color:#14181c;font-family:Georgia,serif;font-size:15px;line-height:1.5;padding:34px 30px;border-radius:6px}
+#printres h1{font-size:26px;margin-bottom:2px;color:#111}
+#printres .pc{font-size:12.5px;margin-bottom:12px;color:#333}
+#printres h2{font-size:14px;text-transform:uppercase;letter-spacing:.06em;border-bottom:1.5px solid #111;margin:16px 0 7px;color:#111}
+#printres .job{margin-bottom:9px}
+#printres .job b{display:block;color:#111}
+#printres .job i{font-size:12.5px;color:#444}
+#printres ul{margin:4px 0 8px 18px}
+#printres li{margin-bottom:3px;font-size:13.5px}
+#printres p{margin-bottom:7px;font-size:13.5px}
+.pvhint{max-width:640px;margin:14px auto 0;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--soft);line-height:1.6;text-align:center}
+@media print{
+  body>*{display:none!important}
+  #plainview{display:block!important;position:static;background:#fff}
+  #pvbar,.pvhint{display:none!important}
+  #pvscroll{overflow:visible;padding:0}
+  #printres{max-width:none;margin:0;border-radius:0;padding:0;font-size:11pt;line-height:1.4;box-shadow:none}
+  #printres h1{font-size:20pt}
+  #printres h2{font-size:11pt;border-bottom:1px solid #000}
+  #printres li,#printres p,#printres .job i,#printres .pc{font-size:10pt}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.rv{opacity:1;transform:none}.ev li{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<!-- ===== SVG icon symbols ===== -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+ <symbol id="i-sculpt" viewBox="0 0 24 24"><path d="M21 8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16Z" />
+  <path d="m3.3 7 8.7 5 8.7-5" />
+  <path d="M12 22V12" /></symbol>
+ <symbol id="i-fork" viewBox="0 0 24 24"><path d="M12 12H5a2 2 0 0 0-2 2v5" />
+  <path d="M15 19h7" />
+  <path d="M16 19V2" />
+  <path d="M6 12V7a2 2 0 0 1 2-2h2.172a2 2 0 0 1 1.414.586l3.828 3.828A2 2 0 0 1 16 10.828" />
+  <path d="M7 19h4" />
+  <circle cx="13" cy="19" r="2" />
+  <circle cx="5" cy="19" r="2" /></symbol>
+ <symbol id="i-sync" viewBox="0 0 24 24"><rect width="10" height="14" x="3" y="8" rx="2" />
+  <path d="M5 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16a2 2 0 0 1-2 2h-2.4" />
+  <path d="M8 18h.01" /></symbol>
+ <symbol id="i-video" viewBox="0 0 24 24"><path d="m12.296 3.464 3.02 3.956" />
+  <path d="M20.2 6 3 11l-.9-2.4c-.3-1.1.3-2.2 1.3-2.5l13.5-4c1.1-.3 2.2.3 2.5 1.3z" />
+  <path d="M3 11h18v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
+  <path d="m6.18 5.276 3.1 3.899" /></symbol>
+ <symbol id="i-shelf" viewBox="0 0 24 24"><line x1="6" x2="10" y1="11" y2="11" />
+  <line x1="8" x2="8" y1="9" y2="13" />
+  <line x1="15" x2="15.01" y1="12" y2="12" />
+  <line x1="18" x2="18.01" y1="10" y2="10" />
+  <path d="M17.32 5H6.68a4 4 0 0 0-3.978 3.59c-.006.052-.01.101-.017.152C2.604 9.416 2 14.456 2 16a3 3 0 0 0 3 3c1 0 1.5-.5 2-1l1.414-1.414A2 2 0 0 1 9.828 16h4.344a2 2 0 0 1 1.414.586L17 18c.5.5 1 1 2 1a3 3 0 0 0 3-3c0-1.545-.604-6.584-.685-7.258-.007-.05-.011-.1-.017-.151A4 4 0 0 0 17.32 5z" /></symbol>
+ <symbol id="i-brew" viewBox="0 0 24 24"><path d="M17 11h1a3 3 0 0 1 0 6h-1" />
+  <path d="M9 12v6" />
+  <path d="M13 12v6" />
+  <path d="M14 7.5c-1 0-1.44.5-3 .5s-2-.5-3-.5-1.72.5-2.5.5a2.5 2.5 0 0 1 0-5c.78 0 1.57.5 2.5.5S9.44 2 11 2s2 1.5 3 1.5 1.72-.5 2.5-.5a2.5 2.5 0 0 1 0 5c-.78 0-1.5-.5-2.5-.5Z" />
+  <path d="M5 8v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8" /></symbol>
+ <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 8v4l3 2"/></symbol>
+ <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14 6a4 4 0 00-5 5l-6 6 3 3 6-6a4 4 0 005-5l-2.5 2.5-2.5-.5-.5-2.5z"/></symbol>
+ <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><rect x="14" y="14" width="6" height="6" rx="1"/></symbol>
+ <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></symbol>
+</defs></svg>
+
+<div class="wrap">
+<header>
+  <div class="hello mono" id="typeline"></div>
+  <h1>Mot Buchanan</h1>
+  <div class="headline">Media producer &amp; trainer who <span class="hl">builds his own tools</span>.</div>
+  <div class="subline">One-person media department. Self-taught AI builder. Professional explainer.</div>
+  <div class="hook rv">Everything on this page was made on a smartphone.<small>the videos · the apps · the page itself</small></div>
+  <div id="stats" class="rv">
+    <div class="stat"><div class="n" data-count="8">0</div><div class="l">fields, one throughline</div></div>
+    <div class="stat"><div class="n" data-count="30" data-approx="1">0</div><div class="l">apps built &amp; deployed</div></div>
+    <div class="stat"><div class="n" data-count="25" data-plus="1">0</div><div class="l">years teaching &amp; training</div></div>
+    <div class="stat"><div class="n" data-count="1">0</div><div class="l">phone</div></div>
+  </div>
+</header>
+
+<div class="eyebrow">The builds</div>
+<p class="sdesc">Tap whatever catches your eye. Everything here is deployed and in use.</p>
+<div id="builds"></div>
+
+<div class="eyebrow">Five claims <span id="ctally"></span></div>
+<p class="sdesc">In any order. Verify the ones you care about, skip the rest.</p>
+<div id="claims"></div>
+
+<div class="eyebrow">More, if you want it</div>
+<p class="sdesc">Nothing here is required reading.</p>
+<div class="mods" id="modbtns"></div>
+<div id="modout"></div>
+
+<footer>
+  <div class="ship">built &amp; shipped by the candidate · <b>v1.0</b> · Aug 5 2026<br>this résumé ships updates. most don't.</div>
+  <span id="egghot">🎩</span>
+</footer>
+</div>
+
+<div id="utilbar"><div class="wrap">
+  <button class="ub sq" id="pdfbtn">⎙ Plain PDF version</button>
+  <button class="ub sq" id="badgebtn">🏅 <span class="bn" id="bcount">0/5</span></button>
+</div></div>
+
+<div id="toast">Badge earned</div>
+<div id="tray">
+  <h3>Exploration badges</h3>
+  <div class="th">You get these for actually reading a résumé. The bar was on the floor.</div>
+  <div class="badges" id="badgegrid"></div>
+  <button id="trayclose" class="sq">Close</button>
+</div>
+
+<div id="egg"><div id="eggcard">
+  <h3>🎩🐇 You found the rabbit.</h3>
+  <p>Before any of this, Mot paid his own way through art school as a working professional magician and balloon artist. Real gigs, real audiences, real rent.</p>
+  <p class="dim">The act is retired. The skills never left: read the room, hold attention, land the moment.</p>
+  <button id="eggclose" class="sq">Nice trick</button>
+</div></div>
+
+<span class="vb" id="vb">v1.0 · deploy</span>
+
+<div id="plainview">
+  <div id="pvbar"><span class="t">PLAIN RESUME · for applications</span><button id="pvprint">⬇ Print / Save PDF</button><button id="pvclose">Close</button></div>
+  <div id="pvscroll">
+<div id="printres">
+  <h1>Mot Buchanan</h1>
+  <div class="pc" style="font-weight:bold;font-size:11pt;margin-bottom:4pt">Media Producer · Trainer · AI-Augmented Builder</div>
+  <div class="pc">Akron, Ohio · 330-475-5301 · Motbuchanan@gmail.com · motbuchanan.com · linkedin.com/in/motbuchanan</div>
+  <p><b>Media producer &amp; trainer who builds his own tools.</b> One-person media department, self-taught AI-augmented builder, experienced trainer. Entire portfolio — video, apps, and this résumé — produced on a smartphone.</p>
+  <h2>Experience</h2>
+  <div class="job"><b>Director of Communications &amp; Media Production</b><i>O&amp;P healthcare practice, Akron OH · Dec 2021–present</i>
+    <ul>
+      <li>Sole media operator for a ten-location clinical practice plus central fabrication facility: video, print, web, social, signage, and brand.</li>
+      <li>Full video pipeline end to end: scripting, shooting, interviewing, editing, publishing.</li>
+      <li>Sole administrator of the company website (WordPress/Divi) and all social channels.</li>
+      <li>Self-taught AI-augmented production workflow (2024–present), phone-first.</li>
+    </ul></div>
+  <div class="job"><b>Delivery Department Manager</b><i>Donamarc Water Systems · 2019–2021</i>
+    <ul><li>Managed delivery department operations: routing, staffing, logistics, and schedules.</li></ul></div>
+  <div class="job"><b>Trainer &amp; Swing Driver</b><i>Miller and Company Sanitation · 2017–2019</i>
+    <ul><li>Trained 12–15 new operators over 2.5 years in a high-turnover environment; forklift certified.</li></ul></div>
+  <div class="job"><b>Creative Arts Specialist &amp; Program Lead</b><i>Hattie Larlham Foundation · 2014–2017</i>
+    <ul><li>Taught painting, sculpture, music, screenprinting, and creative writing to learners of every ability; led program and community outreach.</li></ul></div>
+  <div class="job"><b>GameStop</b><i>Store Manager · 2008–2010</i>
+    <ul><li>Managed a store the district used to develop and train new managers; brought rising employees up to keyholder and assistant-manager level (customer service, closing sales, new-role duties).</li></ul></div>
+  <h2>Earlier Experience (2000s)</h2>
+  <p>Shift manager across several restaurants — oversaw teams and trained new crew.</p>
+  <h2>Independent Build Work (2026–present)</h2>
+  <p>Roughly 30 deployed single-file web applications built with AI-assisted development, phone-first, including: a WebGL2 3D sculpting tool, a forklift-operator training simulator, a real-time synced multiplayer game (Firebase), a browser-based video editor, a family game library PWA, and an interactive homebrewing learning app.</p>
+  <h2>Skills</h2>
+  <p><b>Media:</b> CapCut, DaVinci Resolve, Canva, videography &amp; interviewing, scriptwriting, social media management, phone-first production workflow. <b>Design &amp; brand:</b> brand &amp; identity, graphic design, photo editing. <b>Web:</b> WordPress, Divi, HTML/CSS/JavaScript, GitHub Pages, PWA development. <b>AI:</b> AI-assisted development, AI image and video generation, prompt design. <b>Data &amp; backend:</b> Firebase (real-time sync, auth), Git/GitHub, WebGL. <b>Workplace:</b> Google Workspace, Microsoft Office.</p>
+  <h2>Education</h2>
+  <p>Kent State University — B.I.S., Fine Arts / Illustration (2014)</p>
+</div>
+  <div class="pvhint">This is the ATS-friendly version. Use Print / Save PDF, or your browser’s share menu, to save it as a file for applications.</div>
+  </div>
+</div>
+
+<script>
+(function(){
+"use strict";
+var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+var KEY='resume-v06-state';
+var S={badges:{}};
+try{var raw=localStorage.getItem(KEY);if(raw){var p=JSON.parse(raw);if(p&&typeof p==='object')S=p;S.badges=S.badges||{};}}catch(e){}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(S));}catch(e){}}
+
+var PCOLORS=['#4cf0e0','#f59847','#ebedef'];
+function burst(x,y,n){
+ if(reduce)return;
+ n=Math.min(n||12,16);
+ for(var i=0;i<n;i++){
+  var p=document.createElement('div');p.className='pp';
+  p.style.background=PCOLORS[i%3];p.style.left=x+'px';p.style.top=y+'px';
+  document.body.appendChild(p);
+  var a=Math.random()*Math.PI*2,d=38+Math.random()*62;
+  p.animate([{transform:'translate(0,0) scale(1)',opacity:1},
+   {transform:'translate('+Math.cos(a)*d+'px,'+(Math.sin(a)*d-28)+'px) scale(.2)',opacity:0}],
+   {duration:520,easing:'cubic-bezier(.2,.8,.3,1)'}).onfinish=(function(el){return function(){el.remove();};})(p);
+ }
+}
+function icon(id){return '<svg class="icn"><use href="#'+id+'"/></svg>';}
+
+/* badges */
+var BADGES=[
+ {id:'maker',ico:'🛠️',name:'Browsed the builds'},
+ {id:'auditor',ico:'✅',name:'Verified all 5'},
+ {id:'historian',ico:'🕰️',name:'Historian'},
+ {id:'trad',ico:'⎙',name:'Traditionalist'},
+ {id:'rabbit',ico:'🐇',name:'The Rabbit'}
+];
+var grid=document.getElementById('badgegrid');
+BADGES.forEach(function(b){
+ var d=document.createElement('div');d.className='badge';d.id='bdg_'+b.id;
+ d.innerHTML='<div class="bi2">'+b.ico+'</div><span>'+b.name+'</span>';
+ grid.appendChild(d);
+});
+function bTally(){
+ var n=BADGES.filter(function(b){return S.badges[b.id];}).length;
+ document.getElementById('bcount').textContent=n+'/'+BADGES.length;
+ BADGES.forEach(function(b){document.getElementById('bdg_'+b.id).classList.toggle('got',!!S.badges[b.id]);});
+}
+var toastT=null;
+function earn(id,label){
+ if(S.badges[id])return;
+ S.badges[id]=true;save();bTally();
+ var t=document.getElementById('toast');t.textContent='🏅 '+label;t.classList.add('show');
+ clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show');},2000);
+}
+bTally();
+document.getElementById('badgebtn').addEventListener('click',function(){document.getElementById('tray').classList.add('open');});
+document.getElementById('trayclose').addEventListener('click',function(){document.getElementById('tray').classList.remove('open');});
+
+/* typed hero */
+var TYPES=["$ mot --resume --interactive","// tap anything. nothing here is required reading.","// last shipped: Aug 5 2026"];
+var tEl=document.getElementById('typeline'),ti=0;
+function typeNext(){
+ var txt=TYPES[ti%TYPES.length];ti++;
+ if(reduce){tEl.textContent=txt;return;}
+ var i=0;tEl.textContent='';
+ (function t(){tEl.textContent=txt.slice(0,++i);
+  if(i<txt.length)setTimeout(t,26);else setTimeout(typeNext,2800);})();
+}
+typeNext();
+
+/* stats */
+function countUp(el){
+ var target=+el.getAttribute('data-count'),plus=el.getAttribute('data-plus'),approx=el.getAttribute('data-approx');
+ var suf=plus?'+':'',pre=approx?'~':'';
+ if(reduce){el.textContent=pre+target+suf;return;}
+ var v=0,inc=target/Math.max(16,target);
+ (function c(){v+=inc;
+  if(v>=target){el.textContent=pre+target+suf;return;}
+  el.textContent=pre+Math.floor(v);setTimeout(c,44);})();
+}
+var obs=new IntersectionObserver(function(es){
+ es.forEach(function(en){
+  if(!en.isIntersecting)return;
+  en.target.classList.add('in');
+  if(en.target.id==='stats'){en.target.querySelectorAll('.n').forEach(countUp);obs.unobserve(en.target);}
+ });
+},{threshold:.2});
+document.querySelectorAll('.rv').forEach(function(el){obs.observe(el);});
+
+/* builds */
+var BUILDS=[
+ {ic:'i-sculpt',name:'3D sculpting tool',tag:'WebGL2 · browser',
+  what:'A 3D sculpting app that runs in a browser tab — push, pull, and gather geometry in real time, then export the model.',
+  who:'Built for a professional sculptor to rough out forms anywhere.',
+  ph:''},
+ {ic:'i-fork',name:'Forklift training simulator',tag:'training · certification prep',
+  what:'A certification-prep simulator: scenario deck, guided wizard, animated graphics, OSHA-based content.',
+  who:'Built to see whether a full certification sim could be made on a phone. It could.',
+  ph:''},
+ {ic:'i-sync',name:'Live multiplayer',tag:'Firebase · real-time',
+  what:'Two people, two phones, one shared game that stays in sync in real time \u2014 the kind of live, cloud-connected app most people assume takes a whole team.',
+  who:'Built solo, to prove he could do the hardest kind of app there is.',
+  ph:''},
+ {ic:'i-video',name:'Browser video editor',tag:'media · touch-first',
+  what:'A video editor that runs in a browser tab, designed for touch from the first sketch.',
+  who:'Because the best editor is the one already in your pocket.',
+  ph:''},
+ {ic:'i-shelf',name:'Family game library',tag:'PWA · cloud sync',
+  what:'An installable arcade: dozens of games, player profiles, achievements, records synced across devices.',
+  who:'Daily users. A very honest QA department.',
+  ph:'Shipped and updated entirely from a phone.'},
+ {ic:'i-brew',name:'Homebrewing learning app',tag:'learning PWA · sims + XP',
+  what:'Teaches a hobby end to end: recipes, decision simulations, and a progression system.',
+  who:'A full learning product, not a cheat sheet.',
+  ph:''}
+];
+var bwrap=document.getElementById('builds');
+var detail=document.createElement('div');detail.id='bdetail';
+var curB=-1;
+BUILDS.forEach(function(b,i){
+ var t=document.createElement('button');t.className='btile sq';
+ t.innerHTML='<span class="ic">'+icon(b.ic)+'</span><b>'+b.name+'</b><span class="bt">'+b.tag+'</span>';
+ t.addEventListener('click',function(){
+  earn('maker','Browsed the builds');
+  document.querySelectorAll('.btile').forEach(function(o){o.classList.remove('open');});
+  if(curB===i){curB=-1;detail.classList.remove('show');if(detail.parentNode)detail.parentNode.removeChild(detail);return;}
+  curB=i;t.classList.add('open');
+  detail.innerHTML='<div class="dh"><span class="dic">'+icon(b.ic)+'</span><div><h3>'+b.name+'</h3><div class="dtag">'+b.tag+'</div></div></div>'+
+   '<p>'+b.what+'</p><p class="who">'+b.who+'</p>'+
+   (b.ph?'<div class="phone">📱 '+b.ph+'</div>':'');
+    detail.classList.add('show');
+  var row=Math.floor(i/2);
+  var after=bwrap.children[Math.min(row*2+2,bwrap.children.length)];
+  bwrap.insertBefore(detail,after&&after!==detail?after:null);
+ });
+ bwrap.appendChild(t);
+});
+
+/* claims — Learner, Hands, Teacher, Phone, Operations */
+var CLAIMS=[
+ {tag:"learner",q:"Every job he\u2019s ever had was in a field he\u2019d <span class='hl'>never worked in</span>. It keeps going well.",
+  ev:['Creative arts programs → sanitation → water logistics → healthcare media → AI. <b>Zero prior experience, every time.</b>',
+      'Nobody taught him any of this. <span class="o">That\u2019s the point.</span>',
+      'He learns whole industries from zero — same result every time: he becomes the person other people ask.']},
+ {tag:"hands",q:"Script, shoot, interview, edit, publish: <span class='hl'>same set of hands</span>.",
+  ev:['<b>Director of Communications &amp; Media Production</b>, ten-location O&amp;P healthcare practice (Dec 2021\u2013now).',
+      'A media department of exactly one — video, print, social, signage, brand.',
+      '<span class="o">Sole administrator</span> of the website and every social channel.']},
+ {tag:"teacher",q:"He takes people from \u201cnever touched it\u201d to <span class='hl'>\u201cLook what I can do!\u201d</span> Repeatedly, provably.",
+  ev:['Taught fine art to <span class="o">~200 people</span> across every level of physical and mental ability.',
+      'Learns any job well enough to <b>build its training from nothing</b> \u2014 what he does now, making the training materials for a 75-person practice.',
+      'Designs the training <b>and</b> delivers it \u2014 his curriculum or yours.',
+      'Ships the tools too: decision-simulation decks and a full learning app.']},
+ {tag:"phone",q:"Imagine what he does with <span class='hl'>better hardware</span>.",
+  ev:['Self-taught AI video production, <b>phone-first, since 2024</b>.',
+      'Self-taught AI-assisted coding since 2026: <span class="o">~30 deployed apps</span>, all built on a smartphone.',
+      'This page included. <b>The studio fits in a pocket.</b>']},
+ {tag:"operations",q:"He spent years keeping trucks, routes, and crews on schedule. <span class='hl'>Creative deadlines are a lighter lift.</span>",
+  ev:['<b>Delivery Department Manager</b>, water systems (2019\u20132021): <span class="o">routes, staff, logistics, schedules.</span>',
+      'Trainer and swing driver before that — did the job before teaching it.',
+      'The creative half of this résumé sits on <b>an operations foundation</b>. The dependability isn\u2019t new.']}
+];
+var cw=document.getElementById('claims'),done=0;
+function tallyC(){document.getElementById('ctally').textContent='\u00b7 '+done+'/5 verified';}
+tallyC();
+CLAIMS.forEach(function(c,i){
+ var d=document.createElement('div');d.className='claim rv';
+ d.innerHTML='<div class="chead"><span class="cnum">0'+(i+1)+'</span><h3>claim/'+c.tag+'</h3></div>'+
+  '<div class="cbody"><div class="cq">'+c.q+'</div>'+
+  '<button class="verify sq">Verify \u2192</button>'+
+  '<div class="ev"><ul>'+c.ev.map(function(e){return '<li>'+e+'</li>';}).join('')+'</ul>'+
+  '<div class="stampwrap"><span class="stamp">\u2713 VERIFIED</span></div></div></div>';
+ cw.appendChild(d);
+ obs.observe(d);
+ d.querySelector('.verify').addEventListener('click',function(){
+  if(d.classList.contains('done'))return;
+  d.classList.add('done');
+  var lis=d.querySelectorAll('.ev li');
+  lis.forEach(function(li,j){setTimeout(function(){li.classList.add('in');},reduce?0:j*160);});
+  setTimeout(function(){
+   var st=d.querySelector('.stamp');st.classList.add('slam');
+   if(!reduce){document.body.classList.add('shake');setTimeout(function(){document.body.classList.remove('shake');},190);}
+   var r=st.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,13);
+  },reduce?0:lis.length*160+120);
+  done++;tallyC();
+  if(done===CLAIMS.length)earn('auditor','Verified all 5');
+ });
+});
+
+/* extras */
+var ERAS=[
+ {n:"The restaurant years",s:"early 20s \u00b7 Shift Manager",
+  t:"Ran shifts and managed teams across several restaurants (often helping friends who owned them). Trained ~20 crew. Where the managing-and-teaching instinct started."},
+ {n:"GameStop",s:"2008\u20132010 \u00b7 Store Manager",
+  t:"Managed a store the district used to develop new managers \u2014 bringing rising employees up to keyholder and assistant-manager level. Trained 10\u201315."},
+ {n:"Kent State + Hattie Larlham",s:"2014\u20132017 \u00b7 B.I.S. \u00b7 Creative Arts Specialist & Lead",
+  t:"Earned a B.I.S. (Fine Arts / Illustration). Led an arts program of ~200 individuals across every level of physical and mental ability at a nonprofit."},
+ {n:"Miller & Co. Sanitation",s:"2017\u20132019 \u00b7 Trainer & Swing Driver",
+  t:"Trained 12\u201315 new operators. Forklift certified. Did the job first, then taught it."},
+ {n:"Donamarc Water Systems",s:"2019\u20132021 \u00b7 Delivery Department Manager",
+  t:"Ran a delivery department: routes, staffing, logistics, schedules."},
+ {n:"O&P healthcare practice",s:"Dec 2021\u2013now \u00b7 Dir. of Communications & Media Production",
+  t:"Ten-location clinical practice, one-person media department. Sole operator of the website and every channel."},
+ {n:"The AI arc",s:"2024\u2013now \u00b7 self-taught",
+  t:"AI video from a phone since 2024. AI-assisted coding since 2026 \u2014 ~30 deployed apps. This page is one of them."}
+];
+var scrubMin=6,scrubMax=6;
+var SKILLS=[
+ {g:'Media',items:[
+  ['CapCut','Fast-turnaround social video cut on the phone between other tasks.'],
+  ['DaVinci Resolve','Color and finishing when a piece needs to look broadcast-clean.'],
+  ['Canva','Print and brand collateral across ten locations, solo.'],
+  ['videography & interviewing','Shoots on location and runs the interviews \u2014 the footage is his too.'],
+  ['scriptwriting','Writes the story before the camera rolls.'],
+  ['social media management','Sole hand on every channel for a ten-location company.'],
+  ['phone-first production','The whole pipeline \u2014 shoot, edit, publish \u2014 without a desk.']]},
+ {g:'Design & brand',items:[
+  ['brand &amp; identity','Owns the brand across ten locations \u2014 look, voice, and consistency.'],
+  ['graphic design','Signage, print, and digital across the whole practice.'],
+  ['photo editing','Cleans, composites, and preps imagery for print and web.']]},
+ {g:'Web',items:[
+  ['WordPress','Sole admin of a live company website.'],
+  ['Divi','Custom page builds and hero sections on that site.'],
+  ['HTML / CSS / JS','The language every build on this page is written in.'],
+  ['GitHub Pages','Where the deployed apps actually live.'],
+  ['PWA development','Installable, offline-capable apps \u2014 the whole game library is one.']]},
+ {g:'AI',items:[
+  ['AI-assisted development','~30 working apps and counting, this page included.'],
+  ['AI image & video generation','Hundreds of assets generated for video work since 2024.'],
+  ['prompt design','Getting reliable output is its own craft \u2014 he does it daily.']]},
+ {g:'Data & backend',items:[
+  ['Firebase · real-time sync','Live-synced two phones into one game.'],
+  ['Git / GitHub','Version control and deploy for every build.'],
+  ['WebGL','Real-time 3D in a browser \u2014 the sculpting tool runs on it.']]}
+];
+var MODS=[
+ {id:'timeline',label:'timeline',build:function(m){
+   m.innerHTML='<h3>The timeline</h3><span class="mh">// drag through six eras</span>'+
+    '<div id="eraName"></div><div id="eraSub"></div><div id="eraTxt"></div>'+
+    '<input type="range" class="slider" id="scrub" min="0" max="6" step="1" value="6">'+
+    '<div class="ticks"><span>20s</span><span>\u201908</span><span>\u201914</span><span>\u201917</span><span>\u201919</span><span>\u201921</span><span>ai</span></div>';
+   var s=m.querySelector('#scrub');
+   function setEra(i){
+    m.querySelector('#eraName').textContent=ERAS[i].n;
+    m.querySelector('#eraSub').textContent=ERAS[i].s;
+    m.querySelector('#eraTxt').textContent=ERAS[i].t;
+    scrubMin=Math.min(scrubMin,i);scrubMax=Math.max(scrubMax,i);
+    if(scrubMin===0&&scrubMax===6)earn('historian','Historian');
+   }
+   s.addEventListener('input',function(){setEra(+s.value);});setEra(6);
+  }},
+ {id:'skills',label:'skills',build:function(m){
+   var html='<h3>The toolkit</h3><span class="mh">// tap any skill \u2014 see where it earns its keep</span>';
+   SKILLS.forEach(function(gr){
+    html+='<div class="skgrp"><b class="gl">'+gr.g+'</b>';
+    gr.items.forEach(function(it){
+     html+='<span class="sk" data-b="'+it[1].replace(/"/g,'&quot;')+'"><span class="plus">+</span>'+it[0]+'</span>';
+    });
+    html+='</div>';
+   });
+   html+='<div id="skblurb"></div>';
+   m.innerHTML=html;
+   var blurb=m.querySelector('#skblurb'),cur=null;
+   m.querySelectorAll('.sk').forEach(function(sk){
+    sk.addEventListener('click',function(){
+     if(cur===sk){sk.classList.remove('open');blurb.classList.remove('show');cur=null;return;}
+     m.querySelectorAll('.sk').forEach(function(o){o.classList.remove('open');});
+     sk.classList.add('open');cur=sk;
+     blurb.innerHTML='<b>'+sk.textContent.replace('+','').trim()+'</b> \u2014 '+sk.getAttribute('data-b');
+     blurb.classList.add('show');
+    });
+   });
+  }},
+ {id:'spec',label:'spec sheet',build:function(m){
+   m.innerHTML='<h3>Spec comparison</h3><span class="mh">// this unit vs. typical hire</span>'+
+    '<table><tr><th>spec</th><th>this unit</th><th>typical</th></tr>'+
+    '<tr><td>learns a new stack in</td><td class="u">weeks</td><td>quarters</td></tr>'+
+    '<tr><td>media dept headcount</td><td class="u">1</td><td>4\u20136</td></tr>'+
+    '<tr><td>needs a missing tool</td><td class="u">builds it</td><td>files a ticket</td></tr>'+
+    '<tr><td>workstation required</td><td class="u">no</td><td>two monitors, minimum</td></tr>'+
+    '<tr><td>r\u00e9sum\u00e9 format</td><td class="u">ships updates</td><td>PDF from 2022</td></tr></table>';
+  }},
+ {id:'contact',label:'contact',build:function(m){
+   m.innerHTML='<h3>Contact</h3><span class="mh">// open a connection</span>'+
+    '<a class="clink sq" href="mailto:Motbuchanan@gmail.com"><span class="ci">mail</span>Motbuchanan@gmail.com</a>'+
+    '<a class="clink sq" href="tel:3304755301"><span class="ci">tel</span>330-475-5301</a>'+
+    '<a class="clink sq" href="https://www.linkedin.com/in/motbuchanan" target="_blank" rel="noopener"><span class="ci">in</span>linkedin.com/in/motbuchanan</a>'+
+    '<a class="clink sq" href="https://motbuchanan.com" target="_blank" rel="noopener"><span class="ci">web</span>motbuchanan.com</a>'+
+    '<div class="cmdlbl">// or run a command</div>'+
+    '<div class="cmdrow">'+
+    '<button class="cmd sq" data-c="hire"><span class="s">$</span> mot --hire</button>'+
+    '<button class="cmd sq" data-c="call"><span class="s">$</span> mot --call</button>'+
+    '<button class="cmd sq" data-c="site"><span class="s">$</span> mot --portfolio</button>'+
+    '<button class="cmd sq" data-c="in"><span class="s">$</span> mot --linkedin</button></div>'+
+    '<div id="cmdout">\u2192 tap a command <span class="cur"></span></div>';
+   var RESP={
+    hire:{t:'\u2192 drafting an email\u2026 \u2713',act:function(){window.location.href='mailto:Motbuchanan@gmail.com?subject=mot%20--hire';}},
+    call:{t:'\u2192 dialing 330-475-5301\u2026 \u2713',act:function(){window.location.href='tel:3304755301';}},
+    site:{t:'\u2192 opening motbuchanan.com\u2026 \u2713',act:function(){window.open('https://motbuchanan.com','_blank');}},
+    in:{t:'\u2192 opening linkedin.com/in/motbuchanan\u2026 \u2713',act:function(){window.open('https://www.linkedin.com/in/motbuchanan','_blank');}}
+   };
+   var out=m.querySelector('#cmdout');
+   m.querySelectorAll('.cmd').forEach(function(b){
+    b.addEventListener('click',function(){
+     m.querySelectorAll('.cmd').forEach(function(o){o.classList.remove('on');});
+     b.classList.add('on');
+     var r=RESP[b.getAttribute('data-c')];
+     if(reduce){out.innerHTML=r.t.replace(/\u2713/g,'<span class="ok">\u2713</span>');setTimeout(r.act,500);return;}
+     out.textContent='';var i=0;
+     (function ty(){out.textContent=r.t.slice(0,++i);
+      if(i<r.t.length)setTimeout(ty,16);
+      else{out.innerHTML=out.textContent.replace(/\u2713/g,'<span class="ok">\u2713</span>');setTimeout(r.act,650);}})();
+    });
+   });
+  }}
+];
+var mbtns=document.getElementById('modbtns'),mout=document.getElementById('modout');
+MODS.forEach(function(mo){
+ var b=document.createElement('button');b.className='modbtn sq';
+ b.innerHTML='<span class="sl">/</span>'+mo.label;
+ b.addEventListener('click',function(){
+  b.classList.add('seen');
+  mout.innerHTML='';
+  var d=document.createElement('div');d.className='mod';
+  mout.appendChild(d);
+  mo.build(d);
+ });
+ mbtns.appendChild(b);
+});
+
+document.getElementById('pdfbtn').addEventListener('click',function(){
+ earn('trad','Traditionalist');
+ document.getElementById('plainview').classList.add('show');
+ var sc=document.getElementById('pvscroll');if(sc)sc.scrollTop=0;
+});
+document.getElementById('pvclose').addEventListener('click',function(){document.getElementById('plainview').classList.remove('show');});
+document.getElementById('pvprint').addEventListener('click',function(){window.print();});
+document.getElementById('egghot').addEventListener('click',function(){
+ document.getElementById('egg').classList.add('show');earn('rabbit','The Rabbit');
+});
+document.getElementById('eggclose').addEventListener('click',function(){document.getElementById('egg').classList.remove('show');});
+document.getElementById('egg').addEventListener('click',function(e){if(e.target===this)this.classList.remove('show');});
+document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v1.0 \u00b7 Aug 5 2026\nBuilt by the candidate, on a phone. Ships updates.');});
+})();
+</script>
+</body>
+</html>
