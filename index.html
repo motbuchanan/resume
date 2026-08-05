@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mot Buchanan — Media producer & trainer who builds his own tools</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;800;900&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
 <style>
 :root{
@@ -195,6 +196,11 @@ footer .ship b{color:var(--teal)}
   #printres li,#printres p,#printres .job i,#printres .pc{font-size:10pt}
 }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}.rv{opacity:1;transform:none}.ev li{opacity:1;transform:none}}
+
+/* clean fade-in on load */
+body{opacity:0;transition:opacity .5s ease}
+body.ready{opacity:1}
+@media (prefers-reduced-motion:reduce){body{opacity:1!important;transition:none!important}}
 </style>
 </head>
 <body>
@@ -240,7 +246,7 @@ footer .ship b{color:var(--teal)}
   <h1>Mot Buchanan</h1>
   <div class="headline">Media producer &amp; trainer who <span class="hl">builds his own tools</span>.</div>
   <div class="subline">One-person media department. Self-taught AI builder. Professional explainer.</div>
-  <div class="hook rv">Everything on this page was made on a smartphone.<small>the videos · the apps · the page itself</small></div>
+  <div class="hook rv">Everything on this page was made on a smartphone.<small>the apps · the page itself</small></div>
   <div id="stats" class="rv">
     <div class="stat"><div class="n" data-count="8">0</div><div class="l">fields, one throughline</div></div>
     <div class="stat"><div class="n" data-count="30" data-approx="1">0</div><div class="l">apps built &amp; deployed</div></div>
@@ -263,7 +269,7 @@ footer .ship b{color:var(--teal)}
 <div id="modout"></div>
 
 <footer>
-  <div class="ship">built &amp; shipped by the candidate · <b>v1.1</b> · Aug 5 2026<br>this résumé ships updates. most don't.</div>
+  <div class="ship">built &amp; shipped by the candidate · <b>v1.2</b> · Aug 5 2026<br>this résumé ships updates. most don't.</div>
   <span id="egghot">🎩</span>
 </footer>
 </div>
@@ -288,7 +294,7 @@ footer .ship b{color:var(--teal)}
   <button id="eggclose" class="sq">Nice trick</button>
 </div></div>
 
-<span class="vb" id="vb">v1.1 · Aug 5</span>
+<span class="vb" id="vb">v1.2 · Aug 5</span>
 
 <div id="plainview">
   <div id="pvbar"><span class="t">PLAIN RESUME · for applications</span><button id="pvprint">⬇ Print / Save PDF</button><button id="pvclose">Close</button></div>
@@ -666,7 +672,18 @@ document.getElementById('egghot').addEventListener('click',function(){
 });
 document.getElementById('eggclose').addEventListener('click',function(){document.getElementById('egg').classList.remove('show');});
 document.getElementById('egg').addEventListener('click',function(e){if(e.target===this)this.classList.remove('show');});
-document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v1.1 \u00b7 Aug 5 2026\nBuilt by the candidate, on a phone. Ships updates.');});
+document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v1.2 \u00b7 Aug 5 2026\nBuilt by the candidate, on a phone. Ships updates.');});
+})();
+</script>
+<script>
+(function(){
+ function reveal(){document.body.classList.add('ready');}
+ function go(){requestAnimationFrame(function(){requestAnimationFrame(reveal);});}
+ if(document.fonts&&document.fonts.ready){
+   var done=false;var fin=function(){if(done)return;done=true;go();};
+   document.fonts.ready.then(fin);
+   setTimeout(fin,900); // safety cap so it never hangs hidden
+ }else{window.addEventListener('load',go);setTimeout(go,900);}
 })();
 </script>
 </body>
