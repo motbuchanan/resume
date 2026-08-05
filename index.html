@@ -215,6 +215,17 @@ body.nudge #builds .btile:nth-child(5){animation-delay:1.6s}
 body.nudge #builds .btile:nth-child(6){animation-delay:2s}
 body.nudged .verify,body.nudged .btile{animation:none!important}
 @media (prefers-reduced-motion:reduce){body.nudge .verify,body.nudge .btile{animation:none!important}}
+
+/* dynamic "tap" cue on the builds intro */
+.tapchip{display:inline-flex;align-items:center;gap:5px;background:var(--teal-soft);border:1.5px solid var(--teal);color:var(--teal);font-weight:800;border-radius:14px;padding:2px 11px 2px 10px;font-size:.8rem;position:relative;animation:tapPulse 2.2s ease-in-out infinite}
+.tapchip::before{content:"";width:9px;height:9px;border-radius:50%;background:var(--teal);animation:tapDot 2.2s ease-in-out infinite}
+@keyframes tapPulse{0%,100%{box-shadow:0 0 0 0 rgba(76,240,224,0)}50%{box-shadow:0 0 12px 1px rgba(76,240,224,.4)}}
+@keyframes tapDot{0%,100%{transform:scale(1);opacity:.7}50%{transform:scale(1.35);opacity:1}}
+#cueverb{transition:opacity .35s ease}
+#cueverb.swap{opacity:0}
+body.nudged .tapchip{animation:none}
+body.nudged .tapchip::before{animation:none}
+@media (prefers-reduced-motion:reduce){.tapchip,.tapchip::before{animation:none!important}#cueverb{transition:none}}
 </style>
 </head>
 <body>
@@ -270,7 +281,7 @@ body.nudged .verify,body.nudged .btile{animation:none!important}
 </header>
 
 <div class="eyebrow">The builds</div>
-<p class="sdesc">Tap whatever catches your eye. Everything here is deployed and in use.</p>
+<p class="sdesc" id="buildscue"><span class="tapchip" id="tapchip">tap</span> <span id="cueverb">whatever catches your eye</span>. Everything here is deployed and in use.</p>
 <div id="builds"></div>
 
 <div class="eyebrow">Five claims <span id="ctally"></span></div>
@@ -283,7 +294,7 @@ body.nudged .verify,body.nudged .btile{animation:none!important}
 <div id="modout"></div>
 
 <footer>
-  <div class="ship">built &amp; shipped by the candidate · <b>v1.3</b> · Aug 5 2026<br>this résumé ships updates. most don't.</div>
+  <div class="ship">built &amp; shipped by the candidate · <b>v1.4</b> · Aug 5 2026<br>this résumé ships updates. most don't.</div>
   <span id="egghot">🎩</span>
 </footer>
 </div>
@@ -308,7 +319,7 @@ body.nudged .verify,body.nudged .btile{animation:none!important}
   <button id="eggclose" class="sq">Nice trick</button>
 </div></div>
 
-<span class="vb" id="vb">v1.3 · Aug 5</span>
+<span class="vb" id="vb">v1.4 · Aug 5</span>
 
 <div id="plainview">
   <div id="pvbar"><span class="t">PLAIN RESUME · for applications</span><button id="pvprint">⬇ Print / Save PDF</button><button id="pvclose">Close</button></div>
@@ -686,7 +697,7 @@ document.getElementById('egghot').addEventListener('click',function(){
 });
 document.getElementById('eggclose').addEventListener('click',function(){document.getElementById('egg').classList.remove('show');});
 document.getElementById('egg').addEventListener('click',function(e){if(e.target===this)this.classList.remove('show');});
-document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v1.3 \u00b7 Aug 5 2026\nBuilt by the candidate, on a phone. Ships updates.');});
+document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v1.4 \u00b7 Aug 5 2026\nBuilt by the candidate, on a phone. Ships updates.');});
 })();
 </script>
 <script>
@@ -714,6 +725,32 @@ document.getElementById('vb').addEventListener('click',function(){alert('Interac
  },true);
  // also stop if they've clearly engaged (any claim verified / any tile opened) via a safety timer cap
  setTimeout(function(){/* let it breathe up to ~40s then rest */stopNudge();},40000);
+})();
+</script>
+<script>
+(function(){
+ var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ var el=document.getElementById('cueverb');
+ if(!el)return;
+ var phrases=['whatever catches your eye','a tile to see how it was built','the forklift sim','any one of these','to open it'];
+ var i=0,timer=null;
+ function rotate(){
+   if(document.body.classList.contains('nudged'))return;
+   el.classList.add('swap');
+   setTimeout(function(){
+     i=(i+1)%phrases.length;
+     el.textContent=phrases[i];
+     el.classList.remove('swap');
+   },350);
+ }
+ if(!reduce){timer=setInterval(rotate,2800);}
+ // stop rotating once they engage
+ document.addEventListener('click',function(e){
+   if(e.target.closest&&(e.target.closest('.btile')||e.target.closest('.verify'))){
+     if(timer)clearInterval(timer);
+     el.textContent='whatever catches your eye';
+   }
+ },true);
 })();
 </script>
 </body>
