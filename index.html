@@ -201,6 +201,20 @@ footer .ship b{color:var(--teal)}
 body{opacity:0;transition:opacity .5s ease}
 body.ready{opacity:1}
 @media (prefers-reduced-motion:reduce){body{opacity:1!important;transition:none!important}}
+
+/* subtle "live control" breathing — stops after first interaction */
+@keyframes breathe{0%,100%{box-shadow:0 0 0 0 rgba(76,240,224,0)}50%{box-shadow:0 0 0 4px rgba(76,240,224,.13)}}
+@keyframes breatheBtn{0%,100%{box-shadow:0 0 0 0 rgba(76,240,224,.0),0 0 0 rgba(76,240,224,0)}50%{box-shadow:0 0 14px 1px rgba(76,240,224,.28)}}
+body.nudge .verify{animation:breatheBtn 2.6s ease-in-out infinite}
+body.nudge .btile{animation:breathe 3.2s ease-in-out infinite}
+/* slight stagger so tiles don't pulse in unison (feels more organic) */
+body.nudge #builds .btile:nth-child(2){animation-delay:.4s}
+body.nudge #builds .btile:nth-child(3){animation-delay:.8s}
+body.nudge #builds .btile:nth-child(4){animation-delay:1.2s}
+body.nudge #builds .btile:nth-child(5){animation-delay:1.6s}
+body.nudge #builds .btile:nth-child(6){animation-delay:2s}
+body.nudged .verify,body.nudged .btile{animation:none!important}
+@media (prefers-reduced-motion:reduce){body.nudge .verify,body.nudge .btile{animation:none!important}}
 </style>
 </head>
 <body>
@@ -269,7 +283,7 @@ body.ready{opacity:1}
 <div id="modout"></div>
 
 <footer>
-  <div class="ship">built &amp; shipped by the candidate · <b>v1.2</b> · Aug 5 2026<br>this résumé ships updates. most don't.</div>
+  <div class="ship">built &amp; shipped by the candidate · <b>v1.3</b> · Aug 5 2026<br>this résumé ships updates. most don't.</div>
   <span id="egghot">🎩</span>
 </footer>
 </div>
@@ -294,7 +308,7 @@ body.ready{opacity:1}
   <button id="eggclose" class="sq">Nice trick</button>
 </div></div>
 
-<span class="vb" id="vb">v1.2 · Aug 5</span>
+<span class="vb" id="vb">v1.3 · Aug 5</span>
 
 <div id="plainview">
   <div id="pvbar"><span class="t">PLAIN RESUME · for applications</span><button id="pvprint">⬇ Print / Save PDF</button><button id="pvclose">Close</button></div>
@@ -672,7 +686,7 @@ document.getElementById('egghot').addEventListener('click',function(){
 });
 document.getElementById('eggclose').addEventListener('click',function(){document.getElementById('egg').classList.remove('show');});
 document.getElementById('egg').addEventListener('click',function(e){if(e.target===this)this.classList.remove('show');});
-document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v1.2 \u00b7 Aug 5 2026\nBuilt by the candidate, on a phone. Ships updates.');});
+document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v1.3 \u00b7 Aug 5 2026\nBuilt by the candidate, on a phone. Ships updates.');});
 })();
 </script>
 <script>
@@ -684,6 +698,22 @@ document.getElementById('vb').addEventListener('click',function(){alert('Interac
    document.fonts.ready.then(fin);
    setTimeout(fin,900); // safety cap so it never hangs hidden
  }else{window.addEventListener('load',go);setTimeout(go,900);}
+})();
+</script>
+<script>
+(function(){
+ var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+ if(reduce)return;
+ function startNudge(){document.body.classList.add('nudge');}
+ function stopNudge(){document.body.classList.remove('nudge');document.body.classList.add('nudged');}
+ // start shortly after load so it begins once content is settled
+ window.addEventListener('load',function(){setTimeout(startNudge,1200);});
+ // stop on the first tap of any build tile or verify button
+ document.addEventListener('click',function(e){
+   if(e.target.closest && (e.target.closest('.btile')||e.target.closest('.verify'))){stopNudge();}
+ },true);
+ // also stop if they've clearly engaged (any claim verified / any tile opened) via a safety timer cap
+ setTimeout(function(){/* let it breathe up to ~40s then rest */stopNudge();},40000);
 })();
 </script>
 </body>
