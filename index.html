@@ -108,9 +108,10 @@ body.shake{animation:shk .18s linear}
 .sk .plus{font-family:'JetBrains Mono',monospace;font-size:.9rem;color:var(--teal);font-weight:700;line-height:1;transition:transform .25s}
 .sk.open{border-color:var(--teal)}
 .sk.open .plus{transform:rotate(45deg)}
-#skblurb{background:var(--panel);border:1.5px solid var(--teal);border-radius:11px;padding:13px 14px;margin-top:4px;display:none;font-size:.86rem;line-height:1.55;animation:rise .3s ease}
-#skblurb.show{display:block}
-#skblurb b{color:var(--teal)}
+.skchips{display:flex;flex-wrap:wrap;align-items:flex-start}
+.skcard{flex:0 0 100%;width:100%;background:var(--panel);border:1.5px solid var(--teal);border-radius:11px;padding:12px 14px;margin:1px 0 9px;display:none;font-size:.84rem;line-height:1.5;animation:rise .3s ease}
+.skcard.show{display:block}
+.skcard .kt{color:var(--teal);font-weight:800;display:block;margin-bottom:3px}
 /* spec */
 table{width:100%;border-collapse:collapse;font-size:.85rem}
 th{font-family:'JetBrains Mono',monospace;font-size:.58rem;letter-spacing:.1em;text-transform:uppercase;color:var(--soft);text-align:left;padding:8px 6px;border-bottom:2px solid var(--line)}
@@ -229,7 +230,39 @@ body.nudged .tapchip::before{animation:none}
 .demobtn{margin-top:12px;width:100%;background:var(--panel);border:1.5px solid var(--teal);color:var(--teal);border-radius:10px;padding:12px;font-weight:800;font-size:.88rem;cursor:pointer}
 .demobtn.on{background:var(--teal-soft)}
 .demoslot{max-height:0;overflow:hidden;transition:max-height .4s ease}
-.demoslot.open{max-height:640px;margin-top:12px}
+.demoslot.open{max-height:700px;margin-top:12px}
+/* production triangle demo (namespaced td-) */
+.tdemo{display:flex;justify-content:center}
+.td-card{position:relative;width:100%;max-width:520px;background:linear-gradient(180deg,#12171F,#0E131A);border:1.5px solid var(--line);border-radius:14px;padding:14px 14px 12px;overflow:hidden;color:#EAF1F8}
+.td-card::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.5;background-image:linear-gradient(#ffffff0d 1px,transparent 1px),linear-gradient(90deg,#ffffff0d 1px,transparent 1px);background-size:34px 34px;-webkit-mask-image:radial-gradient(130% 100% at 50% 30%,#000 0%,transparent 82%);mask-image:radial-gradient(130% 100% at 50% 30%,#000 0%,transparent 82%)}
+.td-card>*{position:relative;z-index:1}
+.td-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:2px}
+.td-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#AEBAC8}
+.td-h1{font-family:'Archivo',sans-serif;font-weight:800;letter-spacing:-.02em;font-size:24px;margin:2px 0 0;line-height:1}
+.td-h1 .g{color:#35C08A}.td-h1 .f{color:#F5B94A}.td-h1 .c{color:#5B9BE0}
+.td-sub{font-size:12.5px;color:#93A0B0;margin:5px 0 0;line-height:1.5}
+.td-sub b{color:#EAF1F8;font-weight:700}
+.td-svgbox{position:relative;width:100%;max-width:260px;margin:4px auto 0;aspect-ratio:1.08/1;touch-action:none}
+.td-svgbox svg{width:100%;height:100%;display:block;overflow:visible}
+.td-puck{cursor:grab}.td-puck:active{cursor:grabbing}
+.td-verdict{text-align:center;margin:2px 6px 0;min-height:40px}
+.td-verdict .d{font-family:'Archivo',sans-serif;font-weight:700;font-size:16px}
+.td-verdict .n{font-size:12.5px;color:#93A0B0;margin-top:2px}
+.td-vals{display:flex;gap:8px;margin:8px 4px 0}
+.td-v{flex:1;background:#141A22;border:1px solid var(--line);border-radius:10px;padding:7px 6px;text-align:center}
+.td-v .lab{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase}
+.td-v .num{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;font-variant-numeric:tabular-nums;margin-top:1px}
+.td-v.g .lab,.td-v.g .num{color:#35C08A}
+.td-v.f .lab,.td-v.f .num{color:#F5B94A}
+.td-v.c .lab,.td-v.c .num{color:#5B9BE0}
+.td-ctrl{display:flex;align-items:center;gap:12px;margin:10px 4px 0}
+.td-play{display:inline-flex;align-items:center;gap:8px;font-family:'Archivo',sans-serif;font-weight:700;font-size:13px;color:#0c1118;background:#EAF1F8;border:none;border-radius:11px;padding:9px 14px;cursor:pointer}
+.td-play:active{transform:translateY(1px)}
+.td-play svg{width:13px;height:13px;display:block}
+.td-hint{font-size:12px;color:#5C6875}
+.td-foot{margin:11px 2px 0;padding-top:11px;border-top:1px solid var(--line)}
+.td-foot .who{font-size:11.5px;color:#93A0B0;line-height:1.55}
+.td-foot .who b{color:#EAF1F8;font-weight:700}
 /* video demo — self-editing pitch (v2.5): one track, one button, the edit is the show */
 .vd{position:relative;background:#141619;border:1.5px solid var(--line);border-radius:12px;padding:12px;user-select:none}
 .vd .screen{position:relative;height:150px;border-radius:8px;overflow:hidden;background:linear-gradient(180deg,#0c0d0f,#12161a);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
@@ -302,6 +335,7 @@ window.__VERB=(function(){
   <path d="M13 12v6" />
   <path d="M14 7.5c-1 0-1.44.5-3 .5s-2-.5-3-.5-1.72.5-2.5.5a2.5 2.5 0 0 1 0-5c.78 0 1.57.5 2.5.5S9.44 2 11 2s2 1.5 3 1.5 1.72-.5 2.5-.5a2.5 2.5 0 0 1 0 5c-.78 0-1.5-.5-2.5-.5Z" />
   <path d="M5 8v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V8" /></symbol>
+ <symbol id="i-tri" viewBox="0 0 24 24"><path d="M13.73 4a2 2 0 0 0-3.46 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" /></symbol>
 </defs></svg>
 
 <div class="wrap">
@@ -333,7 +367,7 @@ window.__VERB=(function(){
 <div id="modout"></div>
 
 <footer>
-  <div class="ship">built &amp; shipped by the candidate · <b>v2.5</b> · Aug 6 2026<br>this résumé ships updates. most don't.</div>
+  <div class="ship">built &amp; shipped by the candidate · <b>v2.8</b> · Aug 7 2026<br>this résumé ships updates. most don't.</div>
   <span id="egghot">🎩</span>
 </footer>
 </div>
@@ -358,7 +392,7 @@ window.__VERB=(function(){
   <button id="eggclose" class="sq">Nice trick</button>
 </div></div>
 
-<span class="vb" id="vb">v2.5 · Aug 6</span>
+<span class="vb" id="vb">v2.8 · Aug 7</span>
 
 <div id="plainview">
   <div id="pvbar"><span class="t">PLAIN RESUME · for applications</span><button id="pvprint">⬇ Print / Save PDF</button><button id="pvclose">Close</button></div>
@@ -387,7 +421,7 @@ window.__VERB=(function(){
   <h2>Earlier Experience (2000s)</h2>
   <p>Shift manager across several restaurants — oversaw teams and trained new crew.</p>
   <h2>Independent Build Work (2026–present)</h2>
-  <p>Roughly 30 deployed single-file web applications built with AI-assisted development, phone-first, including: a WebGL2 3D sculpting tool, a forklift-operator training simulator, a real-time synced multiplayer game (Firebase), a browser-based video editor, a family game library PWA, and an interactive homebrewing learning app.</p>
+  <p>Roughly 30 deployed single-file web applications built with AI-assisted development, phone-first, including: a WebGL2 3D sculpting tool, a forklift-operator training simulator, a browser-based video editor, a real-time synced family game library PWA with multiplayer (Firebase), an interactive homebrewing learning app, and an interactive production-constraint explainer.</p>
   <h2>Skills</h2>
   <p><b>Media:</b> CapCut, DaVinci Resolve, Canva, videography &amp; interviewing, scriptwriting, social media management, phone-first production workflow. <b>Design &amp; brand:</b> brand &amp; identity, graphic design, photo editing. <b>Web:</b> WordPress, Divi, HTML/CSS/JavaScript, GitHub Pages, PWA development. <b>AI:</b> AI-assisted development, AI image and video generation, prompt design. <b>Data &amp; backend:</b> Firebase (real-time sync, auth), Git/GitHub, WebGL. <b>Workplace:</b> Google Workspace, Microsoft Office.</p>
   <h2>Education</h2>
@@ -455,7 +489,7 @@ document.getElementById('badgebtn').addEventListener('click',function(){document
 document.getElementById('trayclose').addEventListener('click',function(){document.getElementById('tray').classList.remove('open');});
 
 /* typed hero */
-var TYPES=["$ mot --resume --interactive","// {V} anything. nothing here is required reading.","// last shipped: Aug 5 2026"];
+var TYPES=["$ mot --resume --interactive","// {V} anything. nothing here is required reading.","// last shipped: Aug 7 2026"];
 var tEl=document.getElementById('typeline'),ti=0;
 function typeNext(){
  var txt=vz(TYPES[ti%TYPES.length]);ti++;
@@ -495,16 +529,16 @@ var BUILDS=[
   what:'A certification-prep simulator: scenario deck, guided wizard, animated graphics, OSHA-based content.',
   who:'Built to see whether a full certification sim could be made on a phone. It could.',
   ph:''},
- {ic:'i-sync',name:'Live multiplayer',tag:'Firebase · real-time',
-  what:'Two people, two phones, one shared game that stays in sync in real time \u2014 the kind of live, cloud-connected app most people assume takes a whole team.',
-  who:'Built solo, to prove he could do the hardest kind of app there is.',
-  ph:''},
+ {ic:'i-tri',name:'Production Triangle',tag:'explainer · interaction design',
+  what:'An interactive explainer of the good, fast, cheap tradeoff: drag one point inside a triangle and the other two give way in real time.',
+  who:'Built to turn an abstract production rule into something you feel with your thumb.',
+  ph:'',demo:'triangle'},
  {ic:'i-video',name:'Browser video editor',tag:'media · touch-first',
   what:'A video editor that runs in a browser tab, designed for touch from the first sketch.',
   who:'Because the best editor is the one already in your pocket.',
   ph:'',demo:'video'},
  {ic:'i-shelf',name:'Family game library',tag:'PWA · cloud sync',
-  what:'An installable arcade: dozens of games, player profiles, achievements, records synced across devices.',
+  what:'An installable arcade: dozens of games, player profiles, achievements, and records that sync across devices in real time, with head-to-head multiplayer.',
   who:'Daily users. A very honest QA department.',
   ph:'Shipped and updated entirely from a phone.'},
  {ic:'i-brew',name:'Homebrewing learning app',tag:'learning PWA · sims + XP',
@@ -699,6 +733,123 @@ function buildVideoDemo(slot){
   drawStrip();drawBin();
   capEl.textContent=CLIPS[0].t;
 }
+
+function buildTriangleDemo(slot){
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  slot.innerHTML=
+   '<div class="tdemo"><div class="td-card">'+
+   '<div class="td-top"><div class="td-eyebrow">Interactive tool</div></div>'+
+   '<div class="td-h1"><span class="g">Good.</span> <span class="c">Cheap.</span> <span class="f">Fast.</span></div>'+
+   '<div class="td-sub">The <b>good, fast, cheap</b> rule behind everything that gets made: lock any two and the third gives way. '+(window.__VERB==='click'?'Drag':'Drag')+' the point to feel the trade.</div>'+
+   '<div class="td-svgbox"><svg viewBox="0 0 420 400" id="td_svg" role="group" aria-label="Production triangle. Drag the point toward a corner.">'+
+   '<defs><filter id="td_soft" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="13"/></filter>'+
+   '<filter id="td_soft2" x="-120%" y="-120%" width="340%" height="340%"><feGaussianBlur stdDeviation="24"/></filter></defs>'+
+   '<circle id="td_lamp" cx="210" cy="245" r="110" fill="#f5b94a" opacity="0.10" filter="url(#td_soft2)"/>'+
+   '<polygon points="210,54 58,340 362,340" fill="#10151d" stroke="#37424f" stroke-width="1.5"/>'+
+   '<circle id="td_hG" cx="210" cy="54" r="28" fill="#35C08A" opacity="0" filter="url(#td_soft)"/>'+
+   '<circle id="td_hF" cx="58" cy="340" r="28" fill="#F5B94A" opacity="0" filter="url(#td_soft)"/>'+
+   '<circle id="td_hC" cx="362" cy="340" r="28" fill="#5B9BE0" opacity="0" filter="url(#td_soft)"/>'+
+   '<line id="td_tG" stroke="#35C08A" stroke-linecap="round"/>'+
+   '<line id="td_tF" stroke="#F5B94A" stroke-linecap="round"/>'+
+   '<line id="td_tC" stroke="#5B9BE0" stroke-linecap="round"/>'+
+   '<circle cx="210" cy="54" r="4.5" fill="#35C08A"/>'+
+   '<circle cx="58" cy="340" r="4.5" fill="#F5B94A"/>'+
+   '<circle cx="362" cy="340" r="4.5" fill="#5B9BE0"/>'+
+   '<text x="210" y="34" text-anchor="middle" fill="#35C08A" font-size="15" font-weight="700" font-family="Archivo,sans-serif">GOOD</text>'+
+   '<text x="52" y="366" text-anchor="start" fill="#F5B94A" font-size="15" font-weight="700" font-family="Archivo,sans-serif">FAST</text>'+
+   '<text x="368" y="366" text-anchor="end" fill="#5B9BE0" font-size="15" font-weight="700" font-family="Archivo,sans-serif">CHEAP</text>'+
+   '<circle id="td_glow" cx="210" cy="245" r="28" fill="#7d8794" opacity="0.7" filter="url(#td_soft)"/>'+
+   '<circle id="td_puck" class="td-puck" cx="210" cy="245" r="16" fill="#7d8794" stroke="#0a0d12" stroke-width="2.5" tabindex="0" role="slider" aria-label="Priority balance"/>'+
+   '</svg></div>'+
+   '<div class="td-verdict"><div class="d" id="td_deal">Balanced</div><div class="n" id="td_note">Perfectly even means mediocre at everything.</div></div>'+
+   '<div class="td-vals">'+
+   '<div class="td-v g"><div class="lab">Good</div><div class="num" id="td_bG">33</div></div>'+
+   '<div class="td-v f"><div class="lab">Fast</div><div class="num" id="td_bF">33</div></div>'+
+   '<div class="td-v c"><div class="lab">Cheap</div><div class="num" id="td_bC">33</div></div>'+
+   '</div>'+
+   '<div class="td-ctrl"><button class="td-play" id="td_play" type="button"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg><span id="td_playLabel">Watch it</span></button>'+
+   '<span class="td-hint" id="td_hint">or drag the point yourself</span></div>'+
+   '<div class="td-foot"><div class="who">The <b>iron triangle</b> (a.k.a. the triple constraint): the good/fast/cheap tradeoff from manufacturing and project management.</div></div>'+
+   '</div></div>';
+
+  function q(s){return slot.querySelector(s);}
+  var A={x:210,y:54},B={x:58,y:340},C={x:362,y:340};
+  var CEN={x:(A.x+B.x+C.x)/3,y:(A.y+B.y+C.y)/3};
+  var COL={good:[53,192,138],fast:[245,185,74],cheap:[91,155,224]};
+  function baryToPoint(bc){return{x:bc.a*A.x+bc.b*B.x+bc.c*C.x,y:bc.a*A.y+bc.b*B.y+bc.c*C.y};}
+  function mix(bc){function ch(i){return Math.round(bc.a*COL.good[i]+bc.b*COL.fast[i]+bc.c*COL.cheap[i]);}return'rgb('+ch(0)+','+ch(1)+','+ch(2)+')';}
+  function clampBary(a,b,c){a=Math.max(0,a);b=Math.max(0,b);c=Math.max(0,c);var s=a+b+c;if(s<=0)return{a:1/3,b:1/3,c:1/3};return{a:a/s,b:b/s,c:c/s};}
+  function pointToBary(px,py){var d=(B.y-C.y)*(A.x-C.x)+(C.x-B.x)*(A.y-C.y);var a=((B.y-C.y)*(px-C.x)+(C.x-B.x)*(py-C.y))/d;var b=((C.y-A.y)*(px-C.x)+(A.x-C.x)*(py-C.y))/d;return clampBary(a,b,1-a-b);}
+  function lerpB(x,y,t){return{a:x.a+(y.a-x.a)*t,b:x.b+(y.b-x.b)*t,c:x.c+(y.c-x.c)*t};}
+
+  var svg=q('#td_svg'),puck=q('#td_puck'),glow=q('#td_glow'),lamp=q('#td_lamp');
+  var tG=q('#td_tG'),tF=q('#td_tF'),tC=q('#td_tC'),hG=q('#td_hG'),hF=q('#td_hF'),hC=q('#td_hC');
+  var bary={a:1/3,b:1/3,c:1/3};
+  function thread(el,p,v,w){el.setAttribute('x1',p.x);el.setAttribute('y1',p.y);el.setAttribute('x2',v.x);el.setAttribute('y2',v.y);el.setAttribute('stroke-width',(1+w*9).toFixed(2));el.setAttribute('stroke-opacity',(0.12+w*0.55).toFixed(3));}
+  function halo(el,w){el.setAttribute('opacity',(w*0.85).toFixed(3));el.setAttribute('r',(15+w*30).toFixed(1));}
+  function verdict(g,f,c){
+    var mx=Math.max(g,f,c),mn=Math.min(g,f,c);
+    if(mx-mn<=12)return{d:'Balanced',n:'Perfectly even means mediocre at everything.'};
+    if(mx>=82){var wn=g===mx?'Good':f===mx?'Fast':'Cheap';var wt=g===mx?'quality':f===mx?'speed':'low cost';return{d:'All-in on '+wn,n:'You bought '+wt+'. The other two are gone.'};}
+    if(c===mn)return{d:'Good & Fast',n:'Sharp and quick, but you are paying for it.'};
+    if(f===mn)return{d:'Good & Cheap',n:'Sharp and affordable, but it will take a while.'};
+    return{d:'Fast & Cheap',n:'Quick and affordable, but it will come out rough.'};
+  }
+  function render(){
+    var g=Math.round(bary.a*100),f=Math.round(bary.b*100),c=Math.round(bary.c*100),p=baryToPoint(bary),col=mix(bary);
+    puck.setAttribute('cx',p.x);puck.setAttribute('cy',p.y);puck.setAttribute('fill',col);
+    glow.setAttribute('cx',p.x);glow.setAttribute('cy',p.y);glow.setAttribute('fill',col);
+    lamp.setAttribute('cx',(CEN.x+(p.x-CEN.x)*0.6).toFixed(1));lamp.setAttribute('cy',(CEN.y+(p.y-CEN.y)*0.6).toFixed(1));
+    thread(tG,p,A,bary.a);thread(tF,p,B,bary.b);thread(tC,p,C,bary.c);halo(hG,bary.a);halo(hF,bary.b);halo(hC,bary.c);
+    q('#td_bG').textContent=g;q('#td_bF').textContent=f;q('#td_bC').textContent=c;
+    var v=verdict(g,f,c);q('#td_deal').textContent=v.d;q('#td_note').textContent=v.n;
+    puck.setAttribute('aria-valuetext','Good '+g+', Fast '+f+', Cheap '+c);
+  }
+
+  var tw=null,seqTimer=null,playing=false;
+  function easeInOut(k){return k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;}
+  function tweenTo(target,dur,done){
+    clearInterval(tw);
+    var from={a:bary.a,b:bary.b,c:bary.c},t0=Date.now();
+    tw=setInterval(function(){
+      var k=Math.min(1,(Date.now()-t0)/dur),e=easeInOut(k);
+      bary=lerpB(from,target,e);render();
+      if(k>=1){clearInterval(tw);tw=null;if(done)done();}
+    },33);
+  }
+  var GF={a:.5,b:.5,c:0},GC={a:.5,b:0,c:.5},FC={a:0,b:.5,c:.5},BAL={a:1/3,b:1/3,c:1/3};
+  var STEPS=[{to:GF,dwell:1400},{to:GC,dwell:1400},{to:FC,dwell:1400},{to:BAL,dwell:1000}];
+  function runStep(i){
+    if(!playing)return;
+    if(i>=STEPS.length){playing=false;setBtn(false);return;}
+    tweenTo(STEPS[i].to,650,function(){
+      if(!playing)return;
+      seqTimer=setTimeout(function(){runStep(i+1);},STEPS[i].dwell);
+    });
+  }
+  function setBtn(isPlaying){
+    q('#td_playLabel').textContent=isPlaying?'Playing':'Replay';
+    q('#td_hint').textContent=isPlaying?((window.__VERB==='click'?'click':'tap')+' the triangle to take over'):'or drag the point yourself';
+  }
+  function startDemo(){cancelDemo();playing=true;setBtn(true);runStep(0);}
+  function cancelDemo(){playing=false;clearInterval(tw);tw=null;clearTimeout(seqTimer);}
+  q('#td_play').addEventListener('click',function(){if(playing){cancelDemo();setBtn(false);}else{startDemo();}});
+
+  function clientToView(cx,cy){var r=svg.getBoundingClientRect();return{x:(cx-r.left)/r.width*420,y:(cy-r.top)/r.height*400};}
+  var dragging=false;
+  function moveTo(cx,cy){var pt=clientToView(cx,cy);bary=pointToBary(pt.x,pt.y);render();}
+  function takeOver(){cancelDemo();setBtn(false);}
+  puck.addEventListener('pointerdown',function(e){takeOver();dragging=true;try{puck.setPointerCapture(e.pointerId);}catch(err){}e.preventDefault();});
+  svg.addEventListener('pointermove',function(e){if(dragging)moveTo(e.clientX,e.clientY);});
+  function end(){dragging=false;}
+  puck.addEventListener('pointerup',end);puck.addEventListener('pointercancel',end);
+  svg.addEventListener('pointerdown',function(e){if(e.target===puck)return;takeOver();moveTo(e.clientX,e.clientY);});
+  puck.addEventListener('keydown',function(e){var s=10,p=baryToPoint(bary),m=true;takeOver();if(e.key==='ArrowUp')p.y-=s;else if(e.key==='ArrowDown')p.y+=s;else if(e.key==='ArrowLeft')p.x-=s;else if(e.key==='ArrowRight')p.x+=s;else m=false;if(m){e.preventDefault();bary=pointToBary(p.x,p.y);render();}});
+
+  render();
+  if(reduce){setBtn(false);}else{seqTimer=setTimeout(startDemo,500);}
+}
+
 var bwrap=document.getElementById('builds');
 var detail=document.createElement('div');detail.id='bdetail';
 var curB=-1;
@@ -720,6 +871,7 @@ BUILDS.forEach(function(b,i){
     if(slot.classList.contains('open')){slot.classList.remove('open');slot.innerHTML='';db.classList.remove('on');return;}
     slot.classList.add('open');db.classList.add('on');
     if(b.demo==='video')buildVideoDemo(slot);
+    else if(b.demo==='triangle')buildTriangleDemo(slot);
    });
   }
     detail.classList.add('show');
@@ -823,7 +975,7 @@ var SKILLS=[
   ['AI image & video generation','Hundreds of assets generated for video work since 2024.'],
   ['prompt design','Getting reliable output is its own craft \u2014 he does it daily.']]},
  {g:'Data & backend',items:[
-  ['Firebase · real-time sync','Live-synced two phones into one game.'],
+  ['Firebase · real-time sync','Live-synced a real-time game across Android and iOS.'],
   ['Git / GitHub','Version control and deploy for every build.'],
   ['WebGL','Real-time 3D in a browser \u2014 the sculpting tool runs on it.']]}
 ];
@@ -846,22 +998,23 @@ var MODS=[
  {id:'skills',label:'skills',build:function(m){
    var html=vz('<h3>The toolkit</h3><span class="mh">// {V} any skill \u2014 see where it earns its keep</span>');
    SKILLS.forEach(function(gr){
-    html+='<div class="skgrp"><b class="gl">'+gr.g+'</b>';
+    html+='<div class="skgrp"><b class="gl">'+gr.g+'</b><div class="skchips">';
     gr.items.forEach(function(it){
-     html+='<span class="sk" data-b="'+it[1].replace(/"/g,'&quot;')+'"><span class="plus">+</span>'+it[0]+'</span>';
+     html+='<span class="sk"><span class="plus">+</span>'+it[0]+'</span>'+
+           '<div class="skcard"><span class="kt">'+it[0]+'</span>'+it[1]+'</div>';
     });
-    html+='</div>';
+    html+='</div></div>';
    });
-   html+='<div id="skblurb"></div>';
    m.innerHTML=html;
-   var blurb=m.querySelector('#skblurb'),cur=null;
+   function closeAll(){
+    m.querySelectorAll('.sk.open').forEach(function(o){o.classList.remove('open');});
+    m.querySelectorAll('.skcard.show').forEach(function(c){c.classList.remove('show');});
+   }
    m.querySelectorAll('.sk').forEach(function(sk){
     sk.addEventListener('click',function(){
-     if(cur===sk){sk.classList.remove('open');blurb.classList.remove('show');cur=null;return;}
-     m.querySelectorAll('.sk').forEach(function(o){o.classList.remove('open');});
-     sk.classList.add('open');cur=sk;
-     blurb.innerHTML='<b>'+sk.textContent.replace('+','').trim()+'</b> \u2014 '+sk.getAttribute('data-b');
-     blurb.classList.add('show');
+     var card=sk.nextElementSibling,wasOpen=sk.classList.contains('open');
+     closeAll();
+     if(!wasOpen&&card){sk.classList.add('open');card.classList.add('show');}
     });
    });
   }},
@@ -934,7 +1087,7 @@ document.getElementById('egghot').addEventListener('click',function(){
 });
 document.getElementById('eggclose').addEventListener('click',function(){document.getElementById('egg').classList.remove('show');});
 document.getElementById('egg').addEventListener('click',function(e){if(e.target===this)this.classList.remove('show');});
-document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v2.5 \u00b7 Aug 6 2026\nBuilt by the candidate, on a phone. Ships updates.');});
+document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v2.8 \u00b7 Aug 7 2026\nBuilt by the candidate, on a phone. Ships updates.');});
 })();
 </script>
 <script>
