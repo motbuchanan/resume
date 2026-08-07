@@ -230,7 +230,7 @@ body.nudged .tapchip::before{animation:none}
 .demobtn{margin-top:12px;width:100%;background:var(--panel);border:1.5px solid var(--teal);color:var(--teal);border-radius:10px;padding:12px;font-weight:800;font-size:.88rem;cursor:pointer}
 .demobtn.on{background:var(--teal-soft)}
 .demoslot{max-height:0;overflow:hidden;transition:max-height .4s ease}
-.demoslot.open{max-height:700px;margin-top:12px}
+.demoslot.open{max-height:820px;margin-top:12px}
 /* production triangle demo (namespaced td-) */
 .tdemo{display:flex;justify-content:center}
 .td-card{position:relative;width:100%;max-width:520px;background:linear-gradient(180deg,#12171F,#0E131A);border:1.5px solid var(--line);border-radius:14px;padding:14px 14px 12px;overflow:hidden;color:#EAF1F8}
@@ -263,6 +263,66 @@ body.nudged .tapchip::before{animation:none}
 .td-foot{margin:11px 2px 0;padding-top:11px;border-top:1px solid var(--line)}
 .td-foot .who{font-size:11.5px;color:#93A0B0;line-height:1.55}
 .td-foot .who b{color:#EAF1F8;font-weight:700}
+/* brew-to-spec demo (namespaced bd-) */
+.bdemo{display:flex;justify-content:center;width:100%}
+  .bd-card{position:relative;width:100%;max-width:520px;background:linear-gradient(180deg,#181219,#120d13);border:1.5px solid #3a2f33;border-radius:14px;padding:14px 14px 12px;overflow:hidden;color:#EAE4DA}
+  .bd-card::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;opacity:.5;background-image:linear-gradient(#ffffff0d 1px,transparent 1px),linear-gradient(90deg,#ffffff0d 1px,transparent 1px);background-size:34px 34px;-webkit-mask-image:radial-gradient(130% 100% at 50% 25%,#000,transparent 82%);mask-image:radial-gradient(130% 100% at 50% 25%,#000,transparent 82%)}
+  .bd-card>*{position:relative;z-index:1}
+  .bd-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#c9a06a}
+  .bd-h1{font-family:'Archivo',sans-serif;font-weight:800;letter-spacing:-.02em;font-size:23px;margin:2px 0 0;line-height:1.05}
+  .bd-sub{font-size:12.5px;color:#a4988a;margin:5px 0 0;line-height:1.5}
+  .bd-sub b{color:#EAE4DA;font-weight:700}
+
+  .bd-aimlbl{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;color:#9a8b7a;margin:13px 2px 6px}
+  .bd-picks{display:flex;flex-direction:column;gap:6px}
+  .bd-pick{display:flex;align-items:center;gap:10px;text-align:left;background:#1b151b;border:1.5px solid #322930;border-radius:11px;padding:8px 11px;cursor:pointer;color:#c8bcae;touch-action:manipulation}
+  .bd-pick:active{transform:scale(.99)}
+  .bd-pick .swatch{width:14px;height:14px;flex:0 0 14px;border-radius:50%;border:1px solid #00000055}
+  .bd-pick .txt{flex:1;min-width:0}
+  .bd-pick .nm{font-size:13px;font-weight:800;color:#EAE4DA}
+  .bd-pick .bl{font-size:11px;color:#8f8276;margin-top:1px}
+  .bd-pick .chk{font-family:'JetBrains Mono',monospace;font-size:11px;color:#8f8276;font-weight:700}
+  .bd-pick.on{border-color:#c9a06a;background:#241c22}
+  .bd-pick.on .chk{color:#c9a06a}
+  .bd-pick.won{border-color:#57c98a;background:#16241b}
+  .bd-pick.won .chk{color:#57c98a}
+
+  .bd-stage{display:flex;gap:14px;align-items:stretch;margin-top:12px}
+  .bd-glassbox{flex:0 0 104px;display:flex;align-items:center;justify-content:center}
+  .bd-glassbox svg{width:100%;height:auto;display:block}
+  .bd-stats{flex:1;display:grid;grid-template-columns:1fr 1fr;gap:7px;align-content:center}
+  .bd-stat{background:#201a20;border:1px solid #3a2f33;border-radius:10px;padding:6px 9px}
+  .bd-stat .k{font-family:'JetBrains Mono',monospace;font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:#9a8b7a}
+  .bd-stat .v{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:16px;font-variant-numeric:tabular-nums;margin-top:1px;color:#f0a53c}
+  .bd-stat .v small{font-size:9.5px;color:#9a8b7a;font-weight:500}
+  .bd-stat .tg{font-family:'JetBrains Mono',monospace;font-size:9px;margin-top:2px;color:#7d7166}
+  .bd-stat.in{border-color:#3f6b52}
+  .bd-stat.in .tg{color:#57c98a}
+  .bd-stat.out .tg{color:#c98a57}
+
+  .bd-status{margin:9px 2px 0;font-size:12.5px;color:#a4988a;min-height:17px;line-height:1.4}
+  .bd-status b{color:#EAE4DA}
+  .bd-status.win{color:#57c98a;font-weight:700}
+
+  .bd-rows{margin-top:11px;display:flex;flex-direction:column;gap:7px}
+  .bd-row{display:flex;align-items:center;gap:10px;background:#1b151b;border:1px solid #322930;border-radius:11px;padding:6px 8px 6px 12px}
+  .bd-row .info{flex:1;min-width:0}
+  .bd-row .nm{font-size:12.5px;font-weight:700;color:#EAE4DA}
+  .bd-row .dt{font-size:10.5px;color:#8f8276;font-family:'JetBrains Mono',monospace;margin-top:1px}
+  .bd-amt{font-family:'JetBrains Mono',monospace;font-weight:700;font-size:14px;min-width:58px;text-align:right;color:#f0a53c;font-variant-numeric:tabular-nums}
+  .bd-step{width:34px;height:34px;flex:0 0 34px;border-radius:9px;border:1.5px solid #4a3c44;background:#241c23;color:#EAE4DA;font-size:19px;font-weight:700;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;touch-action:manipulation;user-select:none}
+  .bd-step:active{transform:translateY(1px)}
+  .bd-step:disabled{opacity:.35;cursor:default}
+
+  .bd-ctrl{display:flex;align-items:center;gap:12px;margin:11px 2px 0}
+  .bd-play{display:inline-flex;align-items:center;gap:8px;font-family:'Archivo',sans-serif;font-weight:700;font-size:13px;color:#1a1013;background:#f0a53c;border:none;border-radius:11px;padding:9px 14px;cursor:pointer}
+  .bd-play:active{transform:translateY(1px)}
+  .bd-play svg{width:13px;height:13px;display:block}
+  .bd-hint{font-size:12px;color:#8f8276}
+
+  .bd-foot{margin:11px 2px 0;padding-top:11px;border-top:1px solid #322930}
+  .bd-foot .who{font-size:11px;color:#9a8b7a;line-height:1.55}
+  .bd-foot .who b{color:#d8cdbf;font-weight:700}
 /* video demo — self-editing pitch (v2.5): one track, one button, the edit is the show */
 .vd{position:relative;background:#141619;border:1.5px solid var(--line);border-radius:12px;padding:12px;user-select:none}
 .vd .screen{position:relative;height:150px;border-radius:8px;overflow:hidden;background:linear-gradient(180deg,#0c0d0f,#12161a);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
@@ -367,7 +427,7 @@ window.__VERB=(function(){
 <div id="modout"></div>
 
 <footer>
-  <div class="ship">built &amp; shipped by the candidate · <b>v2.8</b> · Aug 7 2026<br>this résumé ships updates. most don't.</div>
+  <div class="ship">built &amp; shipped by the candidate · <b>v2.9</b> · Aug 7 2026<br>this résumé ships updates. most don't.</div>
   <span id="egghot">🎩</span>
 </footer>
 </div>
@@ -392,7 +452,7 @@ window.__VERB=(function(){
   <button id="eggclose" class="sq">Nice trick</button>
 </div></div>
 
-<span class="vb" id="vb">v2.8 · Aug 7</span>
+<span class="vb" id="vb">v2.9 · Aug 7</span>
 
 <div id="plainview">
   <div id="pvbar"><span class="t">PLAIN RESUME · for applications</span><button id="pvprint">⬇ Print / Save PDF</button><button id="pvclose">Close</button></div>
@@ -544,7 +604,7 @@ var BUILDS=[
  {ic:'i-brew',name:'Homebrewing learning app',tag:'learning PWA · sims + XP',
   what:'Teaches a hobby end to end: recipes, decision simulations, and a progression system.',
   who:'A full learning product, not a cheat sheet.',
-  ph:''}
+  ph:'',demo:'brew'}
 ];
 function buildVideoDemo(slot){
   // The pitch edits itself. One track, one button.
@@ -850,6 +910,253 @@ function buildTriangleDemo(slot){
   if(reduce){setBtn(false);}else{seqTimer=setTimeout(startDemo,500);}
 }
 
+function buildBrewDemo(slot){
+  slot.innerHTML="<div class=\"bdemo\">\n  <div class=\"bd-card\" id=\"bd_card\">\n    <div class=\"bd-eyebrow\">Interactive tool</div>\n    <div class=\"bd-h1\">Brew to spec</div>\n    <div class=\"bd-sub\">Pick a beer to brew, then mix the grain and hops until all three numbers land in its style. Every value is live off a <b>verified brewing engine</b>.</div>\n\n    <div class=\"bd-aimlbl\">Pick a beer to brew</div>\n    <div class=\"bd-picks\" id=\"bd_picks\"></div>\n\n    <div class=\"bd-stage\">\n      <div class=\"bd-glassbox\" id=\"bd_glass\"></div>\n      <div class=\"bd-stats\">\n        <div class=\"bd-stat\" id=\"bd_st_og\"><div class=\"k\">Gravity</div><div class=\"v\" id=\"bd_og\">1.000</div><div class=\"tg\">&nbsp;</div></div>\n        <div class=\"bd-stat\" id=\"bd_st_abv\"><div class=\"k\">ABV</div><div class=\"v\" id=\"bd_abv\">0.0<small>%</small></div><div class=\"tg\" id=\"bd_tg_abv\">&nbsp;</div></div>\n        <div class=\"bd-stat\" id=\"bd_st_ibu\"><div class=\"k\">Bitterness</div><div class=\"v\" id=\"bd_ibu\">0<small> IBU</small></div><div class=\"tg\" id=\"bd_tg_ibu\">&nbsp;</div></div>\n        <div class=\"bd-stat\" id=\"bd_st_srm\"><div class=\"k\">Color</div><div class=\"v\" id=\"bd_srm\">0<small> SRM</small></div><div class=\"tg\" id=\"bd_tg_srm\">&nbsp;</div></div>\n      </div>\n    </div>\n\n    <div class=\"bd-status\" id=\"bd_status\"></div>\n\n    <div class=\"bd-rows\" id=\"bd_rows\"></div>\n\n    <div class=\"bd-ctrl\">\n      <button class=\"bd-play\" id=\"bd_play\" type=\"button\"><svg viewBox=\"0 0 24 24\" fill=\"currentColor\"><path d=\"M8 5v14l11-7z\"/></svg><span id=\"bd_playlbl\">Watch it</span></button>\n      <span class=\"bd-hint\" id=\"bd_hint\">or brew it yourself</span>\n    </div>\n\n    <div class=\"bd-foot\"><div class=\"who\">Live OG / ABV / IBU / SRM and every style range from the app's <b>source-verified math</b> (Tinseth IBU, Morey color), the same engine its 8 recipes are computed from.</div></div>\n  </div>\n</div>";
+
+/* ══════════════════════════════════════════════════════════════
+   Brewing engine — pulled VERBATIM from The Brew Deck v5.6.
+   Numbers and style ranges are the app's real, unit-tested math.
+   ══════════════════════════════════════════════════════════════ */
+var FERMENTABLES = [
+  { id:'dme_light', name:'Light DME',      ppg:44, L:4,   steep:false },
+  { id:'choc',      name:'Chocolate Malt', ppg:29, L:350, steep:true  },
+];
+var STEEP_EFFICIENCY = 0.50;
+var HOPS = [ { id:'cascade', name:'Cascade', aa:5.5 } ];
+var YEAST = { id:'us05', name:'US-05', att:0.81 };
+function gravityPoints(bill, gallons){
+  var pts=0;
+  bill.forEach(function(item){
+    var f=FERMENTABLES.find(function(x){return x.id===item.fermentableId;});
+    if(!f||!item.lbs)return;
+    var eff=f.steep?STEEP_EFFICIENCY:1.0;
+    pts+=item.lbs*f.ppg*eff;
+  });
+  return gallons>0?pts/gallons:0;
+}
+function calcOG(bill,gallons){return 1+gravityPoints(bill,gallons)/1000;}
+function calcFG(og,att){return 1+((og-1)*(1-att));}
+function calcABV(og,fg){return (og-fg)*131.25;}
+function calcSRM(bill,gallons){
+  if(gallons<=0)return 0;
+  var mcu=0;
+  bill.forEach(function(item){
+    var f=FERMENTABLES.find(function(x){return x.id===item.fermentableId;});
+    if(!f||!item.lbs)return;
+    mcu+=(item.lbs*f.L)/gallons;
+  });
+  if(mcu<=0)return 0;
+  return 1.4922*Math.pow(mcu,0.6859);
+}
+function tinsethUtilization(boilGravity,minutes){
+  var bigness=1.65*Math.pow(0.000125,boilGravity-1);
+  var timeF=(1-Math.exp(-0.04*minutes))/4.15;
+  return bigness*timeF;
+}
+function calcIBU(hopAdditions,gallons,boilGravity){
+  if(gallons<=0)return 0;
+  var total=0;
+  hopAdditions.forEach(function(h){
+    var hop=HOPS.find(function(x){return x.id===h.hopId;});
+    var aa=(h.aa!=null?h.aa:(hop?hop.aa:0))/100;
+    if(!aa||!h.oz||h.minutes==null)return;
+    var u=tinsethUtilization(boilGravity,h.minutes);
+    total+=u*(aa*h.oz*7490)/gallons;
+  });
+  return total;
+}
+var SRM_COLORS=[
+  [1,'#FFE699'],[2,'#FFD878'],[3,'#FFCA5A'],[4,'#FFBF42'],[5,'#FBB123'],
+  [6,'#F8A600'],[7,'#F39C00'],[8,'#EA8F00'],[9,'#E58500'],[10,'#DE7C00'],
+  [12,'#CF6900'],[14,'#BB5100'],[16,'#A13700'],[18,'#8E2900'],[20,'#701400'],
+  [24,'#600903'],[28,'#4C0505'],[32,'#361F1B'],[36,'#261716'],[40,'#000000'],
+];
+function srmToHex(srm){
+  if(srm<=0)return '#FFE699';
+  for(var i=0;i<SRM_COLORS.length;i++){if(srm<=SRM_COLORS[i][0])return SRM_COLORS[i][1];}
+  return '#000000';
+}
+function inR(v,r){return v>=r[0]&&v<=r[1];}
+
+/* ── three challenges spread across the spectrum, each reachable ── */
+var CHALLENGES=[
+  { id:'apa',   name:'American Pale Ale', blurb:'Pale, balanced, easy-drinking', swatch:'#E58500',
+    abv:[4.5,6.2], ibu:[30,50], srm:[5,10] },
+  { id:'wcipa', name:'West Coast IPA',    blurb:'Pale, strong, boldly bitter',   swatch:'#CF6900',
+    abv:[5.5,7.5], ibu:[40,70], srm:[6,14] },
+  { id:'stout', name:'Dry Irish Stout',   blurb:'Dark, roasty, low in alcohol',  swatch:'#1c1414',
+    abv:[3.8,5.0], ibu:[25,45], srm:[25,40] },
+];
+
+var GAL=5;
+var st={base:6, roast:0, hops:1};
+var LIMITS={base:[2,9,0.5], roast:[0,1.5,0.1], hops:[0,3,0.25]};
+var ING=[
+  {key:'base', nm:'Base malt', dt:'Light DME', unit:'lb', dp:1},
+  {key:'roast',nm:'Roast grain', dt:'Chocolate malt', unit:'lb', dp:1},
+  {key:'hops', nm:'Bittering hops', dt:'Cascade @ 60 min', unit:'oz', dp:2},
+];
+var selected='apa';
+function id(x){return slot.querySelector('#'+x);}
+function target(){return CHALLENGES.find(function(c){return c.id===selected;});}
+function stats(){
+  var bill=[{fermentableId:'dme_light',lbs:st.base},{fermentableId:'choc',lbs:st.roast}];
+  var hops=[{hopId:'cascade',oz:st.hops,minutes:60}];
+  var og=calcOG(bill,GAL), fg=calcFG(og,YEAST.att), abv=calcABV(og,fg);
+  var srm=calcSRM(bill,GAL), ibu=calcIBU(hops,GAL,og);
+  return {og:og,fg:fg,abv:abv,srm:srm,ibu:ibu,color:srmToHex(srm)};
+}
+function darken(hex,f){
+  var n=parseInt(hex.slice(1),16),r=(n>>16)&255,g=(n>>8)&255,b=n&255;
+  r=Math.round(r*(1-f));g=Math.round(g*(1-f));b=Math.round(b*(1-f));
+  return 'rgb('+r+','+g+','+b+')';
+}
+function glassSVG(color){
+  var dark=darken(color,0.32);
+  return '<svg viewBox="0 0 120 150" aria-label="Beer glass">'
+   +'<defs><linearGradient id="bd_liq" x1="0" y1="0" x2="0" y2="1">'
+   +'<stop offset="0" stop-color="'+color+'"/><stop offset="1" stop-color="'+dark+'"/></linearGradient></defs>'
+   +'<path d="M27 46 L93 46 L86 138 Q85 142 81 142 L39 142 Q35 142 34 138 Z" fill="url(#bd_liq)"/>'
+   +'<circle cx="52" cy="112" r="2.1" fill="#ffffff" opacity="0.5"/>'
+   +'<circle cx="63" cy="96" r="1.6" fill="#ffffff" opacity="0.45"/>'
+   +'<circle cx="58" cy="126" r="1.7" fill="#ffffff" opacity="0.4"/>'
+   +'<path d="M26 47 Q24 30 40 30 Q44 20 58 26 Q74 20 82 32 Q98 32 94 47 Q60 54 26 47 Z" fill="#F3EAD8"/>'
+   +'<path d="M26 30 L94 30 L86 140 Q85 145 80 145 L40 145 Q35 145 34 140 Z" fill="none" stroke="#e9dcc9" stroke-width="2.2" stroke-linejoin="round" opacity="0.9"/>'
+   +'</svg>';
+}
+function buildPicks(){
+  var html='';
+  CHALLENGES.forEach(function(c){
+    html+='<button class="bd-pick" id="bd_pk_'+c.id+'" type="button">'
+      +'<span class="swatch" style="background:'+c.swatch+'"></span>'
+      +'<span class="txt"><span class="nm">'+c.name+'</span><span class="bl">'+c.blurb+'</span></span>'
+      +'<span class="chk" id="bd_chk_'+c.id+'">0/3</span></button>';
+  });
+  id('bd_picks').innerHTML=html;
+  CHALLENGES.forEach(function(c){
+    id('bd_pk_'+c.id).addEventListener('click',function(){takeOver();selected=c.id;render();});
+  });
+}
+function buildRows(){
+  var html='';
+  ING.forEach(function(g){
+    html+='<div class="bd-row">'
+      +'<button class="bd-step" id="bd_m_'+g.key+'" type="button" aria-label="less '+g.nm+'">\u2212</button>'
+      +'<div class="info"><div class="nm">'+g.nm+'</div><div class="dt">'+g.dt+'</div></div>'
+      +'<span class="bd-amt" id="bd_amt_'+g.key+'"></span>'
+      +'<button class="bd-step" id="bd_p_'+g.key+'" type="button" aria-label="more '+g.nm+'">+</button>'
+      +'</div>';
+  });
+  id('bd_rows').innerHTML=html;
+  ING.forEach(function(g){
+    var L=LIMITS[g.key];
+    id('bd_m_'+g.key).addEventListener('click',function(){takeOver();bump(g.key,-L[2]);});
+    id('bd_p_'+g.key).addEventListener('click',function(){takeOver();bump(g.key,L[2]);});
+  });
+}
+function bump(key,delta){
+  var L=LIMITS[key];
+  st[key]=Math.min(L[1],Math.max(L[0],Math.round((st[key]+delta)*100)/100));
+  render();
+}
+function rng(r,suf){return r[0]+'\u2013'+r[1]+(suf||'');}
+function setStat(box,tg,rangeStr,ok){
+  id(box).className='bd-stat '+(ok?'in':'out');
+  id(tg).textContent=rangeStr;
+}
+function render(){
+  var s=stats(), t=target();
+  id('bd_glass').innerHTML=glassSVG(s.color);
+  id('bd_og').textContent=s.og.toFixed(3);
+  id('bd_abv').innerHTML=s.abv.toFixed(1)+'<small>%</small>';
+  id('bd_ibu').innerHTML=Math.round(s.ibu)+'<small> IBU</small>';
+  id('bd_srm').innerHTML=s.srm.toFixed(1)+'<small> SRM</small>';
+
+  var okA=inR(s.abv,t.abv), okI=inR(s.ibu,t.ibu), okS=inR(s.srm,t.srm);
+  setStat('bd_st_abv','bd_tg_abv','aim '+rng(t.abv,'%'),okA);
+  setStat('bd_st_ibu','bd_tg_ibu','aim '+rng(t.ibu),okI);
+  setStat('bd_st_srm','bd_tg_srm','aim '+rng(t.srm),okS);
+  var hits=(okA?1:0)+(okI?1:0)+(okS?1:0);
+
+  // pick rows
+  CHALLENGES.forEach(function(c){
+    var on=c.id===selected;
+    var h=on?hits:0;
+    var chip=id('bd_pk_'+c.id);
+    chip.className='bd-pick'+(on?(hits===3?' won':' on'):'');
+    id('bd_chk_'+c.id).textContent=(on?hits:0)+'/3';
+  });
+
+  // status: win, or a one-ingredient nudge toward the target
+  var status=id('bd_status');
+  if(hits===3){
+    status.className='bd-status win';
+    var art=/^[AEIOU]/.test(t.name)?'an':'a';
+    status.innerHTML='\u2713 You brewed '+art+' '+t.name+'.';
+  } else {
+    var nudge='';
+    if(!okS){nudge=(s.srm<t.srm[0])?'add roast grain for color':'too dark \u2014 less roast grain';}
+    else if(!okI){nudge=(s.ibu<t.ibu[0])?'add bittering hops':'ease off the hops';}
+    else if(!okA){nudge=(s.abv<t.abv[0])?'add base malt for strength':'too strong \u2014 less base malt';}
+    status.className='bd-status';
+    status.innerHTML='<b>'+hits+'/3</b> in range \u2014 '+nudge;
+  }
+
+  ING.forEach(function(g){
+    var el=id('bd_amt_'+g.key); if(el)el.textContent=st[g.key].toFixed(g.dp)+' '+g.unit;
+    var minus=id('bd_m_'+g.key),plus=id('bd_p_'+g.key),L=LIMITS[g.key];
+    if(minus)minus.disabled=st[g.key]<=L[0]+1e-9;
+    if(plus)plus.disabled=st[g.key]>=L[1]-1e-9;
+  });
+}
+
+/* ── the show: pick the stout, mix a pale wort into it until it locks, hand off ── */
+var tw=null,seq=null,playing=false;
+function ease(k){return k<.5?2*k*k:1-Math.pow(-2*k+2,2)/2;}
+function tweenTo(target,dur,done){
+  clearInterval(tw);
+  var from={base:st.base,roast:st.roast,hops:st.hops},t0=Date.now();
+  tw=setInterval(function(){
+    var k=Math.min(1,(Date.now()-t0)/dur),e=ease(k);
+    st.base=from.base+(target.base-from.base)*e;
+    st.roast=from.roast+(target.roast-from.roast)*e;
+    st.hops=from.hops+(target.hops-from.hops)*e;
+    render();
+    if(k>=1){clearInterval(tw);tw=null;if(done)done();}
+  },33);
+}
+function runShow(){
+  if(!playing)return;
+  tweenTo({base:4.5,roast:1.0,hops:1.5},1100,function(){
+    if(!playing)return;
+    seq=setTimeout(function(){playing=false;setBtn(false);},900);
+  });
+}
+function setBtn(on){
+  id('bd_playlbl').textContent=on?'Playing':'Replay';
+  id('bd_hint').textContent=on?'tap anything to take over':'or brew it yourself';
+}
+function startShow(){cancelShow();selected='stout';st={base:6,roast:0,hops:1};playing=true;setBtn(true);render();runShow();}
+function cancelShow(){playing=false;clearInterval(tw);tw=null;clearTimeout(seq);}
+function takeOver(){
+  if(!playing&&tw===null&&seq===null)return;
+  cancelShow();
+  st.base=Math.round(st.base/LIMITS.base[2])*LIMITS.base[2];
+  st.roast=Math.round(st.roast/LIMITS.roast[2])*LIMITS.roast[2];
+  st.hops=Math.round(st.hops/LIMITS.hops[2])*LIMITS.hops[2];
+  setBtn(false);
+}
+id('bd_play').addEventListener('click',function(){if(playing){cancelShow();setBtn(false);}else{startShow();}});
+
+buildPicks();
+buildRows();
+render();
+if(!window.matchMedia||!window.matchMedia('(prefers-reduced-motion: reduce)').matches){
+  seq=setTimeout(startShow,500);
+}
+
+}
+
 var bwrap=document.getElementById('builds');
 var detail=document.createElement('div');detail.id='bdetail';
 var curB=-1;
@@ -872,6 +1179,7 @@ BUILDS.forEach(function(b,i){
     slot.classList.add('open');db.classList.add('on');
     if(b.demo==='video')buildVideoDemo(slot);
     else if(b.demo==='triangle')buildTriangleDemo(slot);
+    else if(b.demo==='brew')buildBrewDemo(slot);
    });
   }
     detail.classList.add('show');
@@ -1087,7 +1395,7 @@ document.getElementById('egghot').addEventListener('click',function(){
 });
 document.getElementById('eggclose').addEventListener('click',function(){document.getElementById('egg').classList.remove('show');});
 document.getElementById('egg').addEventListener('click',function(e){if(e.target===this)this.classList.remove('show');});
-document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v2.8 \u00b7 Aug 7 2026\nBuilt by the candidate, on a phone. Ships updates.');});
+document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v2.9 \u00b7 Aug 7 2026\nBuilt by the candidate, on a phone. Ships updates.');});
 })();
 </script>
 <script>
