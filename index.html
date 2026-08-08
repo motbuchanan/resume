@@ -323,7 +323,7 @@ body.nudged .tapchip::before{animation:none}
   .bd-foot{margin:11px 2px 0;padding-top:11px;border-top:1px solid #322930}
   .bd-foot .who{font-size:11px;color:#c2b5a7;line-height:1.55}
   .bd-foot .who b{color:#d8cdbf;font-weight:700}
-/* brick-breaker demo (namespaced .g-/.bk-) */
+/* brick-breaker demo */
 .gd{display:flex;justify-content:center;width:100%}
   .g-card{position:relative;width:100%;max-width:400px;background:linear-gradient(180deg,#141821,#0f1218);border:1.5px solid #2c333f;border-radius:14px;padding:14px;overflow:hidden}
   .g-eyebrow{font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:#7fd6cc}
@@ -444,7 +444,7 @@ window.__VERB=(function(){
 <div id="modout"></div>
 
 <footer>
-  <div class="ship">built &amp; shipped by the candidate · <b>v3.3</b> · Aug 7 2026<br>this résumé ships updates. most don't.</div>
+  <div class="ship">built &amp; shipped by the candidate · <b>v3.4</b> · Aug 7 2026<br>this résumé ships updates. most don't.</div>
   <span id="egghot">🎩</span>
 </footer>
 </div>
@@ -469,7 +469,7 @@ window.__VERB=(function(){
   <button id="eggclose" class="sq">Nice trick</button>
 </div></div>
 
-<span class="vb" id="vb">v3.3 · Aug 7</span>
+<span class="vb" id="vb">v3.4 · Aug 7</span>
 
 <div id="plainview">
   <div id="pvbar"><span class="t">PLAIN RESUME · for applications</span><button id="pvprint">⬇ Print / Save PDF</button><button id="pvclose">Close</button></div>
@@ -1175,11 +1175,11 @@ if(!window.matchMedia||!window.matchMedia('(prefers-reduced-motion: reduce)').ma
 }
 
 function buildGameDemo(slot){
-  slot.innerHTML="<div class=\"gd\"><div class=\"g-card\">\n  <div class=\"g-eyebrow\">Playable demo \u00b7 round 4</div>\n  <div class=\"g-h1\">Brick Breaker</div>\n  <div class=\"g-sub\">Slide to move the paddle. Break bricks, catch power-ups, chain combos. Tougher bricks take more hits.</div>\n  <div class=\"bk-wrap\" id=\"bk_wrap\">\n    <canvas id=\"bk_cv\"></canvas>\n    <div class=\"bk-hud\"><span id=\"bk_score\">0</span><span id=\"bk_combo\"></span><span id=\"bk_lives\">\u25cf\u25cf\u25cf</span></div>\n    <div class=\"bk-over show\" id=\"bk_over\"><div class=\"big\" id=\"bk_big\">Brick Breaker</div><div class=\"sm\">tap to launch</div></div>\n  </div>\n  <div class=\"bk-legend\">\n    <span><i style=\"background:#f0a53c\"></i>expand</span>\n    <span><i style=\"background:#4cf0e0\"></i>multiball</span>\n    <span><i style=\"background:#8a6be0\"></i>slow-mo</span>\n  </div>\n  <div class=\"g-foot\">Lit like a real chamber: beveled bricks with cast shadows, a glossy ball, additive spark bursts and light flashes, and a paddle with depth and underglow.</div>\n</div></div>";
+  slot.innerHTML="<div class=\"gd\"><div class=\"g-card\">\n  <div class=\"g-eyebrow\">Playable demo \u00b7 round 5</div>\n  <div class=\"g-h1\">Brick Breaker</div>\n  <div class=\"g-sub\">Slide to move the paddle. Break bricks, catch power-ups, chain combos. Tougher bricks take more hits.</div>\n  <div class=\"bk-wrap\" id=\"bk_wrap\">\n    <canvas id=\"bk_cv\"></canvas>\n    <div class=\"bk-hud\"><span id=\"bk_score\">0</span><span id=\"bk_combo\"></span><span id=\"bk_lives\">\u25cf\u25cf\u25cf</span></div>\n    <div class=\"bk-over show\" id=\"bk_over\"><div class=\"big\" id=\"bk_big\">Brick Breaker</div><div class=\"sm\">tap to launch</div></div>\n  </div>\n  <div class=\"bk-legend\">\n    <span><i style=\"background:#f0a53c\"></i>expand</span>\n    <span><i style=\"background:#4cf0e0\"></i>multiball</span>\n    <span><i style=\"background:#8a6be0\"></i>slow-mo</span>\n  </div>\n  <div class=\"g-foot\">Lit like a real chamber: beveled bricks with cast shadows, a glossy ball, additive spark bursts and light flashes, and a paddle with depth and underglow.</div>\n</div></div>";
   function id(x){return slot.querySelector('#'+x);}
 
 (function(){
-  var W=320,H=380,R=6.5,LIGHT={x:0.32,y:0.16}; // light from upper-left
+  var W=320,H=344,R=6.5,LIGHT={x:0.32,y:0.16}; // light from upper-left
   var cv=id('bk_cv'),scoreEl=id('bk_score'),comboEl=id('bk_combo'),livesEl=id('bk_lives');
   var over=id('bk_over'),big=id('bk_big');
   var dpr=Math.min(window.devicePixelRatio||1,2);
@@ -1189,7 +1189,7 @@ function buildGameDemo(slot){
   var HUE={1:190,2:150,3:40};
   // static atmosphere (built once)
   var bgGrad=ctx.createLinearGradient(0,0,0,H);
-  bgGrad.addColorStop(0,'#1a2536');bgGrad.addColorStop(0.28,'#151e2e');bgGrad.addColorStop(0.55,'#101825');bgGrad.addColorStop(0.78,'#0b111b');bgGrad.addColorStop(1,'#070a10');
+  bgGrad.addColorStop(0,'#1c2839');bgGrad.addColorStop(0.3,'#17212f');bgGrad.addColorStop(0.6,'#131c29');bgGrad.addColorStop(0.85,'#0f1723');bgGrad.addColorStop(1,'#0c1420');
   var vign=ctx.createRadialGradient(W/2,H*0.42,H*0.2,W/2,H*0.5,H*0.75);
   vign.addColorStop(0,'rgba(0,0,0,0)');vign.addColorStop(1,'rgba(0,0,0,0.55)');
   var stars=[];for(var i=0;i<46;i++)stars.push({x:Math.random()*W,y:Math.random()*H*0.7,r:Math.random()*1.1+0.3,a:Math.random()*0.4+0.15});
@@ -1278,30 +1278,38 @@ function buildGameDemo(slot){
   function rr(x,y,w,h,r){r=Math.min(r,w/2,h/2);ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
   function drawBg(){
     ctx.fillStyle=bgGrad;ctx.fillRect(-14,-14,W+28,H+28);
+    // faint back-wall grid so the space has texture instead of reading as a void
+    ctx.strokeStyle='rgba(130,165,215,0.055)';ctx.lineWidth=1;
+    for(var gx=20;gx<W;gx+=28){ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,H);ctx.stroke();}
+    for(var gy=20;gy<H;gy+=28){ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(W,gy);ctx.stroke();}
     // starfield
     for(var i=0;i<stars.length;i++){var s=stars[i];ctx.globalAlpha=s.a;ctx.fillStyle='#cfe0f5';ctx.beginPath();ctx.arc(s.x,s.y,s.r,0,7);ctx.fill();}
     ctx.globalAlpha=1;
-    // spotlight glow high in the chamber (full-height fill so there is no hard edge)
+    // high spotlight
     var sp=ctx.createRadialGradient(W*0.42,70,10,W/2,92,210);
     sp.addColorStop(0,'rgba(120,150,200,0.15)');sp.addColorStop(1,'rgba(120,150,200,0)');
     ctx.fillStyle=sp;ctx.fillRect(0,0,W,H);
+    // soft ambient light filling the mid/lower chamber (kills the black void)
+    var amb=ctx.createRadialGradient(W/2,H*0.6,10,W/2,H*0.6,H*0.52);
+    amb.addColorStop(0,'rgba(96,134,196,0.11)');amb.addColorStop(1,'rgba(96,134,196,0)');
+    ctx.fillStyle=amb;ctx.fillRect(0,0,W,H);
     // side walls (depth)
     var lw=ctx.createLinearGradient(0,0,16,0);lw.addColorStop(0,'rgba(0,0,0,0.5)');lw.addColorStop(1,'rgba(0,0,0,0)');
     ctx.fillStyle=lw;ctx.fillRect(0,0,16,H);
     var rw=ctx.createLinearGradient(W-16,0,W,0);rw.addColorStop(0,'rgba(0,0,0,0)');rw.addColorStop(1,'rgba(0,0,0,0.5)');
     ctx.fillStyle=rw;ctx.fillRect(W-16,0,16,H);
-    // floor glow
-    var fg=ctx.createLinearGradient(0,H-60,0,H);fg.addColorStop(0,'rgba(76,240,224,0)');fg.addColorStop(1,'rgba(76,240,224,0.07)');
-    ctx.fillStyle=fg;ctx.fillRect(0,H-60,W,60);
-    // recessed back-wall the bricks are mounted on (figure/ground separation)
-    var px=8,py=38,pw=W-16,ph=100;
+    // floor glow (grounds the paddle)
+    var fg=ctx.createLinearGradient(0,H-70,0,H);fg.addColorStop(0,'rgba(76,240,224,0)');fg.addColorStop(1,'rgba(76,240,224,0.10)');
+    ctx.fillStyle=fg;ctx.fillRect(0,H-70,W,70);
+    // recessed back-wall the bricks are mounted on
+    var px=8,py=34,pw=W-16,ph=110;
     ctx.save();ctx.shadowColor='rgba(0,0,0,0.5)';ctx.shadowBlur=14;ctx.shadowOffsetY=4;
-    var wg=ctx.createLinearGradient(0,py,0,py+ph);wg.addColorStop(0,'#0c121c');wg.addColorStop(1,'#070c14');
+    var wg=ctx.createLinearGradient(0,py,0,py+ph);wg.addColorStop(0,'#0e1522');wg.addColorStop(1,'#0a111c');
     ctx.fillStyle=wg;rr(px,py,pw,ph,13);ctx.fill();ctx.restore();
     ctx.save();rr(px,py,pw,ph,13);ctx.clip();
     var isg=ctx.createLinearGradient(0,py,0,py+26);isg.addColorStop(0,'rgba(0,0,0,0.5)');isg.addColorStop(1,'rgba(0,0,0,0)');
     ctx.fillStyle=isg;ctx.fillRect(px,py,pw,26);ctx.restore();
-    ctx.strokeStyle='rgba(255,255,255,0.05)';ctx.lineWidth=1;rr(px,py,pw,ph,13);ctx.stroke();
+    ctx.strokeStyle='rgba(255,255,255,0.06)';ctx.lineWidth=1;rr(px,py,pw,ph,13);ctx.stroke();
   }
   function drawBrick(b){
     var hue=HUE[b.hp]||40;
@@ -1418,9 +1426,10 @@ BUILDS.forEach(function(b,i){
    });
   }
     detail.classList.add('show');
-  var row=Math.floor(i/2);
-  var after=bwrap.children[Math.min(row*2+2,bwrap.children.length)];
-  bwrap.insertBefore(detail,after&&after!==detail?after:null);
+  if(detail.parentNode)detail.parentNode.removeChild(detail);
+  var tiles=bwrap.querySelectorAll('.btile');
+  var after=tiles[Math.floor(i/2)*2+2]||null;
+  bwrap.insertBefore(detail,after);
  });
  bwrap.appendChild(t);
 });
@@ -1630,7 +1639,7 @@ document.getElementById('egghot').addEventListener('click',function(){
 });
 document.getElementById('eggclose').addEventListener('click',function(){document.getElementById('egg').classList.remove('show');});
 document.getElementById('egg').addEventListener('click',function(e){if(e.target===this)this.classList.remove('show');});
-document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v3.3 \u00b7 Aug 7 2026\nBuilt by the candidate, on a phone. Ships updates.');});
+document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v3.4 \u00b7 Aug 7 2026\nBuilt by the candidate, on a phone. Ships updates.');});
 })();
 </script>
 <script>
