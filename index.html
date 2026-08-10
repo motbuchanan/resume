@@ -24,6 +24,8 @@ svg.icn{width:26px;height:26px;stroke:var(--teal);stroke-width:1.7;fill:none;str
 header{padding:52px 0 20px}
 .hello{font-family:'JetBrains Mono',monospace;font-size:.72rem;color:var(--teal);letter-spacing:.13em;margin-bottom:16px;min-height:1.3em}
 h1{font-size:clamp(2.5rem,10vw,3.9rem);font-weight:900;line-height:.98;letter-spacing:-.02em}
+.wordmark{margin:2px 0 4px;line-height:0}
+.wordmark .wm{display:block;width:min(92vw,470px);height:auto}
 .headline{font-size:clamp(1.12rem,4.4vw,1.45rem);font-weight:800;margin-top:16px;line-height:1.32}
 .headline .hl{color:var(--teal)}
 .subline{color:var(--soft);font-size:.93rem;margin-top:9px}
@@ -368,9 +370,92 @@ body.nudged .tapchip::before{animation:none}
 .vd .rc-chip{background:#17191c;border:1.5px solid #494d55;color:var(--soft);border-radius:14px;padding:4px 9px;font-family:'JetBrains Mono',monospace;font-size:.52rem;text-decoration:line-through}
 .vd .hint{font-family:'JetBrains Mono',monospace;font-size:.6rem;color:var(--soft);margin-top:10px;text-align:center;line-height:1.5;min-height:2.4em}
 .vd .hint b{color:var(--orange);font-weight:400}
+
+/* ===== forklift demo (scoped under .fkwrap) ===== */
+.fkwrap :root{color-scheme:dark}
+.fkwrap *{box-sizing:border-box;-webkit-tap-highlight-color:transparent;-webkit-user-select:none;user-select:none}
+.fkwrap{position:relative;width:100%;aspect-ratio:3/4;max-height:520px;margin-top:12px;border-radius:12px;overflow:hidden;background:#0c0e12;border:1px solid #242a34;touch-action:none}
+.fkwrap #cv{position:absolute;inset:0;width:100%;height:100%;display:block}
+.fkwrap .obj{position:absolute;left:50%;top:10px;transform:translateX(-50%);z-index:6;
+  width:calc(100% - 24px);max-width:344px;background:rgba(14,17,22,.82);border:1px solid #2b303b;border-left:4px solid #ffb020;
+  border-radius:11px;padding:7px 11px;backdrop-filter:blur(8px)}
+.fkwrap .obj .step{font-size:10px;letter-spacing:.16em;color:#ffb020;text-transform:uppercase}
+.fkwrap .obj .txt{font-size:12.5px;font-weight:600;margin-top:2px;line-height:1.25}
+.fkwrap .obj.done{border-left-color:#2fbf71}
+.fkwrap .obj.done .step{color:#2fbf71}
+.fkwrap .obj.fail{border-left-color:#e63a2e}
+.fkwrap .obj.fail .step{color:#ff5a3c}
+.fkwrap .hud{position:absolute;top:64px;right:12px;z-index:5;text-align:right;pointer-events:none}
+.fkwrap .hud .box{background:rgba(14,17,22,.8);border:1px solid #2b303b;border-radius:9px;padding:6px 9px;backdrop-filter:blur(6px)}
+.fkwrap .hud .row{font-size:10px;color:#8a909c;letter-spacing:.05em}
+.fkwrap .hud .row b{color:#f2f4f7;font-size:13px}
+.fkwrap .hud .row.warn b{color:#ff5a3c}
+.fkwrap .ctl{position:absolute;z-index:8;touch-action:none}
+.fkwrap #lever{left:12px;top:40%;transform:translateY(-50%);width:62px;height:184px;
+  background:rgba(20,23,29,.9);border:1px solid #2b303b;border-radius:14px;padding:8px 0;
+  display:flex;flex-direction:column;align-items:center;justify-content:space-between}
+.fkwrap #lever .slot{position:absolute;top:12px;bottom:12px;left:50%;transform:translateX(-50%);width:8px;background:#0d0f14;border-radius:6px}
+.fkwrap #lever .knob{position:absolute;left:50%;transform:translateX(-50%);width:44px;height:44px;border-radius:11px;
+  background:linear-gradient(180deg,#ffc94a,#f19100);border:1px solid #b06f00;transition:top .12s cubic-bezier(.3,1.4,.5,1);z-index:2}
+.fkwrap #lever .lab{position:relative;z-index:3;font-size:10px;font-weight:700;letter-spacing:.08em;color:#6b7280;pointer-events:none}
+.fkwrap #lever .lab.on{color:#ffb020}
+.fkwrap #pedal{left:14px;bottom:14px;width:66px;height:102px;
+  background:rgba(20,23,29,.9);border:1px solid #2b303b;border-radius:16px;overflow:hidden}
+.fkwrap #pedal .face{position:absolute;left:8px;right:8px;top:8px;height:64px;border-radius:11px;
+  background:linear-gradient(180deg,#2c313c,#20242c);border:1px solid #3a4150;transition:transform .05s}
+.fkwrap #pedal .fill{position:absolute;left:8px;right:8px;bottom:8px;top:8px;border-radius:11px;
+  background:linear-gradient(0deg,rgba(255,176,32,.5),rgba(255,176,32,0));transform-origin:bottom;transform:scaleY(0)}
+.fkwrap #pedal .txt{position:absolute;left:0;right:0;bottom:10px;text-align:center;font-size:10px;letter-spacing:.14em;color:#8a909c}
+.fkwrap #wheel{right:12px;bottom:12px;width:104px;height:104px}
+.fkwrap #wheelSvg{width:100%;height:100%;transition:none}
+.fkwrap .btnrow{position:absolute;top:64px;left:12px;z-index:7;display:flex;flex-direction:column;gap:8px}
+.fkwrap .mini{pointer-events:auto;background:rgba(30,33,41,.92);border:1px solid #2b303b;color:#e7e9ee;
+  border-radius:10px;padding:8px 11px;font:600 11px/1 'JetBrains Mono',monospace;letter-spacing:.05em}
+.fkwrap .mini:active{transform:scale(.96)}
+.fkwrap .ver{position:absolute;bottom:4px;left:50%;transform:translateX(-50%);z-index:7;background:none;border:none;color:#464c59;font:600 10px/1 'JetBrains Mono',monospace;pointer-events:auto}
+.fkwrap .fkdir{position:absolute;left:12px;bottom:16px;z-index:7;font:700 12px/1 'JetBrains Mono',monospace;letter-spacing:.08em;color:#0e1519;background:#ffb020;border:none;border-radius:9px;padding:9px 14px;cursor:pointer;touch-action:manipulation;box-shadow:0 2px 8px #0006}
+.fkwrap .fkdir.rev{background:#4cc0e0}
+.fkwrap .fkdir:active{transform:translateY(1px)}
+.fkwrap .fkwheel{position:absolute;left:50%;bottom:12px;transform:translateX(-50%);width:116px;height:116px;z-index:7;cursor:grab;touch-action:none;-webkit-tap-highlight-color:transparent}
+.fkwrap .fkwheel:active{cursor:grabbing}
+.fkwrap .fkwheel svg{width:100%;height:100%;display:block;transition:transform .05s linear;filter:drop-shadow(0 3px 8px #0007)}
+.fkwrap .fkwheelhint{position:absolute;left:50%;bottom:134px;transform:translateX(-50%);z-index:7;pointer-events:none;background:rgba(14,17,22,.85);border:1px solid #2b303b;border-radius:20px;padding:6px 12px;font:600 10.5px/1 'JetBrains Mono',monospace;letter-spacing:.02em;color:#c7d2de;white-space:nowrap;transition:opacity .45s}
+.fkwrap .fkwheelhint.gone{opacity:0}
+.fkwrap #fk_toast{position:absolute;left:50%;bottom:180px;transform:translateX(-50%) translateY(10px);z-index:9;
+  background:#262a34;border:1px solid #333846;color:#f2f4f7;padding:9px 14px;border-radius:9px;font-size:12px;opacity:0;transition:.25s;pointer-events:none}
+.fkwrap #fk_toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* ambient depth background */
+#ambient{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden;
+  background-image:radial-gradient(circle at 50% -8%,rgba(76,240,224,.06),transparent 55%),radial-gradient(rgba(255,255,255,.022) 1px,transparent 1.4px);
+  background-size:100% 100%,26px 26px}
+#ambient .orb{position:absolute;border-radius:50%;will-change:transform;filter:saturate(1.1)}
+#ambient .o1{width:64vw;height:64vw;left:-14vw;top:-6vh;background:radial-gradient(circle,rgba(76,240,224,.22),transparent 66%);animation:orbA 42s ease-in-out infinite alternate}
+#ambient .o2{width:72vw;height:72vw;right:-20vw;top:34vh;background:radial-gradient(circle,rgba(240,163,94,.17),transparent 66%);animation:orbB 55s ease-in-out infinite alternate}
+#ambient .o3{width:58vw;height:58vw;left:6vw;bottom:-18vh;background:radial-gradient(circle,rgba(70,120,240,.16),transparent 66%);animation:orbC 48s ease-in-out infinite alternate}
+@keyframes orbA{to{transform:translate(14vw,12vh) scale(1.18)}}
+@keyframes orbB{to{transform:translate(-12vw,-10vh) scale(1.12)}}
+@keyframes orbC{to{transform:translate(10vw,-14vh) scale(1.22)}}
+
+/* contact terminal */
+.term{background:#0e1013;border:1px solid var(--line);border-radius:10px;overflow:hidden;margin:4px 0 12px}
+.termbar{display:flex;align-items:center;gap:6px;padding:8px 12px;background:#16191d;border-bottom:1px solid var(--line)}
+.termbar .td{width:10px;height:10px;border-radius:50%;display:inline-block}
+.termbar .td.r{background:#ff5f56}.termbar .td.y{background:#ffbd2e}.termbar .td.g{background:#27c93f}
+.termbar .tt{margin-left:8px;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--soft);letter-spacing:.03em}
+.termout{max-height:180px;overflow-y:auto;padding:12px 13px 4px;font-family:'JetBrains Mono',monospace;font-size:.78rem;line-height:1.7}
+.termout .tl{color:var(--ink)}.termout .tl .tp{color:var(--orange);margin-right:2px}
+.termout .tr{color:var(--soft);margin:2px 0 9px;white-space:pre-wrap;word-break:break-word}
+.termout .tr.hi{color:var(--teal);font-weight:700}
+.termout .ok{color:var(--green)}
+.termline{display:flex;align-items:center;gap:7px;padding:7px 13px 12px;font-family:'JetBrains Mono',monospace;font-size:.78rem;border-top:1px solid var(--line)}
+.termline .tp{color:var(--orange)}
+.termline input{flex:1;min-width:0;background:none;border:none;outline:none;color:var(--ink);font-family:inherit;font-size:inherit;padding:0}
+.termline input::placeholder{color:var(--soft);opacity:.55}
 </style>
 </head>
 <body>
+<div id="ambient" aria-hidden="true"><div class="orb o1"></div><div class="orb o2"></div><div class="orb o3"></div></div>
 <script>
 window.__VERB=(function(){
   try{
@@ -418,10 +503,10 @@ window.__VERB=(function(){
 <div class="wrap">
 <header>
   <div class="hello mono" id="typeline"></div>
-  <h1>Mot Buchanan</h1>
+  <h1 class="wordmark" aria-label="Mot Buchanan"><svg class="wm" role="img" aria-label="Mot Buchanan" xmlns="http://www.w3.org/2000/svg" viewBox="-20 -224 7750 936"><path transform="translate(0.0,700) scale(1,-1)" d="M74 0V688H382L445 446Q449 433 456.5 403.0Q464 373 472.5 338.0Q481 303 488 273H496Q501 295 508.5 325.5Q516 356 524.0 388.0Q532 420 538 446L601 688H898V0H687V248Q687 288 687.5 330.5Q688 373 688.5 411.0Q689 449 689 474H681Q678 454 672.5 427.0Q667 400 661.0 373.5Q655 347 649 327L560 0H395L305 327Q300 347 293.5 373.5Q287 400 282.0 427.0Q277 454 273 473H265Q266 448 267.0 410.0Q268 372 268.5 330.0Q269 288 269 248V0Z" fill="#ebedef"/><path transform="translate(1639.0,700) scale(1,-1)" d="M284 -12Q230 -12 188.5 0.5Q147 13 124.0 44.0Q101 75 101 129V393H27V528H109L152 688H300V528H412V393H300V192Q300 158 311.0 140.5Q322 123 356 123H412V6Q396 1 372.5 -3.5Q349 -8 325.5 -10.0Q302 -12 284 -12Z" fill="#ebedef"/><path transform="translate(2263.0,700) scale(1,-1)" d="M74 0V688H532Q584 688 627.0 666.5Q670 645 696.0 607.0Q722 569 722 519Q722 469 706.0 437.0Q690 405 664.0 386.5Q638 368 607 359V355Q643 347 672.5 327.5Q702 308 720.0 273.0Q738 238 738 183Q738 128 711.0 87.0Q684 46 639.0 23.0Q594 0 538 0ZM295 160H463Q486 160 500.0 176.0Q514 192 514 224Q514 239 507.5 251.5Q501 264 489.5 271.0Q478 278 463 278H295ZM295 420H447Q463 420 474.0 427.5Q485 435 491.5 449.0Q498 463 498 484Q498 506 483.0 521.5Q468 537 447 537H295Z" fill="#ebedef"/><path transform="translate(3041.0,700) scale(1,-1)" d="M242 -12Q148 -12 103.0 40.0Q58 92 58 186V528H257V210Q257 194 261.5 180.0Q266 166 274.0 156.0Q282 146 295.0 140.5Q308 135 324 135Q349 135 367.5 146.5Q386 158 396.5 177.0Q407 196 407 218V528H606V0H443L433 80H426Q407 51 377.5 30.0Q348 9 313.0 -1.5Q278 -12 242 -12Z" fill="#ebedef"/><path transform="translate(3708.0,700) scale(1,-1)" d="M333 -12Q243 -12 176.5 18.5Q110 49 73.0 110.5Q36 172 36 264Q36 357 73.0 418.5Q110 480 176.5 510.5Q243 541 333 541Q393 541 446.0 528.0Q499 515 539.0 488.0Q579 461 601.5 418.0Q624 375 624 315H431Q431 346 419.5 366.0Q408 386 386.0 395.5Q364 405 333 405Q298 405 276.5 391.5Q255 378 245.0 352.5Q235 327 235 292V235Q235 200 245.5 175.0Q256 150 278.5 136.5Q301 123 337 123Q370 123 392.5 132.5Q415 142 427.0 162.5Q439 183 439 215H624Q624 155 601.5 111.5Q579 68 539.0 41.0Q499 14 446.0 1.0Q393 -12 333 -12Z" fill="#ebedef"/><path transform="translate(4375.0,700) scale(1,-1)" d="M60 0V725H259V473H266Q283 495 309.0 509.5Q335 524 365.0 532.0Q395 540 424 540Q487 540 527.5 516.5Q568 493 588.0 449.0Q608 405 608 342V0H409V318Q409 335 404.5 348.5Q400 362 392.0 372.0Q384 382 371.5 387.5Q359 393 342 393Q317 393 298.5 381.5Q280 370 269.5 351.5Q259 333 259 310V0Z" fill="#ebedef"/><path transform="translate(5042.0,700) scale(1,-1)" d="M216 -12Q175 -12 141.0 -4.5Q107 3 82.0 20.5Q57 38 43.5 66.5Q30 95 30 136Q30 195 54.5 232.0Q79 269 126.0 289.0Q173 309 240.5 316.5Q308 324 395 324V350Q395 372 384.5 385.5Q374 399 357.0 406.0Q340 413 318 413Q301 413 283.0 409.0Q265 405 253.5 395.0Q242 385 242 367V363H46Q45 367 45.0 370.0Q45 373 45 377Q45 426 76.5 462.5Q108 499 169.5 519.5Q231 540 321 540Q394 540 456.0 524.0Q518 508 556.0 470.5Q594 433 594 368V162Q594 146 602.0 134.5Q610 123 626 123H662V8Q650 1 622.5 -5.5Q595 -12 558 -12Q518 -12 488.0 -4.0Q458 4 439.5 19.0Q421 34 414 54H407Q386 35 358.5 20.0Q331 5 296.0 -3.5Q261 -12 216 -12ZM297 112Q316 112 333.5 117.5Q351 123 365.0 132.5Q379 142 387.0 155.5Q395 169 395 185V230Q336 230 299.5 221.0Q263 212 246.0 197.0Q229 182 229 162Q229 142 239.0 131.0Q249 120 264.5 116.0Q280 112 297 112Z" fill="#ebedef"/><path transform="translate(5709.0,700) scale(1,-1)" d="M60 0V528H223L236 448H243Q264 479 292.0 499.5Q320 520 354.0 530.0Q388 540 424 540Q487 540 527.5 516.5Q568 493 588.0 449.0Q608 405 608 342V0H409V318Q409 335 404.5 348.5Q400 362 392.0 372.0Q384 382 371.5 387.5Q359 393 342 393Q317 393 298.5 381.5Q280 370 269.5 351.5Q259 333 259 310V0Z" fill="#ebedef"/><path transform="translate(6376.0,700) scale(1,-1)" d="M216 -12Q175 -12 141.0 -4.5Q107 3 82.0 20.5Q57 38 43.5 66.5Q30 95 30 136Q30 195 54.5 232.0Q79 269 126.0 289.0Q173 309 240.5 316.5Q308 324 395 324V350Q395 372 384.5 385.5Q374 399 357.0 406.0Q340 413 318 413Q301 413 283.0 409.0Q265 405 253.5 395.0Q242 385 242 367V363H46Q45 367 45.0 370.0Q45 373 45 377Q45 426 76.5 462.5Q108 499 169.5 519.5Q231 540 321 540Q394 540 456.0 524.0Q518 508 556.0 470.5Q594 433 594 368V162Q594 146 602.0 134.5Q610 123 626 123H662V8Q650 1 622.5 -5.5Q595 -12 558 -12Q518 -12 488.0 -4.0Q458 4 439.5 19.0Q421 34 414 54H407Q386 35 358.5 20.0Q331 5 296.0 -3.5Q261 -12 216 -12ZM297 112Q316 112 333.5 117.5Q351 123 365.0 132.5Q379 142 387.0 155.5Q395 169 395 185V230Q336 230 299.5 221.0Q263 212 246.0 197.0Q229 182 229 162Q229 142 239.0 131.0Q249 120 264.5 116.0Q280 112 297 112Z" fill="#ebedef"/><path transform="translate(7043.0,700) scale(1,-1)" d="M60 0V528H223L236 448H243Q264 479 292.0 499.5Q320 520 354.0 530.0Q388 540 424 540Q487 540 527.5 516.5Q568 493 588.0 449.0Q608 405 608 342V0H409V318Q409 335 404.5 348.5Q400 362 392.0 372.0Q384 382 371.5 387.5Q359 393 342 393Q317 393 298.5 381.5Q280 370 269.5 351.5Q259 333 259 310V0Z" fill="#ebedef"/><path transform="translate(844.9,-213.7) scale(9.2129)" d="M27.6,5.0 L26.5,6.7 L24.6,9.4 L23.0,11.8 L20.7,15.0 L20.4,15.6 L19.4,15.7 L13.5,15.8 L12.3,16.0 L12.3,19.9 L12.7,20.1 L18.6,20.2 L22.7,20.2 L23.8,18.8 L25.5,16.4 L26.6,14.7 L28.5,12.0 L29.9,9.9 L31.0,8.2 L32.3,6.3 L32.5,6.1 L63.5,6.1 L63.8,6.8 L65.4,9.1 L66.8,11.1 L68.6,13.7 L69.6,15.1 L71.1,17.4 L72.8,19.6 L73.5,20.4 L86.2,20.4 L86.3,20.2 L86.3,15.8 L86.2,15.7 L75.9,15.6 L73.9,13.0 L73.0,11.5 L71.8,9.9 L70.1,7.5 L68.6,5.3 L68.5,5.0 Z  M48.5,33.3 L45.9,33.6 L42.7,34.2 L39.4,35.1 L38.0,35.7 L38.0,36.3 L40.8,38.0 L44.4,40.1 L46.6,41.3 L50.3,43.6 L52.5,45.0 L54.5,46.1 L58.5,48.5 L61.4,50.4 L62.1,50.9 L62.5,50.8 L62.3,49.5 L60.8,43.9 L59.0,36.7 L58.6,34.7 L58.0,34.3 L55.4,33.7 L53.7,33.5 L52.0,33.3 Z  M61.4,35.6 L61.3,36.3 L61.5,37.1 L62.1,39.9 L63.8,46.7 L65.4,52.6 L66.1,55.1 L67.2,59.1 L68.0,62.2 L68.2,63.3 L68.7,63.5 L70.4,60.4 L71.7,58.2 L73.7,54.7 L75.1,52.3 L75.9,50.8 L76.8,49.4 L76.6,48.7 L75.6,47.3 L75.1,46.3 L73.4,44.0 L73.1,44.0 L72.8,43.5 L70.1,40.8 L67.3,38.7 L64.8,37.1 L62.5,36.0 L61.7,35.6 Z  M34.6,37.3 L33.1,38.2 L31.4,39.5 L29.9,40.8 L28.2,42.3 L26.5,44.2 L26.5,44.4 L26.2,44.4 L24.8,46.4 L23.8,48.0 L22.5,49.9 L21.7,51.8 L21.3,53.2 L23.0,52.9 L26.2,52.0 L28.0,51.5 L33.5,49.9 L35.2,49.4 L36.3,49.1 L40.3,48.0 L43.5,47.0 L47.0,46.0 L48.3,45.6 L48.3,45.1 L46.8,44.3 L44.1,42.7 L43.1,42.2 L39.2,39.8 L36.9,38.5 L34.8,37.3 Z  M35.2,51.8 L33.7,52.3 L31.3,53.0 L28.5,54.0 L24.9,55.0 L22.1,55.8 L20.3,56.5 L20.1,57.1 L20.4,57.1 L20.4,57.5 L19.9,57.4 L19.4,60.6 L19.4,61.9 L19.7,61.8 L19.9,60.5 L19.9,62.3 L20.0,63.5 L19.7,63.5 L19.7,62.3 L19.6,62.3 L19.4,65.0 L19.4,68.1 L19.7,70.4 L20.3,72.5 L20.8,74.6 L21.4,76.3 L21.8,76.3 L23.2,73.9 L24.6,71.6 L26.6,68.2 L27.3,67.0 L29.2,63.9 L31.5,59.8 L33.5,56.4 L34.8,54.2 L35.9,52.0 L35.9,51.8 Z  M77.9,51.9 L77.0,53.2 L76.2,54.7 L74.5,57.7 L72.5,61.1 L71.7,62.6 L69.6,66.3 L68.2,68.7 L66.3,71.9 L65.2,73.9 L64.1,75.7 L63.5,76.7 L63.7,77.3 L64.2,77.1 L68.2,76.0 L69.7,75.4 L71.7,74.9 L74.9,73.9 L78.9,72.7 L79.7,72.3 L80.1,70.5 L80.6,67.4 L80.7,66.0 L80.7,61.9 L80.3,58.5 L79.9,56.4 L79.2,54.2 L78.5,52.2 Z  M31.0,65.6 L29.3,68.4 L28.3,70.4 L26.9,72.7 L26.1,74.2 L25.2,75.7 L23.7,78.4 L23.0,79.8 L23.9,81.3 L25.2,83.0 L26.5,84.6 L28.0,86.3 L30.1,88.2 L31.8,89.5 L33.7,90.8 L35.5,91.9 L37.7,92.9 L38.2,92.7 L37.9,91.3 L36.9,87.5 L35.6,82.2 L34.5,77.8 L33.9,75.8 L33.2,72.9 L31.5,66.7 L31.3,65.6 Z  M78.2,75.1 L73.8,76.5 L70.4,77.5 L67.3,78.4 L63.7,79.5 L60.7,80.4 L56.5,81.6 L53.0,82.6 L51.3,83.0 L51.1,83.6 L53.9,85.3 L56.9,87.1 L60.8,89.5 L63.5,91.2 L64.4,91.6 L65.2,91.5 L66.6,90.5 L67.5,89.9 L69.4,88.4 L70.1,87.8 L70.1,87.5 L70.7,87.3 L73.0,85.0 L74.5,83.0 L76.1,80.9 L77.0,79.4 L78.3,76.7 L78.7,75.8 L78.7,75.1 Z  M37.2,78.1 L37.0,78.5 L37.6,80.5 L38.5,83.9 L39.2,87.0 L40.3,91.6 L41.0,93.9 L41.1,94.2 L43.4,94.7 L44.8,95.0 L45.1,95.1 L54.5,95.1 L55.6,94.9 L58.0,94.3 L60.6,93.5 L61.7,93.0 L61.5,92.6 L59.9,91.6 L57.3,90.1 L54.6,88.4 L51.5,86.5 L49.6,85.3 L46.9,83.7 L44.9,82.5 L42.0,80.8 L41.0,80.1 L39.4,79.2 L38.5,78.5 L37.6,78.1 Z" fill="#4cf0e0" fill-rule="evenodd"/></svg></h1>
   <div class="headline">Media producer &amp; trainer who <span class="hl">builds his own tools</span>.</div>
   <div class="subline">One-person media department. Self-taught AI builder. Professional explainer.</div>
-  <div class="hook rv">Everything on this page was made on a smartphone.<small>the apps · the page itself</small></div>
+  <div class="hook rv">Everything on this page was made on a smartphone.<small>the demos · this résumé · the logo</small></div>
   <div id="stats" class="rv">
     <div class="stat"><div class="n" data-count="8">0</div><div class="l">fields, one throughline</div></div>
     <div class="stat"><div class="n" data-count="30" data-approx="1">0</div><div class="l">apps built &amp; deployed</div></div>
@@ -444,7 +529,7 @@ window.__VERB=(function(){
 <div id="modout"></div>
 
 <footer>
-  <div class="ship">built &amp; shipped by the candidate · <b>v3.4</b> · Aug 7 2026<br>this résumé ships updates. most don't.</div>
+  <div class="ship">built &amp; shipped by the candidate · <b>v3.11</b> · Aug 7 2026<br>this résumé ships updates. most don't.</div>
   <span id="egghot">🎩</span>
 </footer>
 </div>
@@ -469,7 +554,7 @@ window.__VERB=(function(){
   <button id="eggclose" class="sq">Nice trick</button>
 </div></div>
 
-<span class="vb" id="vb">v3.4 · Aug 7</span>
+<span class="vb" id="vb">v3.11 · Aug 7</span>
 
 <div id="plainview">
   <div id="pvbar"><span class="t">PLAIN RESUME · for applications</span><button id="pvprint">⬇ Print / Save PDF</button><button id="pvclose">Close</button></div>
@@ -495,8 +580,6 @@ window.__VERB=(function(){
     <ul><li>Taught painting, sculpture, music, screenprinting, and creative writing to learners of every ability; led program and community outreach.</li></ul></div>
   <div class="job"><b>GameStop</b><i>Store Manager · 2008–2010</i>
     <ul><li>Managed a store the district used to develop and train new managers; brought rising employees up to keyholder and assistant-manager level (customer service, closing sales, new-role duties).</li></ul></div>
-  <h2>Earlier Experience (2000s)</h2>
-  <p>Shift manager across several restaurants — oversaw teams and trained new crew.</p>
   <h2>Independent Build Work (2026–present)</h2>
   <p>Roughly 30 deployed single-file web applications built with AI-assisted development, phone-first, including: a WebGL2 3D sculpting tool, a forklift-operator training simulator, a browser-based video editor, a real-time synced family game library PWA with multiplayer (Firebase), an interactive homebrewing learning app, and an interactive production-constraint explainer.</p>
   <h2>Skills</h2>
@@ -605,7 +688,7 @@ var BUILDS=[
  {ic:'i-fork',name:'Forklift training simulator',tag:'training · certification prep',
   what:'A certification-prep simulator: scenario deck, guided wizard, animated graphics, OSHA-based content.',
   who:'Built to see whether a full certification sim could be made on a phone. It could.',
-  ph:''},
+  ph:'',demo:'forklift'},
  {ic:'i-tri',name:'Production Triangle',tag:'explainer · interaction design',
   what:'An interactive explainer of the good, fast, cheap tradeoff: drag one point inside a triangle and the other two give way in real time.',
   who:'Built to turn an abstract production rule into something you feel with your thumb.',
@@ -1399,6 +1482,372 @@ function buildGameDemo(slot){
 
 }
 
+function buildForkliftDemo(slot){
+  slot.innerHTML="<div class=\"gd\"><div class=\"g-card\">\n  <div class=\"g-eyebrow\">Playable demo \u00b7 mouse or touch</div>\n  <div class=\"g-h1\">Forklift</div>\n  <div class=\"g-sub\">Tap for FWD or REV. Hold the wheel to drive, turn it to steer. Mouse or finger. Rear-wheel steer, so the tail swings wide. Take a corner too fast and it tips.</div>\n  <div class=\"fkwrap\" id=\"fkwrap\">\n<canvas id=\"cv\"></canvas>\n\n<div class=\"obj\" id=\"obj\"><div class=\"step\" id=\"objStep\">Objective 1 of 3</div><div class=\"txt\" id=\"objTxt\">Hold the wheel to carry the pallet up the aisle.</div></div>\n\n<div class=\"hud\"><div class=\"box\">\n  <div class=\"row\">SPD <b id=\"rSpd\">0</b></div>\n  <div class=\"row\" id=\"rowClip\">CLIPS <b id=\"rClip\">0</b></div>\n  <div class=\"row\">TIME <b id=\"rTime\">0.0</b></div>\n</div></div>\n\n<div class=\"btnrow\"><button class=\"mini\" id=\"btnReset\">\u21ba Restart</button><button class=\"mini\" id=\"btnTrail\">Trail on</button></div>\n\n<button class=\"fkdir\" id=\"fkdir\" type=\"button\">FWD</button>\n<div class=\"fkwheelhint\" id=\"fkwheelhint\">hold wheel to drive \u00b7 turn to steer</div>\n<div class=\"fkwheel\" id=\"fkwheel\"><svg viewBox=\"0 0 100 100\" id=\"fkwheelSvg\"><circle cx=\"50\" cy=\"50\" r=\"46\" fill=\"#1a1d24\" stroke=\"#3a4150\" stroke-width=\"3\"/><circle cx=\"50\" cy=\"50\" r=\"46\" fill=\"none\" stroke=\"#ffb020\" stroke-width=\"2\" stroke-dasharray=\"4 6\" opacity=\".5\"/><circle cx=\"50\" cy=\"50\" r=\"15\" fill=\"#2c313c\" stroke=\"#454b5c\" stroke-width=\"2\"/><rect x=\"47\" y=\"8\" width=\"6\" height=\"14\" rx=\"2\" fill=\"#ffb020\"/><rect x=\"46\" y=\"50\" width=\"8\" height=\"34\" rx=\"3\" fill=\"#3a4150\"/><rect x=\"16\" y=\"46\" width=\"30\" height=\"8\" rx=\"3\" fill=\"#3a4150\"/><rect x=\"54\" y=\"46\" width=\"30\" height=\"8\" rx=\"3\" fill=\"#3a4150\"/></svg></div>\n\n<button class=\"ver\" id=\"ver\">maneuver sim v0.7</button>\n<div id=\"fk_toast\"></div>\n  </div>\n  <div class=\"g-foot\">A maneuvering sim spun out of the <b>LiftSafe</b> operator-training app: rear-steer physics, blind-corner line-of-sight, and a hard-but-possible tip-over.</div>\n</div></div>";
+  function id(x){return slot.querySelector('#'+x);}
+
+
+"use strict";
+var cv=id('cv'), ctx=cv.getContext('2d');
+var W=0,H=0,DPR=Math.min(window.devicePixelRatio||1,2);
+var _wrap=id('fkwrap');
+function resize(){W=_wrap.clientWidth;H=_wrap.clientHeight;if(!W||!H)return;cv.width=W*DPR;cv.height=H*DPR;ctx.setTransform(DPR,0,0,DPR,0,0);}
+if(window.ResizeObserver){new ResizeObserver(resize).observe(_wrap);}else{window.addEventListener('resize',resize);}
+resize();
+
+/* ---------------- world ---------------- */
+var RACKS=[
+  {x0:-165,y0:-720,x1:-92,y1:270,tag:'L'},
+  {x0: 92,y0:-505,x1: 165,y1:270,tag:'R'},
+  {x0: 92,y0:-720,x1: 820,y1:-600,tag:'N'},
+  {x0:165,y0:-505,x1: 700,y1:-435,tag:'S'},
+  {x0:815,y0:-720,x1: 888,y1:-435,tag:'E'}
+];
+var CONES=[{x:40,y:120},{x:-40,y:-160},{x:55,y:-360},{x:300,y:-505},{x:560,y:-600}];
+var BAY={x:745,y:-548,w:120,h:96};
+var startPos={x:0,y:220,th:-Math.PI/2};
+
+var TRUCK={L:42,bodyLen:58,bodyW:32,forkLen:28,x:0,y:0,th:0,v:0};
+var STEER_MAX=0.82, V_FWD=135, V_REV=90, ACCEL=5, STEER_RATE=20;
+var ZOOM=0.8;   // camera pull-back: <1 shows more warehouse / more room to maneuver
+var TIP_LIMIT=130;                 // lateral accel that tips it (rescaled for the card speed)
+
+var ctl={dir:1, gas:0, steerTarget:0, steer:0};   // dir: 1 fwd, 0 neutral, -1 rev
+var showTrail=true, trail=[], MAXTRAIL=170;
+var clips=0, shake=0, startedAt=0, elapsed=0, phase=0, done=false, pallet={carried:true,x:0,y:0};
+var flash={}, balance=0, tilt=0, leanSign=0, tipping=false, tipT=0, tipCharge=0, tipDir=1, tipSpill=null;
+
+function reset(){
+  TRUCK.x=startPos.x;TRUCK.y=startPos.y;TRUCK.th=startPos.th;TRUCK.v=0;
+  ctl.gas=0;ctl.steer=0;ctl.steerTarget=0;   // dir stays where the user left it
+  trail=[];clips=0;shake=0;startedAt=0;elapsed=0;phase=0;done=false;pallet.carried=true;
+  flash={};balance=0;tilt=0;tipping=false;tipT=0;tipCharge=0;tipDir=1;tipSpill=null;
+  setObjective();
+}
+
+/* ---------------- controls ---------------- */
+function makeControl(el,onDown,onMove,onUp){
+  el.addEventListener('pointerdown',function(e){ e.preventDefault(); el.setPointerCapture(e.pointerId); onDown(e); });
+  el.addEventListener('pointermove',function(e){ if(el.hasPointerCapture(e.pointerId)) onMove(e); });
+  function up(e){ if(el.hasPointerCapture&&el.hasPointerCapture(e.pointerId)) el.releasePointerCapture(e.pointerId); onUp(e); }
+  el.addEventListener('pointerup',up); el.addEventListener('pointercancel',up);
+}
+// forward-only for the card (F/N/R lever removed); ctl.dir stays 1
+// FWD/REV toggle + a wheel that DRIVES while held (accelerates in the toggled dir with ramp) and STEERS by turning
+var fkDir=id('fkdir'), fkWheel=id('fkwheel'), fkWheelSvg=id('fkwheelSvg');
+fkDir.addEventListener('click',function(){ ctl.dir=-ctl.dir; fkDir.textContent=ctl.dir>0?'FWD':'REV'; fkDir.classList.toggle('rev',ctl.dir<0); });
+var wDriving=false, wGrabX=0, WSPAN=85, WMAXROT=1.15;
+fkWheel.addEventListener('pointerdown',function(e){ e.preventDefault(); try{fkWheel.setPointerCapture(e.pointerId);}catch(_){}
+  wDriving=true; wGrabX=e.clientX; ctl.gas=1;
+  var h=id('fkwheelhint'); if(h) h.classList.add('gone'); });
+fkWheel.addEventListener('pointermove',function(e){ if(!wDriving) return;
+  var st=clamp((e.clientX-wGrabX)/WSPAN,-1,1); ctl.steerTarget=st;
+  fkWheelSvg.style.transform='rotate('+(st*WMAXROT).toFixed(3)+'rad)'; });
+function wEnd(){ wDriving=false; ctl.gas=0; ctl.steerTarget=0; if(fkWheelSvg) fkWheelSvg.style.transform='rotate(0rad)'; }
+fkWheel.addEventListener('pointerup',wEnd); fkWheel.addEventListener('pointercancel',wEnd);
+function clamp(v,a,b){return v<a?a:v>b?b:v;}
+
+/* ---------------- objective ---------------- */
+function setObjective(){
+  var o=id('obj'),s=id('objStep'),t=id('objTxt');
+  o.classList.remove('done','fail');
+  if(tipping){ o.classList.add('fail'); s.textContent='Tip-over'; t.textContent='Too fast into the turn. Slow down before you steer hard. Restarting...'; return; }
+  if(done){ o.classList.add('done'); s.textContent='Complete'; t.textContent='Bay 3 stocked. Clean run: '+(clips===0?'yes':'no')+'. Restart to run it again.'; return; }
+  if(phase===0){ s.textContent='Objective 1 of 3'; t.textContent='Hold the wheel to carry the pallet up the aisle.'; }
+  else if(phase===1){ s.textContent='Objective 2 of 3'; t.textContent='Turn right to take the corner. Too fast and it tips.'; }
+  else { s.textContent='Objective 3 of 3'; t.textContent='Pull straight into Bay 3 and stop.'; }
+}
+function updatePhase(){
+  if(done||tipping) return;
+  if(phase===0 && TRUCK.y<-470) { phase=1; setObjective(); }
+  else if(phase===1 && TRUCK.x>210 && TRUCK.y>-600 && TRUCK.y<-470){ phase=2; setObjective(); }
+  else if(phase===2){
+    var inBay=TRUCK.x>BAY.x-BAY.w/2&&TRUCK.x<BAY.x+BAY.w/2&&TRUCK.y>BAY.y-BAY.h/2&&TRUCK.y<BAY.y+BAY.h/2;
+    if(inBay && Math.cos(TRUCK.th)>0.7 && Math.abs(TRUCK.v)<16){ done=true; pallet.carried=false; pallet.x=BAY.x; pallet.y=BAY.y; setObjective(); }
+  }
+}
+
+/* ---------------- sim ---------------- */
+var DT=1/60, acc=0, lastT=performance.now(), running=true;
+document.addEventListener('visibilitychange',function(){running=!document.hidden;lastT=performance.now();});
+
+function truckPoints(){
+  var th=TRUCK.th,c=Math.cos(th),s=Math.sin(th);
+  var bcx=TRUCK.x-(TRUCK.L/2)*c,bcy=TRUCK.y-(TRUCK.L/2)*s;
+  var hl=TRUCK.bodyLen/2,hw=TRUCK.bodyW/2,ft=TRUCK.bodyLen/2+TRUCK.forkLen;
+  function P(fx,fy){return {x:bcx+fx*c-fy*s,y:bcy+fx*s+fy*c};}
+  return [P(hl,-hw),P(hl,hw),P(-hl,-hw),P(-hl,hw),P(ft,-hw*0.6),P(ft,hw*0.6),P(0,-hw),P(0,hw)];
+}
+function collide(){
+  var pts=truckPoints();
+  for(var r=0;r<RACKS.length;r++){var R=RACKS[r];
+    for(var i=0;i<pts.length;i++){var p=pts[i];
+      if(p.x>R.x0&&p.x<R.x1&&p.y>R.y0&&p.y<R.y1){
+        var pl=p.x-R.x0,pr=R.x1-p.x,pt=p.y-R.y0,pb=R.y1-p.y,m=Math.min(pl,pr,pt,pb),nx=0,ny=0;
+        if(m===pl)nx=-1;else if(m===pr)nx=1;else if(m===pt)ny=-1;else ny=1;
+        TRUCK.x+=nx*(m+0.5);TRUCK.y+=ny*(m+0.5);TRUCK.v*=0.35;
+        if(!flash[R.tag]){clips++;shake=7;} flash[R.tag]=0.35; return;
+      }
+    }
+  }
+}
+function startTip(){
+  tipping=true; tipT=0; shake=13;
+  leanSign=-Math.sign(ctl.steer)||1; tipDir=leanSign;
+  var th=TRUCK.th, off=TRUCK.bodyLen/2+18;
+  tipSpill={x:TRUCK.x+Math.cos(th)*off, y:TRUCK.y+Math.sin(th)*off, th:th,
+            perpx:-Math.sin(th)*tipDir, perpy:Math.cos(th)*tipDir, t:0};
+  setObjective();
+}
+function step(dt){
+  if(tipping){
+    tipT+=dt; TRUCK.v*=Math.pow(0.03,dt);
+    if(tipSpill) tipSpill.t+=dt;
+    tilt += ((tipDir*1.2)-tilt)*clamp(6*dt,0,1);
+    if(shake>0) shake=Math.max(0,shake-16*dt);
+    if(tipT>2.0) reset();
+    return;
+  }
+  ctl.steer += (ctl.steerTarget-ctl.steer)*clamp(STEER_RATE*dt,0,1);
+  var d=ctl.steer*STEER_MAX*(1-0.58*Math.min(Math.abs(TRUCK.v)/V_FWD,1));
+  var target = (ctl.dir!==0 && ctl.gas>0.01) ? ctl.dir*ctl.gas*(ctl.dir>0?V_FWD:V_REV) : 0;
+  if(target!==0) TRUCK.v += (target-TRUCK.v)*clamp(ACCEL*dt,0,1);
+  else { var s=Math.sign(TRUCK.v),mag=Math.abs(TRUCK.v)-95*dt; TRUCK.v=mag>0?s*mag:0; }
+
+  if(Math.abs(TRUCK.v)>3 && startedAt===0) startedAt=performance.now();
+  TRUCK.th += (TRUCK.v/TRUCK.L)*Math.tan(d)*dt;
+  TRUCK.x  += TRUCK.v*Math.cos(TRUCK.th)*dt;
+  TRUCK.y  += TRUCK.v*Math.sin(TRUCK.th)*dt;
+  collide();
+
+  // lateral load / balance
+  var latAcc = TRUCK.v*TRUCK.v*Math.abs(Math.tan(d))/TRUCK.L;
+  var raw = latAcc/TIP_LIMIT;
+  balance += (raw-balance)*clamp(6*dt,0,1);
+  leanSign = -Math.sign(ctl.steer)||leanSign;
+  var targetTilt = clamp(balance,0,1)*0.6*leanSign;
+  tilt += (targetTilt-tilt)*clamp(8*dt,0,1);
+  if(balance>=1 && Math.abs(TRUCK.v)>45) tipCharge+=dt; else tipCharge=Math.max(0,tipCharge-dt*2.5);
+  if(tipCharge>0.14) startTip();
+
+  var rx=TRUCK.x-TRUCK.L*Math.cos(TRUCK.th),ry=TRUCK.y-TRUCK.L*Math.sin(TRUCK.th);
+  if(showTrail&&Math.abs(TRUCK.v)>5){trail.push({x:rx,y:ry});if(trail.length>MAXTRAIL)trail.shift();}
+  for(var k in flash){flash[k]-=dt;if(flash[k]<=0)delete flash[k];}
+  if(shake>0)shake=Math.max(0,shake-24*dt);
+  if(startedAt&&!done)elapsed=(performance.now()-startedAt)/1000;
+  updatePhase();
+}
+function loop(){
+  if(!cv.isConnected)return;
+  if(running){var now=performance.now();var f=(now-lastT)/1000;lastT=now;if(f>0.1)f=0.1;acc+=f;
+    while(acc>=DT){try{step(DT);}catch(e){}acc-=DT;} try{render();}catch(e){}}
+  setTimeout(loop,1000/60);
+}
+setTimeout(loop,1000/60);
+
+/* ---------------- line of sight (visibility polygon) ---------------- */
+var VIEW_R=470;
+function raySeg(px,py,dx,dy,s){
+  var ax=s.a.x,ay=s.a.y,ex=s.b.x-ax,ey=s.b.y-ay;
+  var denom=dx*ey-dy*ex; if(Math.abs(denom)<1e-6) return null;
+  var t1=((ax-px)*ey-(ay-py)*ex)/denom;
+  var t2=((ax-px)*dy-(ay-py)*dx)/denom;
+  if(t1>0 && t2>=0 && t2<=1) return t1; return null;
+}
+function losSegments(sx,sy,cx,cy,R){
+  var segs=[];
+  for(var i=0;i<RACKS.length;i++){var Rr=RACKS[i];
+    var x0=sx(Rr.x0),y0=sy(Rr.y0),x1=sx(Rr.x1),y1=sy(Rr.y1);
+    segs.push({a:{x:x0,y:y0},b:{x:x1,y:y0}});
+    segs.push({a:{x:x1,y:y0},b:{x:x1,y:y1}});
+    segs.push({a:{x:x1,y:y1},b:{x:x0,y:y1}});
+    segs.push({a:{x:x0,y:y1},b:{x:x0,y:y0}});
+  }
+  var L=cx-R,T=cy-R,Rt=cx+R,B=cy+R;
+  segs.push({a:{x:L,y:T},b:{x:Rt,y:T}});segs.push({a:{x:Rt,y:T},b:{x:Rt,y:B}});
+  segs.push({a:{x:Rt,y:B},b:{x:L,y:B}});segs.push({a:{x:L,y:B},b:{x:L,y:T}});
+  return segs;
+}
+function visPoly(cx,cy,segs){
+  var angs=[];
+  for(var i=0;i<segs.length;i++){
+    var a1=Math.atan2(segs[i].a.y-cy,segs[i].a.x-cx), a2=Math.atan2(segs[i].b.y-cy,segs[i].b.x-cx);
+    angs.push(a1-0.0003,a1,a1+0.0003,a2-0.0003,a2,a2+0.0003);
+  }
+  var poly=[];
+  for(var j=0;j<angs.length;j++){
+    var ang=angs[j],dx=Math.cos(ang),dy=Math.sin(ang),ct=Infinity;
+    for(var k=0;k<segs.length;k++){var t=raySeg(cx,cy,dx,dy,segs[k]); if(t!==null&&t<ct)ct=t;}
+    if(ct<Infinity) poly.push({ang:ang,x:cx+dx*ct,y:cy+dy*ct});
+  }
+  poly.sort(function(p,q){return p.ang-q.ang;});
+  return poly;
+}
+
+/* ---------------- render world ---------------- */
+function render(){
+  ctx.fillStyle='#0a0d12';ctx.fillRect(0,0,W,H);
+  ctx.save();ctx.translate(W/2,H/2);ctx.scale(ZOOM,ZOOM);ctx.translate(-W/2,-H/2);
+  var camx=TRUCK.x,camy=TRUCK.y;
+  var sh=shake>0?(Math.random()-0.5)*shake:0, sv=shake>0?(Math.random()-0.5)*shake:0;
+  function sx(px){return px-camx+W/2+sh;} function sy(py){return py-camy+H/2+sv;}
+  ctx.fillStyle='#12151a';ctx.fillRect(0,0,W,H);
+  var G=80;ctx.strokeStyle='#181c22';ctx.lineWidth=1;var ox=((-camx)%G+G)%G,oy=((-camy)%G+G)%G;ctx.beginPath();
+  for(var x=ox;x<W;x+=G){ctx.moveTo(x,0);ctx.lineTo(x,H);}for(var y=oy;y<H;y+=G){ctx.moveTo(0,y);ctx.lineTo(W,y);}ctx.stroke();
+  ctx.strokeStyle='rgba(255,176,32,.18)';ctx.lineWidth=3;ctx.setLineDash([16,14]);
+  ctx.beginPath();ctx.moveTo(sx(0),sy(240));ctx.lineTo(sx(0),sy(-540));ctx.stroke();
+  ctx.beginPath();ctx.moveTo(sx(60),sy(-548));ctx.lineTo(sx(760),sy(-548));ctx.stroke();ctx.setLineDash([]);
+  var bx=sx(BAY.x),by=sy(BAY.y);
+  ctx.save();var pulse=done?1:0.6+0.4*Math.sin(performance.now()/350);
+  ctx.strokeStyle=done?'#2fbf71':'rgba(47,191,113,'+pulse.toFixed(2)+')';ctx.lineWidth=3;ctx.setLineDash([10,8]);
+  ctx.strokeRect(bx-BAY.w/2,by-BAY.h/2,BAY.w,BAY.h);ctx.setLineDash([]);
+  ctx.fillStyle=done?'rgba(47,191,113,.18)':'rgba(47,191,113,.07)';ctx.fillRect(bx-BAY.w/2,by-BAY.h/2,BAY.w,BAY.h);
+  ctx.fillStyle='#2fbf71';ctx.font='11px ui-monospace';ctx.textAlign='center';ctx.fillText('BAY 3',bx,by-BAY.h/2-8);ctx.restore();
+  for(var i=0;i<RACKS.length;i++)drawRack(RACKS[i],sx,sy);
+  CONES.forEach(function(c){var X=sx(c.x),Y=sy(c.y);
+    ctx.fillStyle='rgba(0,0,0,.4)';ctx.beginPath();ctx.ellipse(X,Y+7,10,4,0,0,7);ctx.fill();
+    ctx.fillStyle='#ff8c3b';ctx.beginPath();ctx.moveTo(X,Y-13);ctx.lineTo(X-9,Y+7);ctx.lineTo(X+9,Y+7);ctx.closePath();ctx.fill();
+    ctx.fillStyle='#ffd7a8';ctx.fillRect(X-7,Y-2,14,4);});
+  if(!pallet.carried)drawPallet(sx(pallet.x),sy(pallet.y));
+  if(showTrail&&trail.length>1){for(var t=1;t<trail.length;t++){var a=t/trail.length;
+    ctx.strokeStyle='rgba(255,176,32,'+(a*0.5).toFixed(3)+')';ctx.lineWidth=1+a*3;
+    ctx.beginPath();ctx.moveTo(sx(trail[t-1].x),sy(trail[t-1].y));ctx.lineTo(sx(trail[t].x),sy(trail[t].y));ctx.stroke();}}
+
+  // ---- line-of-sight fog: hide everything the truck can't actually see ----
+  var lcx=W/2+sh, lcy=H/2+sv;
+  var segs=losSegments(sx,sy,lcx,lcy,VIEW_R);
+  var poly=visPoly(lcx,lcy,segs);
+  ctx.save();
+  ctx.beginPath();
+  ctx.rect(0,0,W,H);
+  if(poly.length){ ctx.moveTo(poly[0].x,poly[0].y); for(var vp=1;vp<poly.length;vp++)ctx.lineTo(poly[vp].x,poly[vp].y); ctx.closePath(); }
+  ctx.fillStyle='rgba(6,8,12,0.86)';
+  ctx.fill('evenodd');
+  ctx.restore();
+  // vision range falls off softly toward the edge
+  var rg=ctx.createRadialGradient(lcx,lcy,VIEW_R*0.42,lcx,lcy,VIEW_R);
+  rg.addColorStop(0,'rgba(6,8,12,0)');rg.addColorStop(1,'rgba(6,8,12,0.8)');
+  ctx.fillStyle=rg;ctx.fillRect(0,0,W,H);
+  // soft lit pool around the truck (no headlights, just presence)
+  var wg=ctx.createRadialGradient(lcx,lcy,0,lcx,lcy,170);
+  wg.addColorStop(0,'rgba(255,206,130,0.07)');wg.addColorStop(1,'rgba(255,206,130,0)');
+  ctx.fillStyle=wg;ctx.fillRect(0,0,W,H);
+
+  drawObjArrow(sx,sy);
+  drawTruck(sx(TRUCK.x),sy(TRUCK.y),TRUCK.th);
+  if(tipping){
+    if(tipSpill){var sl=(1-Math.pow(1-Math.min(tipSpill.t/0.6,1),2))*42;
+      drawPallet(sx(tipSpill.x+tipSpill.perpx*sl),sy(tipSpill.y+tipSpill.perpy*sl),tipSpill.th+tipSpill.t*3*tipDir);}
+    var dtp=Math.min(tipT/0.7,1);
+    ctx.save();ctx.globalAlpha=(1-dtp)*0.5;ctx.fillStyle='#c9cdd4';
+    ctx.beginPath();ctx.arc(sx(TRUCK.x),sy(TRUCK.y),12+dtp*50,0,7);ctx.fill();ctx.restore();
+    if(tipT<0.28){ctx.fillStyle='rgba(230,58,46,'+(0.4*(1-tipT/0.28)).toFixed(2)+')';ctx.fillRect(0,0,W,H);}
+  }
+  id('rSpd').textContent=Math.round(Math.abs(TRUCK.v));
+  id('rClip').textContent=clips;
+  id('rowClip').classList.toggle('warn',clips>0);
+  id('rTime').textContent=elapsed.toFixed(1);
+  ctx.restore();
+  var _vg=ctx.createRadialGradient(W/2,H/2,Math.min(W,H)*0.34,W/2,H/2,Math.max(W,H)*0.6);
+  _vg.addColorStop(0,'rgba(8,11,16,0)');_vg.addColorStop(1,'rgba(8,11,16,0.85)');
+  ctx.fillStyle=_vg;ctx.fillRect(0,0,W,H);
+}
+function drawRack(R,sx,sy){
+  var x=sx(R.x0),y=sy(R.y0),w=R.x1-R.x0,h=R.y1-R.y0;
+  ctx.fillStyle='rgba(0,0,0,.5)';ctx.fillRect(x+5,y+8,w,h);
+  ctx.fillStyle=flash[R.tag]?'#5a2320':'#1c2028';ctx.fillRect(x,y,w,h);
+  ctx.fillStyle=flash[R.tag]?'#ff5a3c':'#e0852a';var horiz=w>h;
+  if(horiz){ctx.fillRect(x,y,w,4);ctx.fillRect(x,y+h-4,w,4);}else{ctx.fillRect(x,y,4,h);ctx.fillRect(x+w-4,y,4,h);}
+  var seg=46,inset=8;
+  if(horiz){for(var px=x+10;px<x+w-30;px+=seg)palletTile(px,y+inset,seg-12,h-inset*2);}
+  else{for(var py=y+10;py<y+h-30;py+=seg)palletTile(x+inset,py,w-inset*2,seg-12);}
+  ctx.fillStyle='#0e1116';
+  if(horiz){for(var ux=x;ux<x+w;ux+=seg)ctx.fillRect(ux-2,y,4,h);}else{for(var uy=y;uy<y+h;uy+=seg)ctx.fillRect(x,uy-2,w,4);}
+}
+function palletTile(x,y,w,h){if(w<8||h<8)return;ctx.fillStyle='#7a5230';ctx.fillRect(x,y,w,h);
+  ctx.fillStyle='#a9793f';ctx.fillRect(x+2,y+2,w-4,h-4);ctx.strokeStyle='rgba(0,0,0,.25)';ctx.lineWidth=1;ctx.strokeRect(x+2,y+2,w-4,h-4);}
+function drawPallet(cx,cy,rot){ctx.save();ctx.translate(cx,cy);if(rot)ctx.rotate(rot);
+  ctx.fillStyle='rgba(0,0,0,.3)';ctx.fillRect(-16,-13,34,30);ctx.fillStyle='#7a5230';ctx.fillRect(-18,-15,34,30);
+  ctx.fillStyle='#b1813f';ctx.fillRect(-14,-11,26,22);ctx.strokeStyle='rgba(0,0,0,.3)';ctx.strokeRect(-14,-11,26,22);ctx.restore();}
+function drawObjArrow(sx,sy){
+  if(done||tipping)return;var tx,ty,ang;
+  if(phase===0){tx=0;ty=-470;ang=-Math.PI/2;}else if(phase===1){tx=320;ty=-548;ang=0;}else{tx=BAY.x;ty=BAY.y;ang=0;}
+  var X=sx(tx),Y=sy(ty),p=0.5+0.5*Math.sin(performance.now()/300);
+  ctx.save();ctx.translate(X,Y);ctx.rotate(ang);ctx.globalAlpha=0.5+0.5*p;ctx.fillStyle='#ffb020';
+  ctx.beginPath();ctx.moveTo(14,0);ctx.lineTo(-8,-11);ctx.lineTo(-8,11);ctx.closePath();ctx.fill();ctx.restore();
+}
+function drawTruck(cx,cy,th){
+  var T=TRUCK,c=Math.cos(th),s=Math.sin(th),bcx=cx-(T.L/2)*c,bcy=cy-(T.L/2)*s;
+  ctx.save();ctx.translate(bcx,bcy);ctx.rotate(th);
+  if(tipping){var _tp=Math.min(tipT/0.7,1),_e=1-Math.pow(1-_tp,3);ctx.translate(0,tipDir*_e*26);ctx.rotate(tipDir*_e*0.5);ctx.scale(1,1-0.55*_e);}
+  ctx.fillStyle='rgba(0,0,0,.42)';ctx.beginPath();ctx.ellipse(3,5,T.bodyLen*0.62,T.bodyW*0.66,0,0,7);ctx.fill();
+  var d=ctl.steer*STEER_MAX;
+  drawWheel(-T.L/2,-T.bodyW/2-2,d);drawWheel(-T.L/2,T.bodyW/2+2,d);
+  drawWheel(T.L/2,-T.bodyW/2-2,0);drawWheel(T.L/2,T.bodyW/2+2,0);
+  ctx.fillStyle='#8b929e';ctx.fillRect(T.bodyLen/2-2,-T.bodyW/2+4,4,T.bodyW-8);
+  ctx.fillRect(T.bodyLen/2,-T.bodyW/2+7,T.forkLen,5);ctx.fillRect(T.bodyLen/2,T.bodyW/2-12,T.forkLen,5);
+  if(pallet.carried&&!tipping){ctx.fillStyle='#7a5230';ctx.fillRect(T.bodyLen/2+4,-14,26,28);
+    ctx.fillStyle='#b1813f';ctx.fillRect(T.bodyLen/2+7,-11,20,22);ctx.strokeStyle='rgba(0,0,0,.3)';ctx.strokeRect(T.bodyLen/2+7,-11,20,22);}
+  var g=ctx.createLinearGradient(0,-T.bodyW/2,0,T.bodyW/2);g.addColorStop(0,'#ffc94a');g.addColorStop(1,'#f19100');
+  ctx.fillStyle=g;rr(-T.bodyLen/2,-T.bodyW/2,T.bodyLen,T.bodyW,7);ctx.fill();
+  ctx.strokeStyle='#b06f00';ctx.lineWidth=1.5;rr(-T.bodyLen/2,-T.bodyW/2,T.bodyLen,T.bodyW,7);ctx.stroke();
+  ctx.strokeStyle='#2b303b';ctx.lineWidth=3;rr(-T.bodyLen/2+8,-T.bodyW/2+5,T.bodyLen*0.5,T.bodyW-10,4);ctx.stroke();
+  ctx.fillStyle='#12141a';ctx.fillRect(-6,-7,13,14);ctx.fillStyle='#4a9eff';ctx.beginPath();ctx.arc(0,0,5,0,7);ctx.fill();
+  ctx.restore();
+}
+function drawWheel(lx,ly,ang){ctx.save();ctx.translate(lx,ly);ctx.rotate(ang);
+  ctx.fillStyle='#0d0f14';rr(-9,-5,18,10,3);ctx.fill();ctx.fillStyle='#333846';ctx.fillRect(-7,-1.5,14,3);ctx.restore();}
+function rr(x,y,w,h,r){ctx.beginPath();ctx.moveTo(x+r,y);ctx.arcTo(x+w,y,x+w,y+h,r);ctx.arcTo(x+w,y+h,x,y+h,r);ctx.arcTo(x,y+h,x,y,r);ctx.arcTo(x,y,x+w,y,r);ctx.closePath();}
+
+/* ---------------- perspective BALANCE inset (rear view) ---------------- */
+function drawBalanceInset(){
+  var pw=124,ph=112,px=W-pw-12,py=150;
+  // panel
+  ctx.save();
+  ctx.fillStyle='rgba(14,17,22,.86)';ctx.strokeStyle='#2b303b';ctx.lineWidth=1;
+  rr(px,py,pw,ph,12);ctx.fill();rr(px,py,pw,ph,12);ctx.stroke();
+  var danger = balance>=1||tipping;
+  ctx.fillStyle=danger?'#ff5a3c':'#8a909c';ctx.font='9px ui-monospace';ctx.textAlign='left';
+  ctx.fillText('BALANCE',px+10,py+16);
+  // meter
+  var mw=pw-20,mx=px+10,myy=py+ph-14;
+  ctx.fillStyle='#0d0f14';ctx.fillRect(mx,myy,mw,6);
+  var bf=clamp(balance,0,1);ctx.fillStyle=bf<0.6?'#2fbf71':(bf<0.9?'#ffb020':'#e63a2e');ctx.fillRect(mx,myy,mw*bf,6);
+
+  // rear-view forklift, tilts about outer wheel
+  var ccx=px+pw/2, groundY=py+ph-26;
+  ctx.translate(ccx,groundY);
+  // perspective ground ellipse
+  ctx.fillStyle='rgba(255,255,255,.05)';ctx.beginPath();ctx.ellipse(0,4,42,9,0,0,7);ctx.fill();
+  var pivot = (tilt>0?1:-1)*20;                 // outer wheel contact to rotate about
+  ctx.translate(pivot,0);ctx.rotate(tilt);ctx.translate(-pivot,0);
+  var col = danger? '#e63a2e' : '#f0a41f';
+  // wheels
+  ctx.fillStyle='#0d0f14';ctx.fillRect(-24,-6,14,10);ctx.fillRect(10,-6,14,10);
+  // body (slightly trapezoid for perspective)
+  ctx.fillStyle=col;ctx.beginPath();ctx.moveTo(-20,-6);ctx.lineTo(20,-6);ctx.lineTo(16,-30);ctx.lineTo(-16,-30);ctx.closePath();ctx.fill();
+  // overhead guard
+  ctx.strokeStyle='#2b303b';ctx.lineWidth=3;ctx.beginPath();
+  ctx.moveTo(-14,-30);ctx.lineTo(-12,-52);ctx.lineTo(12,-52);ctx.lineTo(14,-30);ctx.stroke();
+  // load up top (raises CG)
+  ctx.fillStyle='#7a5230';ctx.fillRect(-12,-50,24,10);
+  // CG marker
+  var cgOK = Math.abs(tilt)<0.5 && !danger;
+  ctx.fillStyle=cgOK?'#2fbf71':'#e63a2e';ctx.beginPath();ctx.arc(0,-26,4,0,7);ctx.fill();
+  ctx.restore();
+}
+
+id('btnReset').addEventListener('click',function(){reset();});
+id('btnTrail').addEventListener('click',function(){showTrail=!showTrail;this.textContent='Trail '+(showTrail?'on':'off');if(!showTrail)trail=[];});
+function toast(m){var t=id('fk_toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(function(){t.classList.remove('show');},1600);}
+id('ver').addEventListener('click',function(){toast('warehouse maneuver v0.7 \u00B7 real rollover');});
+
+ctl.dir=1;
+reset();
+
+
+}
+
 var bwrap=document.getElementById('builds');
 var detail=document.createElement('div');detail.id='bdetail';
 var curB=-1;
@@ -1423,6 +1872,7 @@ BUILDS.forEach(function(b,i){
     else if(b.demo==='triangle')buildTriangleDemo(slot);
     else if(b.demo==='brew')buildBrewDemo(slot);
     else if(b.demo==='game')buildGameDemo(slot);
+    else if(b.demo==='forklift')buildForkliftDemo(slot);
    });
   }
     detail.classList.add('show');
@@ -1440,23 +1890,23 @@ var CLAIMS=[
   ev:['Creative arts programs → sanitation → water logistics → healthcare media → AI. <b>Zero prior experience, every time.</b>',
       'Nobody taught him any of this. <span class="o">That\u2019s the point.</span>',
       'He learns whole industries from zero — same result every time: he becomes the person other people ask.']},
- {tag:"hands",q:"Script, shoot, interview, edit, publish: <span class='hl'>same set of hands</span>.",
-  ev:['<b>Director of Communications &amp; Media Production</b>, ten-location O&amp;P healthcare practice (Dec 2021\u2013now).',
-      'A media department of exactly one — video, print, social, signage, brand.',
-      '<span class="o">Sole administrator</span> of the website and every social channel.']},
+ {tag:"storyteller",q:"He makes complicated things <span class='hl'>easy to feel</span>.",
+  ev:['Takes clinical and technical subjects, prosthetics, OSHA rules, a brand, and turns them into things real people <b>watch, understand, and act on</b>.',
+      'The story comes first, <span class="o">then</span> the camera, then the edit that makes it land.',
+      'Every explainer on this page is the same move: take something dense, make it <b>click in seconds</b>.']},
  {tag:"teacher",q:"He takes people from \u201cnever touched it\u201d to <span class='hl'>\u201cLook what I can do!\u201d</span> Repeatedly, provably.",
   ev:['Taught fine art to <span class="o">~200 people</span> across every level of physical and mental ability.',
       'Learns any job well enough to <b>build its training from nothing</b> \u2014 what he does now, making the training materials for a 75-person practice.',
       'Designs the training <b>and</b> delivers it \u2014 his curriculum or yours.',
       'Ships the tools too: decision-simulation decks and a full learning app.']},
- {tag:"phone",q:"Imagine what he does with <span class='hl'>better hardware</span>.",
-  ev:['Self-taught AI video production, <b>phone-first, since 2024</b>.',
-      'Self-taught AI-assisted coding since 2026: <span class="o">~30 deployed apps</span>, all built on a smartphone.',
-      'This page included. <b>The studio fits in a pocket.</b>']},
- {tag:"operations",q:"He spent years keeping trucks, routes, and crews on schedule. <span class='hl'>Creative deadlines are a lighter lift.</span>",
-  ev:['<b>Delivery Department Manager</b>, water systems (2019\u20132021): <span class="o">routes, staff, logistics, schedules.</span>',
-      'Trainer and swing driver before that — did the job before teaching it.',
-      'The creative half of this résumé sits on <b>an operations foundation</b>. The dependability isn\u2019t new.']}
+ {tag:"hands",q:"Script, shoot, interview, edit, publish: <span class='hl'>same set of hands</span>.",
+  ev:['<b>Director of Communications &amp; Media Production</b>, ten-location O&amp;P healthcare practice (Dec 2021\u2013now).',
+      'A media department of exactly one — video, print, social, signage, brand.',
+      '<span class="o">Sole administrator</span> of the website and every social channel.']},
+ {tag:"department",q:"One person, <span class='hl'>a whole department\u2019s output</span>.",
+  ev:['Runs communications, video, web, print, and brand for a <b>ten-location, 75-person practice</b>. Solo.',
+      'The org chart says one seat. <span class="o">The output looks like a team of four to six.</span>',
+      'No hand-offs, no bottleneck: whoever plans it is the same person who ships it.']}
 ];
 var cw=document.getElementById('claims'),done=0;
 function tallyC(){document.getElementById('ctally').textContent='\u00b7 '+done+'/5 verified';}
@@ -1487,8 +1937,6 @@ CLAIMS.forEach(function(c,i){
 
 /* extras */
 var ERAS=[
- {n:"The restaurant years",s:"early 20s \u00b7 Shift Manager",
-  t:"Ran shifts and managed teams across several restaurants (often helping friends who owned them). Trained ~20 crew. Where the managing-and-teaching instinct started."},
  {n:"GameStop",s:"2008\u20132010 \u00b7 Store Manager",
   t:"Managed a store the district used to develop new managers \u2014 bringing rising employees up to keyholder and assistant-manager level. Trained 10\u201315."},
  {n:"Kent State + Hattie Larlham",s:"2014\u20132017 \u00b7 B.I.S. \u00b7 Creative Arts Specialist & Lead",
@@ -1502,7 +1950,7 @@ var ERAS=[
  {n:"The AI arc",s:"2024\u2013now \u00b7 self-taught",
   t:"AI video from a phone since 2024. AI-assisted coding since 2026 \u2014 ~30 deployed apps. This page is one of them."}
 ];
-var scrubMin=6,scrubMax=6;
+var scrubMin=5,scrubMax=5;
 var SKILLS=[
  {g:'Media',items:[
   ['CapCut','Fast-turnaround social video cut on the phone between other tasks.'],
@@ -1533,10 +1981,10 @@ var SKILLS=[
 ];
 var MODS=[
  {id:'timeline',label:'timeline',build:function(m){
-   m.innerHTML='<h3>The timeline</h3><span class="mh">// drag through seven eras</span>'+
+   m.innerHTML='<h3>The timeline</h3><span class="mh">// drag through six eras</span>'+
     '<div id="eraName"></div><div id="eraSub"></div><div id="eraTxt"></div>'+
-    '<input type="range" class="slider" id="scrub" min="0" max="6" step="1" value="6">'+
-    '<div class="ticks"><span>20s</span><span>\u201908</span><span>\u201914</span><span>\u201917</span><span>\u201919</span><span>\u201921</span><span>ai</span></div>';
+    '<input type="range" class="slider" id="scrub" min="0" max="5" step="1" value="5">'+
+    '<div class="ticks"><span>\u201908</span><span>\u201914</span><span>\u201917</span><span>\u201919</span><span>\u201921</span><span>ai</span></div>';
    var s=m.querySelector('#scrub');
    function setEra(i){
     m.querySelector('#eraName').textContent=ERAS[i].n;
@@ -1585,32 +2033,47 @@ var MODS=[
     '<a class="clink sq" href="tel:3304755301"><span class="ci">tel</span>330-475-5301</a>'+
     '<a class="clink sq" href="https://www.linkedin.com/in/motbuchanan" target="_blank" rel="noopener"><span class="ci">in</span>linkedin.com/in/motbuchanan</a>'+
     '<a class="clink sq" href="https://motbuchanan.com" target="_blank" rel="noopener"><span class="ci">web</span>motbuchanan.com</a>'+
-    '<div class="cmdlbl">// or run a command</div>'+
+        '<div class="cmdlbl">// or run a command</div>'+
+    '<div class="term sq" id="term">'+
+     '<div class="termbar"><i class="td r"></i><i class="td y"></i><i class="td g"></i><span class="tt">mot@buchanan — ~/resume</span></div>'+
+     '<div class="termout" id="termout"></div>'+
+     '<div class="termline"><span class="tp">$</span><input id="termcmd" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="type a command, or tap one below"><span class="cur"></span></div>'+
+    '</div>'+
     '<div class="cmdrow">'+
-    '<button class="cmd sq" data-c="hire"><span class="s">$</span> mot --hire</button>'+
-    '<button class="cmd sq" data-c="call"><span class="s">$</span> mot --call</button>'+
-    '<button class="cmd sq" data-c="site"><span class="s">$</span> mot --portfolio</button>'+
-    '<button class="cmd sq" data-c="in"><span class="s">$</span> mot --linkedin</button></div>'+
-    vz('<div id="cmdout">\u2192 {V} a command <span class="cur"></span></div>');
-   var RESP={
-    hire:{t:'\u2192 drafting an email\u2026 \u2713',act:function(){window.location.href='mailto:Motbuchanan@gmail.com?subject=mot%20--hire';}},
-    call:{t:'\u2192 dialing 330-475-5301\u2026 \u2713',act:function(){window.location.href='tel:3304755301';}},
-    site:{t:'\u2192 opening motbuchanan.com\u2026 \u2713',act:function(){window.open('https://motbuchanan.com','_blank');}},
-    in:{t:'\u2192 opening linkedin.com/in/motbuchanan\u2026 \u2713',act:function(){window.open('https://www.linkedin.com/in/motbuchanan','_blank');}}
+     '<button class="cmd sq" data-c="hire"><span class="s">$</span> mot --hire</button>'+
+     '<button class="cmd sq" data-c="call"><span class="s">$</span> mot --call</button>'+
+     '<button class="cmd sq" data-c="portfolio"><span class="s">$</span> mot --portfolio</button>'+
+     '<button class="cmd sq" data-c="linkedin"><span class="s">$</span> mot --linkedin</button>'+
+     '<button class="cmd sq" data-c="resume"><span class="s">$</span> mot --resume</button>'+
+     '<button class="cmd sq" data-c="demos"><span class="s">$</span> mot --demos</button>'+
+     '<button class="cmd sq" data-c="whoami"><span class="s">$</span> whoami</button>'+
+     '<button class="cmd sq" data-c="help"><span class="s">$</span> help</button>'+
+    '</div>';
+   var out=m.querySelector('#termout'), inp=m.querySelector('#termcmd');
+   var CMDS={
+    hire:{e:'mot --hire',r:'drafting an email… ✓',a:function(){location.href='mailto:Motbuchanan@gmail.com?subject=mot%20--hire';}},
+    call:{e:'mot --call',r:'dialing 330-475-5301… ✓',a:function(){location.href='tel:3304755301';}},
+    portfolio:{e:'mot --portfolio',r:'opening motbuchanan.com… ✓',a:function(){window.open('https://motbuchanan.com','_blank');}},
+    linkedin:{e:'mot --linkedin',r:'opening linkedin.com/in/motbuchanan… ✓',a:function(){window.open('https://www.linkedin.com/in/motbuchanan','_blank');}},
+    resume:{e:'mot --resume',r:'rendering the plain résumé… ✓',a:function(){var p=document.getElementById('pdfbtn');if(p)p.click();}},
+    demos:{e:'mot --demos',r:'jumping to the builds… ✓',a:function(){var b=document.getElementById('builds');if(b)b.scrollIntoView({behavior:reduce?'auto':'smooth'});}},
+    whoami:{e:'whoami',r:'tell stories and help people',a:null,hi:true},
+    help:{e:'help',r:'commands: --hire  --call  --portfolio  --linkedin  --resume  --demos  whoami  clear',a:null},
+    clear:{e:'clear',r:'',a:function(){out.innerHTML='';}}
    };
-   var out=m.querySelector('#cmdout');
-   m.querySelectorAll('.cmd').forEach(function(b){
-    b.addEventListener('click',function(){
-     m.querySelectorAll('.cmd').forEach(function(o){o.classList.remove('on');});
-     b.classList.add('on');
-     var r=RESP[b.getAttribute('data-c')];
-     if(reduce){out.innerHTML=r.t.replace(/\u2713/g,'<span class="ok">\u2713</span>');setTimeout(r.act,500);return;}
-     out.textContent='';var i=0;
-     (function ty(){out.textContent=r.t.slice(0,++i);
-      if(i<r.t.length)setTimeout(ty,16);
-      else{out.innerHTML=out.textContent.replace(/\u2713/g,'<span class="ok">\u2713</span>');setTimeout(r.act,650);}})();
-    });
-   });
+   function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
+   function fmt(t){return esc(t).replace(/✓/g,'<span class="ok">✓</span>');}
+   function push(echo,resp,act,hi){
+    var l=document.createElement('div');l.className='tl';l.innerHTML='<span class="tp">$</span> '+esc(echo);out.appendChild(l);
+    var r=document.createElement('div');r.className='tr'+(hi?' hi':'');out.appendChild(r);out.scrollTop=out.scrollHeight;
+    if(reduce||!resp){r.innerHTML=fmt(resp);out.scrollTop=out.scrollHeight;if(act)setTimeout(act,450);return;}
+    var i=0;(function ty(){r.textContent=resp.slice(0,++i);out.scrollTop=out.scrollHeight;
+     if(i<resp.length)setTimeout(ty,15);else{r.innerHTML=fmt(resp);if(act)setTimeout(act,600);}})();
+   }
+   function run(k){var c=CMDS[k];if(!c){push(k,"command not found: "+k+" — try 'help'",null);return;}push(c.e,c.r,c.a,c.hi);}
+   m.querySelectorAll('.cmd').forEach(function(b){b.addEventListener('click',function(){run(b.getAttribute('data-c'));if(inp)inp.focus();});});
+   if(inp){inp.addEventListener('keydown',function(e){if(e.key==='Enter'){var v=inp.value.trim().toLowerCase().replace(/^\$\s*/,'').replace(/^mot\s+/,'').replace(/^--/,'');inp.value='';if(v)run(v);}});}
+   push('mot --resume --interactive','type a command, or tap one below ✓',null);
   }}
 ];
 var mbtns=document.getElementById('modbtns'),mout=document.getElementById('modout');
@@ -1639,7 +2102,7 @@ document.getElementById('egghot').addEventListener('click',function(){
 });
 document.getElementById('eggclose').addEventListener('click',function(){document.getElementById('egg').classList.remove('show');});
 document.getElementById('egg').addEventListener('click',function(e){if(e.target===this)this.classList.remove('show');});
-document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v3.4 \u00b7 Aug 7 2026\nBuilt by the candidate, on a phone. Ships updates.');});
+document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v3.11 \u00b7 Aug 7 2026\nBuilt by the candidate, on a phone. Ships updates.');});
 })();
 </script>
 <script>
