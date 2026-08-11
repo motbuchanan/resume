@@ -489,13 +489,12 @@ button:focus-visible,[tabindex="0"]:focus-visible{outline:2.5px solid var(--teal
 #ambient{display:none!important}
 body{background:#12151a}
 #room{position:fixed;inset:0;z-index:-1;pointer-events:none;background:
-  conic-gradient(from 118deg at -6% -8%, transparent 0deg, rgba(255,238,214,.10) 10deg, rgba(255,236,210,.42) 26deg, rgba(255,236,210,.16) 44deg, transparent 62deg),
-  radial-gradient(62vmax 62vmax at -4% -6%, rgba(255,240,220,.30), transparent 60%),
-  radial-gradient(72vmax 56vmax at 106% 96%, rgba(64,180,170,.22), transparent 62%),
-  radial-gradient(30vmax 24vmax at 62% 50%, rgba(76,240,224,.16), transparent 74%),
-  radial-gradient(70vmax 40vmax at 50% 120%, rgba(150,134,112,.28), transparent 66%),
-  radial-gradient(150vmax 130vmax at 22% -12%, rgba(70,80,98,.40), transparent 60%),#12151a}
-#scrim{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.5;
+  conic-gradient(from 118deg at 1.3% -6.9%, transparent 0deg, rgba(254,228,196,0.130) 9deg, rgba(254,228,196,0.434) 26deg, rgba(254,228,196,0.165) 44deg, transparent 52deg),
+  radial-gradient(60vmax 60vmax at 1.3% -6.9%, rgba(255,234,208,0.294), transparent 60%),
+  linear-gradient(to left, rgba(76,240,224,0.260) 0%, rgba(76,240,224,0.088) 3.8%, transparent 9.0%),
+  radial-gradient(46vmax 82vmax at 110% 55%, rgba(76,240,224,0.130), transparent 60%),
+  radial-gradient(150vmax 130vmax at 22% -12%, rgba(70,80,98,.38), transparent 60%),#12151a}
+#scrim{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.410;
   background:radial-gradient(74vmax 96vmax at 50% 40%, rgba(8,10,14,.60), rgba(8,10,14,.28) 44%, transparent 72%)}
 #bggrain{position:fixed;inset:0;z-index:-1;pointer-events:none;opacity:.09;background-image:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%27%20width%3D%27140%27%20height%3D%27140%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.8%27%20numOctaves%3D%272%27%20stitchTiles%3D%27stitch%27%2F%3E%3CfeColorMatrix%20type%3D%27saturate%27%20values%3D%270%27%2F%3E%3C%2Ffilter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%2523n%29%27%2F%3E%3C%2Fsvg%3E")}
 #bgvgn{position:fixed;inset:0;z-index:-1;pointer-events:none;box-shadow:inset 0 0 150px 34px rgba(0,0,0,.42)}
@@ -579,7 +578,7 @@ window.__VERB=(function(){
 <div id="modout"></div>
 
 <footer>
-  <div class="ship">built &amp; shipped by the candidate · <b>v3.26</b> · <span id="ftd">Aug 11 2026</span><br>this résumé ships updates. most don't.</div>
+  <div class="ship">built &amp; shipped by the candidate · <b>v3.27</b> · <span id="ftd">Aug 11 2026</span><br>this résumé ships updates. most don't.</div>
   <span id="egghot">🎩</span>
 </footer>
 </div>
@@ -604,7 +603,7 @@ window.__VERB=(function(){
   <button id="eggclose" class="sq">Nice trick</button>
 </div></div>
 
-<span class="vb" id="vb">v3.26 · <span id="vbd">Aug 11</span></span>
+<span class="vb" id="vb">v3.27 · <span id="vbd">Aug 11</span></span>
 
 <div id="plainview">
   <div id="pvbar"><span class="t">PLAIN RESUME · for applications</span><button id="pvprint">⬇ Print / Save PDF</button><button id="pvclose">Close</button></div>
@@ -2233,7 +2232,7 @@ document.getElementById('egghot').addEventListener('click',function(){
 });
 document.getElementById('eggclose').addEventListener('click',function(){document.getElementById('egg').classList.remove('show');});
 document.getElementById('egg').addEventListener('click',function(e){if(e.target===this)this.classList.remove('show');});
-document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v3.26 \u00b7 Aug 11 2026\nBuilt by the candidate, on a phone. Ships updates.');});
+document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v3.27 \u00b7 Aug 11 2026\nBuilt by the candidate, on a phone. Ships updates.');});
 })();
 </script>
 <script>
