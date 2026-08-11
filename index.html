@@ -189,6 +189,9 @@ footer .ship b{color:var(--teal)}
 #printres p{margin-bottom:7px;font-size:13.5px}
 .pvhint{max-width:640px;margin:14px auto 0;font-family:'JetBrains Mono',monospace;font-size:.62rem;color:var(--soft);line-height:1.6;text-align:center}
 @media print{
+  @page{margin:13mm}
+  #printres h2{break-after:avoid;page-break-after:avoid}
+  #printres p,#printres li,#printres ul{break-inside:avoid;page-break-inside:avoid}
   body>*{display:none!important}
   #plainview{display:block!important;position:static;background:#fff}
   #pvbar,.pvhint{display:none!important}
@@ -472,6 +475,15 @@ body.nudged .tapchip::before{animation:none}
 #statdrawer .sd{font-size:.66rem;line-height:1.75;color:var(--soft);letter-spacing:.03em;border-left:3px solid var(--teal);padding:8px 12px;background:var(--card);border-radius:0 10px 10px 0}
 #statdrawer .sd b{color:var(--teal);font-weight:700}
 #statdrawer .sd i{color:var(--orange);font-style:normal}
+
+/* polish batch */
+button:focus-visible,[tabindex="0"]:focus-visible{outline:2.5px solid var(--teal);outline-offset:2px}
+.vd .rc-strip{position:relative}
+.vd .rc-strip.clean::after{content:"FINAL CUT ✓";position:absolute;top:-10px;right:8px;font-family:'JetBrains Mono',monospace;font-size:.5rem;font-weight:700;letter-spacing:.12em;color:#0e2b27;background:var(--teal);padding:2.5px 8px;border-radius:4px;transform:rotate(-2deg);box-shadow:0 2px 8px rgba(0,0,0,.4);animation:fcstamp .38s cubic-bezier(.2,1.7,.4,1) both}
+@keyframes fcstamp{0%{transform:rotate(-2deg) scale(1.7);opacity:0}100%{transform:rotate(-2deg) scale(1);opacity:1}}
+#ctally{display:inline-block}
+#ctally.pop{animation:ctpop .6s cubic-bezier(.2,1.8,.4,1)}
+@keyframes ctpop{0%{transform:scale(1)}35%{transform:scale(1.35);color:var(--teal)}100%{transform:scale(1)}}
 </style>
 </head>
 <body>
@@ -550,7 +562,7 @@ window.__VERB=(function(){
 <div id="modout"></div>
 
 <footer>
-  <div class="ship">built &amp; shipped by the candidate · <b>v3.22</b> · <span id="ftd">Aug 11 2026</span><br>this résumé ships updates. most don't.</div>
+  <div class="ship">built &amp; shipped by the candidate · <b>v3.25</b> · <span id="ftd">Aug 11 2026</span><br>this résumé ships updates. most don't.</div>
   <span id="egghot">🎩</span>
 </footer>
 </div>
@@ -575,7 +587,7 @@ window.__VERB=(function(){
   <button id="eggclose" class="sq">Nice trick</button>
 </div></div>
 
-<span class="vb" id="vb">v3.22 · <span id="vbd">Aug 11</span></span>
+<span class="vb" id="vb">v3.25 · <span id="vbd">Aug 11</span></span>
 
 <div id="plainview">
   <div id="pvbar"><span class="t">PLAIN RESUME · for applications</span><button id="pvprint">⬇ Print / Save PDF</button><button id="pvclose">Close</button></div>
@@ -1292,7 +1304,7 @@ if(!window.matchMedia||!window.matchMedia('(prefers-reduced-motion: reduce)').ma
 }
 
 function buildGameDemo(slot){
-  slot.innerHTML="<div class=\"gd\"><div class=\"g-card\">\n  <div class=\"g-eyebrow\">Playable demo \u00b7 round 5</div>\n  <div class=\"g-h1\">Brick Breaker</div>\n  <div class=\"g-sub\">Slide to move the paddle. Break bricks, catch power-ups, chain combos. Tougher bricks take more hits.</div>\n  <div class=\"bk-wrap\" id=\"bk_wrap\">\n    <canvas id=\"bk_cv\"></canvas>\n    <div class=\"bk-hud\"><span id=\"bk_score\">0</span><span id=\"bk_combo\"></span><span id=\"bk_lives\">\u25cf\u25cf\u25cf</span></div>\n    <div class=\"bk-over show\" id=\"bk_over\"><div class=\"big\" id=\"bk_big\">Brick Breaker</div><div class=\"sm\">tap to launch</div></div>\n  </div>\n  <div class=\"bk-legend\">\n    <span><i style=\"background:#f0a53c\"></i>expand</span>\n    <span><i style=\"background:#4cf0e0\"></i>multiball</span>\n    <span><i style=\"background:#8a6be0\"></i>slow-mo</span>\n  </div>\n  <div class=\"g-foot\">Lit like a real chamber: beveled bricks with cast shadows, a glossy ball, additive spark bursts and light flashes, and a paddle with depth and underglow.</div>\n</div></div>";
+  slot.innerHTML="<div class=\"gd\"><div class=\"g-card\">\n  <div class=\"g-eyebrow\">Playable demo \u00b7 round 5 \u00b7 mouse or touch</div>\n  <div class=\"g-h1\">Brick Breaker</div>\n  <div class=\"g-sub\">Slide to move the paddle. Break bricks, catch power-ups, chain combos. Tougher bricks take more hits.</div>\n  <div class=\"bk-wrap\" id=\"bk_wrap\">\n    <canvas id=\"bk_cv\"></canvas>\n    <div class=\"bk-hud\"><span id=\"bk_score\">0</span><span id=\"bk_combo\"></span><span id=\"bk_lives\">\u25cf\u25cf\u25cf</span></div>\n    <div class=\"bk-over show\" id=\"bk_over\"><div class=\"big\" id=\"bk_big\">Brick Breaker</div><div class=\"sm\">tap to launch</div></div>\n  </div>\n  <div class=\"bk-legend\">\n    <span><i style=\"background:#f0a53c\"></i>expand</span>\n    <span><i style=\"background:#4cf0e0\"></i>multiball</span>\n    <span><i style=\"background:#8a6be0\"></i>slow-mo</span>\n  </div>\n  <div class=\"g-foot\">Lit like a real chamber: beveled bricks with cast shadows, a glossy ball, additive spark bursts and light flashes, and a paddle with depth and underglow.</div>\n</div></div>";
   function id(x){return slot.querySelector('#'+x);}
 
 (function(){
@@ -1550,6 +1562,7 @@ var ctl={dir:1, gas:0, steerTarget:0, steer:0};   // dir: 1 fwd, 0 neutral, -1 r
 var showTrail=true, trail=[], MAXTRAIL=170;
 var clips=0, shake=0, startedAt=0, elapsed=0, phase=0, done=false, pallet={carried:true,x:0,y:0};
 var flash={}, balance=0, tilt=0, leanSign=0, tipping=false, tipT=0, tipCharge=0, tipDir=1, tipSpill=null;
+var fkFade=0, fkRt=false;
 
 function reset(){
   TRUCK.x=startPos.x;TRUCK.y=startPos.y;TRUCK.th=startPos.th;TRUCK.v=0;
@@ -1636,12 +1649,14 @@ function startTip(){
 function step(dt){
   if(tipping){
     tipT+=dt; TRUCK.v*=Math.pow(0.03,dt);
+    if(tipT>1.3&&!fkRt){fkRt=true;toast('resetting\u2026');}
     if(tipSpill) tipSpill.t+=dt;
     tilt += ((tipDir*1.2)-tilt)*clamp(6*dt,0,1);
     if(shake>0) shake=Math.max(0,shake-16*dt);
-    if(tipT>2.0) reset();
+    if(tipT>2.2){fkFade=1;fkRt=false;reset();}
     return;
   }
+  if(fkFade>0)fkFade=Math.max(0,fkFade-2.0*dt);
   ctl.steer += (ctl.steerTarget-ctl.steer)*clamp(STEER_RATE*dt,0,1);
   var d=ctl.steer*STEER_MAX*(1-0.58*Math.min(Math.abs(TRUCK.v)/V_FWD,1));
   var target = (ctl.dir!==0 && ctl.gas>0.01) ? ctl.dir*ctl.gas*(ctl.dir>0?V_FWD:V_REV) : 0;
@@ -1785,6 +1800,8 @@ function render(){
   var _vg=ctx.createRadialGradient(W/2,H/2,Math.min(W,H)*0.34,W/2,H/2,Math.max(W,H)*0.6);
   _vg.addColorStop(0,'rgba(8,11,16,0)');_vg.addColorStop(1,'rgba(8,11,16,0.85)');
   ctx.fillStyle=_vg;ctx.fillRect(0,0,W,H);
+  var _fo=0; if(tipping&&tipT>1.3)_fo=Math.min(1,(tipT-1.3)/0.8); if(fkFade>_fo)_fo=fkFade;
+  if(_fo>0){ctx.fillStyle='rgba(8,11,16,'+_fo.toFixed(2)+')';ctx.fillRect(0,0,W,H);}
 }
 function drawRack(R,sx,sy){
   var x=sx(R.x0),y=sy(R.y0),w=R.x1-R.x0,h=R.y1-R.y0;
@@ -1902,7 +1919,7 @@ function buildSculptDemo(slot){
       try{doc=new TextDecoder('utf-8').decode(Uint8Array.from(bin,function(c){return c.charCodeAt(0);}));}
       catch(e1){doc=decodeURIComponent(escape(bin));}
       fr.srcdoc=doc;
-    }catch(e){fr.src='firstbreath.html';}
+    }catch(e){fr.srcdoc='<body style="background:#05060a;color:#EAF1F8;font-family:monospace;display:flex;align-items:center;justify-content:center;height:100vh">demo failed to load \u2014 tap close and try again</body>';}
     document.body.appendChild(ov);var prev=document.body.style.overflow;document.body.style.overflow='hidden';
     function close(){ov.remove();document.body.style.overflow=prev;document.removeEventListener('keydown',onkey);}
     function onkey(e){if(e.key==='Escape')close();}
@@ -1996,7 +2013,7 @@ var CLAIMS=[
       'No hand-offs, no bottleneck: whoever plans it is the same person who ships it.']}
 ];
 var cw=document.getElementById('claims'),done=0;
-function tallyC(){document.getElementById('ctally').textContent='\u00b7 '+done+'/5 verified';}
+function tallyC(){document.getElementById('ctally').textContent='\u00b7 '+done+'/5 verified'+(done===5?' \u2713':'');}
 tallyC();
 CLAIMS.forEach(function(c,i){
  var d=document.createElement('div');d.className='claim rv';
@@ -2018,7 +2035,13 @@ CLAIMS.forEach(function(c,i){
    var r=st.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,13);
   },reduce?0:lis.length*160+120);
   done++;tallyC();
-  if(done===CLAIMS.length)earn('auditor','Verified all 5');
+  if(done===CLAIMS.length){
+   earn('auditor','Verified all 5');
+   var ct=document.getElementById('ctally');
+   if(ct){ct.classList.remove('pop');void ct.offsetWidth;ct.classList.add('pop');
+    var cr=ct.getBoundingClientRect();
+    [0,140,290].forEach(function(dl,k){setTimeout(function(){burst(cr.left+cr.width/2+(k-1)*46,cr.top+cr.height/2,16);},dl);});}
+  }
  });
 });
 
@@ -2133,6 +2156,8 @@ var MODS=[
      '<button class="cmd sq" data-c="linkedin"><span class="s">$</span> mot --linkedin</button>'+
      '<button class="cmd sq" data-c="resume"><span class="s">$</span> mot --resume</button>'+
      '<button class="cmd sq" data-c="demos"><span class="s">$</span> mot --demos</button>'+
+     '<button class="cmd sq" data-c="story"><span class="s">$</span> mot --story</button>'+
+     '<button class="cmd sq" data-c="built"><span class="s">$</span> mot --built</button>'+
      '<button class="cmd sq" data-c="whoami"><span class="s">$</span> whoami</button>'+
      '<button class="cmd sq" data-c="help"><span class="s">$</span> help</button>'+
     '</div>';
@@ -2145,7 +2170,9 @@ var MODS=[
     resume:{e:'mot --resume',r:'rendering the plain résumé… ✓',a:function(){var p=document.getElementById('pdfbtn');if(p)p.click();}},
     demos:{e:'mot --demos',r:'jumping to the builds… ✓',a:function(){var b=document.getElementById('builds');if(b)b.scrollIntoView({behavior:reduce?'auto':'smooth'});}},
     whoami:{e:'whoami',r:'tell stories and help people',a:null,hi:true},
-    help:{e:'help',r:'commands: --hire  --call  --portfolio  --linkedin  --resume  --demos  whoami  clear',a:null},
+    story:{e:'mot --story',r:'every job I\u2019ve had, I walked in knowing nothing and walked out the person people asked.\nI make complicated things easy, and I help where I can. that\u2019s the whole story.',a:null,hi:true},
+    built:{e:'mot --built',r:'no laptop, no framework. a phone, an AI, and a lot of iterations.\nevery line, demo, and pixel was built by prompting and refining what came back until it worked.',a:null},
+    help:{e:'help',r:'commands: --hire  --call  --portfolio  --linkedin  --resume  --demos  --story  --built  whoami  clear',a:null},
     clear:{e:'clear',r:'',a:function(){out.innerHTML='';}}
    };
    function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;');}
@@ -2189,7 +2216,7 @@ document.getElementById('egghot').addEventListener('click',function(){
 });
 document.getElementById('eggclose').addEventListener('click',function(){document.getElementById('egg').classList.remove('show');});
 document.getElementById('egg').addEventListener('click',function(e){if(e.target===this)this.classList.remove('show');});
-document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v3.22 \u00b7 Aug 11 2026\nBuilt by the candidate, on a phone. Ships updates.');});
+document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v3.25 \u00b7 Aug 11 2026\nBuilt by the candidate, on a phone. Ships updates.');});
 })();
 </script>
 <script>
