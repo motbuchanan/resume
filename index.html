@@ -629,7 +629,7 @@ window.__VERB=(function(){
 <div id="modout"></div>
 
 <footer>
-  <div class="ship">built &amp; shipped by the candidate · <b>v3.31</b> · <span id="ftd">Aug 11 2026</span><br>this résumé ships updates. most don't.</div>
+  <div class="ship">built &amp; shipped by the candidate · <b>v3.32</b> · <span id="ftd">Aug 11 2026</span><br>this résumé ships updates. most don't.</div>
   <span id="egghot">🎩</span>
 </footer>
 </div>
@@ -654,7 +654,7 @@ window.__VERB=(function(){
   <button id="eggclose" class="sq">Nice trick</button>
 </div></div>
 
-<span class="vb" id="vb">v3.31 · <span id="vbd">Aug 11</span></span>
+<span class="vb" id="vb">v3.32 · <span id="vbd">Aug 11</span></span>
 
 <div id="plainview">
   <div id="pvbar"><span class="t">PLAIN RESUME · for applications</span><button id="pvprint">⬇ Print / Save PDF</button><button id="pvclose">Close</button></div>
@@ -2130,7 +2130,7 @@ var ERAS=[
  {n:"The AI arc",s:"2024\u2013now \u00b7 self-taught",
   t:"AI video from a phone since 2024. AI-assisted coding since 2026 \u2014 ~30 deployed apps. This page is one of them."}
 ];
-var scrubMin=5,scrubMax=5;
+var scrubMin=0,scrubMax=0;
 var SKILLS=[
  {g:'Media',items:[
   ['CapCut','Fast-turnaround social video cut on the phone between other tasks.'],
@@ -2163,7 +2163,7 @@ var MODS=[
  {id:'timeline',label:'timeline',build:function(m){
    m.innerHTML='<h3>The timeline</h3><span class="mh">// drag through six eras</span>'+
     '<div id="eraName"></div><div id="eraSub"></div><div id="eraTxt"></div>'+
-    '<input type="range" class="slider" id="scrub" min="0" max="5" step="1" value="5">'+
+    '<input type="range" class="slider" id="scrub" min="0" max="5" step="1" value="0">'+
     '<div class="ticks"><span>\u201908</span><span>\u201914</span><span>\u201917</span><span>\u201919</span><span>\u201921</span><span>ai</span></div>';
    var s=m.querySelector('#scrub');
    function setEra(i){
@@ -2171,9 +2171,9 @@ var MODS=[
     m.querySelector('#eraSub').textContent=ERAS[i].s;
     m.querySelector('#eraTxt').textContent=ERAS[i].t;
     scrubMin=Math.min(scrubMin,i);scrubMax=Math.max(scrubMax,i);
-    if(scrubMin===0&&scrubMax===6)earn('historian','Historian');
+    if(scrubMin===0&&scrubMax===5)earn('historian','Historian');
    }
-   s.addEventListener('input',function(){setEra(+s.value);});setEra(6);
+   s.addEventListener('input',function(){setEra(+s.value);});setEra(0);
   }},
  {id:'skills',label:'skills',build:function(m){
    var html=vz('<h3>The toolkit</h3><span class="mh">// {V} any skill \u2014 see where it earns its keep</span>');
@@ -2288,7 +2288,7 @@ document.getElementById('egghot').addEventListener('click',function(){
 });
 document.getElementById('eggclose').addEventListener('click',function(){document.getElementById('egg').classList.remove('show');});
 document.getElementById('egg').addEventListener('click',function(e){if(e.target===this)this.classList.remove('show');});
-document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v3.31 \u00b7 Aug 11 2026\nBuilt by the candidate, on a phone. Ships updates.');});
+document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v3.32 \u00b7 Aug 11 2026\nBuilt by the candidate, on a phone. Ships updates.');});
 })();
 </script>
 <script>
