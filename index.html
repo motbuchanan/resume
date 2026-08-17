@@ -2097,7 +2097,6 @@ CLAIMS.forEach(function(c,i){
   var st=d.querySelector('.stamp');
   st.classList.remove('slam');void st.offsetWidth;st.classList.add('slam');
   if(withBurst&&!reduce){
-   document.body.classList.add('shake');setTimeout(function(){document.body.classList.remove('shake');},190);
    var r=st.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,13);
   }
  }
