@@ -31,10 +31,16 @@ h1{font-size:clamp(2.5rem,10vw,3.9rem);font-weight:900;line-height:.98;letter-sp
 .tcardwrap::before{content:"";position:absolute;inset:-3px -3px -6px -3px;border-radius:16px;z-index:0;background:linear-gradient(135deg,transparent 55%,rgba(76,240,224,.30));filter:blur(9px);opacity:.55}
 .tcard{position:relative;z-index:1;width:100%;height:clamp(150px,42vw,168px);transform-style:preserve-3d;transition:transform .6s cubic-bezier(.2,.7,.2,1);cursor:pointer}
 .tcard.flipped{transform:rotateY(180deg)}
-.tface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:15px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(160deg,var(--panel),var(--card));box-shadow:0 14px 34px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.05);display:flex;flex-direction:column;justify-content:center;padding:16px 20px;transition:opacity 0s linear .3s}
-.tback{transform:rotateY(180deg);opacity:0}
-.tcard.flipped .tfront{opacity:0}
-.tcard.flipped .tback{opacity:1}
+.tface{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:15px;overflow:hidden;border:1px solid var(--line);background:linear-gradient(160deg,var(--panel),var(--card));box-shadow:0 14px 34px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.05);display:flex;flex-direction:column;justify-content:center;padding:16px 20px}
+.tback{transform:rotateY(180deg)}
+@media (prefers-reduced-motion:reduce){
+  .tcard{transition:none!important;transform:none!important}
+  .tface{backface-visibility:visible;-webkit-backface-visibility:visible}
+  .tback{transform:none;opacity:0}
+  .tfront{opacity:1}
+  .tcard.flipped .tback{opacity:1}
+  .tcard.flipped .tfront{opacity:0}
+}
 .tsheen{position:absolute;inset:0;pointer-events:none;overflow:hidden;border-radius:15px}
 .tsheen::after{content:"";position:absolute;top:-60%;left:-40%;width:42%;height:220%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.14) 45%,rgba(76,240,224,.10) 55%,transparent);transform:rotate(8deg);animation:tsweep 5.2s ease-in-out infinite}
 @keyframes tsweep{0%{left:-45%}55%{left:125%}100%{left:125%}}
@@ -104,6 +110,10 @@ h1{font-size:clamp(2.5rem,10vw,3.9rem);font-weight:900;line-height:.98;letter-sp
 .ev{display:none}
 .claim.done .ev{display:block}
 .claim.done .verify{display:none}
+.claim.done .chead{cursor:pointer}
+.claim.done.collapsed .ev{display:none}
+.claim.done.collapsed{border-color:var(--line)}
+.claim.done.collapsed .cnum{background:var(--panel);border-color:var(--line);color:var(--soft)}
 .ev li{list-style:none;padding:8px 0 8px 26px;position:relative;font-size:.93rem;line-height:1.55;opacity:0;transform:translateX(-8px)}
 .ev li.in{opacity:1;transform:none;transition:all .35s ease}
 .ev li::before{content:"";position:absolute;left:2px;top:14px;width:12px;height:12px;border-radius:50%;background:var(--teal)}
@@ -618,7 +628,7 @@ window.__VERB=(function(){
 <div id="modout"></div>
 
 <footer>
-  <div class="ship">built &amp; shipped by the candidate · <b>v3.34</b> · <span id="ftd">Aug 11 2026</span><br>this résumé ships updates. most don't.</div>
+  <div class="ship">built &amp; shipped by the candidate · <b>v3.36</b> · <span id="ftd">Aug 17 2026</span><br>this résumé ships updates. most don't.</div>
   <span id="egghot">🎩</span>
 </footer>
 </div>
@@ -643,7 +653,7 @@ window.__VERB=(function(){
   <button id="eggclose" class="sq">Nice trick</button>
 </div></div>
 
-<span class="vb" id="vb">v3.34 · <span id="vbd">Aug 11</span></span>
+<span class="vb" id="vb">v3.36 · <span id="vbd">Aug 17</span></span>
 
 <div id="plainview">
   <div id="pvbar"><span class="t">PLAIN RESUME · for applications</span><button id="pvprint">⬇ Print / Save PDF</button><button id="pvclose">Close</button></div>
@@ -754,7 +764,7 @@ document.getElementById('badgebtn').addEventListener('click',function(){document
 document.getElementById('trayclose').addEventListener('click',function(){document.getElementById('tray').classList.remove('open');});
 
 /* typed hero */
-var TYPES=["$ mot --resume --interactive","// {V} anything. nothing here is required reading.","// last shipped: Aug 11 2026"];
+var TYPES=["$ mot --resume --interactive","// {V} anything. nothing here is required reading.","// last shipped: Aug 17 2026"];
 var tEl=document.getElementById('typeline'),ti=0;
 function typeNext(){
  var txt=vz(TYPES[ti%TYPES.length]);ti++;
@@ -2083,15 +2093,32 @@ CLAIMS.forEach(function(c,i){
   '<div class="stampwrap"><span class="stamp">\u2713 VERIFIED</span></div></div></div>';
  cw.appendChild(d);
  obs.observe(d);
+ function slamStamp(d,withBurst){
+  var st=d.querySelector('.stamp');
+  st.classList.remove('slam');void st.offsetWidth;st.classList.add('slam');
+  if(withBurst&&!reduce){
+   document.body.classList.add('shake');setTimeout(function(){document.body.classList.remove('shake');},190);
+   var r=st.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,13);
+  }
+ }
+ // reopening a verified claim replays the stamp (tap the header to collapse, tap again to reopen)
+ d.querySelector('.chead').addEventListener('click',function(){
+  if(!d.classList.contains('done'))return;
+  var collapsing=!d.classList.contains('collapsed');
+  d.classList.toggle('collapsed',collapsing);
+  if(!collapsing){
+   var lis=d.querySelectorAll('.ev li');
+   lis.forEach(function(li,j){li.classList.remove('in');setTimeout(function(){li.classList.add('in');},reduce?0:j*120);});
+   setTimeout(function(){slamStamp(d,true);},reduce?0:lis.length*120+100);
+  }
+ });
  d.querySelector('.verify').addEventListener('click',function(){
   if(d.classList.contains('done'))return;
   d.classList.add('done');
   var lis=d.querySelectorAll('.ev li');
   lis.forEach(function(li,j){setTimeout(function(){li.classList.add('in');},reduce?0:j*160);});
   setTimeout(function(){
-   var st=d.querySelector('.stamp');st.classList.add('slam');
-   if(!reduce){document.body.classList.add('shake');setTimeout(function(){document.body.classList.remove('shake');},190);}
-   var r=st.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,13);
+   slamStamp(d,true);
   },reduce?0:lis.length*160+120);
   done++;tallyC();
   if(done===CLAIMS.length){
@@ -2277,7 +2304,7 @@ document.getElementById('egghot').addEventListener('click',function(){
 });
 document.getElementById('eggclose').addEventListener('click',function(){document.getElementById('egg').classList.remove('show');});
 document.getElementById('egg').addEventListener('click',function(e){if(e.target===this)this.classList.remove('show');});
-document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v3.34 \u00b7 Aug 11 2026\nBuilt by the candidate, on a phone. Ships updates.');});
+document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v3.36 \u00b7 Aug 17 2026\nBuilt by the candidate, on a phone. Ships updates.');});
 })();
 </script>
 <script>
