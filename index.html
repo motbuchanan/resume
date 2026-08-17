@@ -628,7 +628,7 @@ window.__VERB=(function(){
 <div id="modout"></div>
 
 <footer>
-  <div class="ship">built &amp; shipped by the candidate · <b>v3.36</b> · <span id="ftd">Aug 17 2026</span><br>this résumé ships updates. most don't.</div>
+  <div class="ship">built &amp; shipped by the candidate · <b>v3.37</b> · <span id="ftd">Aug 17 2026</span><br>this résumé ships updates. most don't.</div>
   <span id="egghot">🎩</span>
 </footer>
 </div>
@@ -653,7 +653,7 @@ window.__VERB=(function(){
   <button id="eggclose" class="sq">Nice trick</button>
 </div></div>
 
-<span class="vb" id="vb">v3.36 · <span id="vbd">Aug 17</span></span>
+<span class="vb" id="vb">v3.37 · <span id="vbd">Aug 17</span></span>
 
 <div id="plainview">
   <div id="pvbar"><span class="t">PLAIN RESUME · for applications</span><button id="pvprint">⬇ Print / Save PDF</button><button id="pvclose">Close</button></div>
@@ -2095,12 +2095,21 @@ CLAIMS.forEach(function(c,i){
  obs.observe(d);
  function slamStamp(d,withBurst){
   var st=d.querySelector('.stamp');
-  st.classList.remove('slam');void st.offsetWidth;st.classList.add('slam');
+  // restart the stamp animation via the Web Animations API - no full-document reflow, no page flash
+  st.classList.add('slam');
+  if(st.animate){
+   st.getAnimations&&st.getAnimations().forEach(function(a){a.cancel();});
+   st.animate([
+    {transform:'rotate(-3deg) scale(2.8)',opacity:0,offset:0},
+    {transform:'rotate(-3deg) scale(.95)',opacity:1,offset:.6},
+    {transform:'rotate(-3deg) scale(1)',opacity:1,offset:1}
+   ],{duration:380,easing:'cubic-bezier(.2,.9,.3,1.2)',fill:'forwards'});
+  }
   if(withBurst&&!reduce){
    var r=st.getBoundingClientRect();burst(r.left+r.width/2,r.top+r.height/2,13);
   }
  }
- // reopening a verified claim replays the stamp (tap the header to collapse, tap again to reopen)
+ // reopening a verified claim replays the stamp only (no burst, no shake) so it stays light
  d.querySelector('.chead').addEventListener('click',function(){
   if(!d.classList.contains('done'))return;
   var collapsing=!d.classList.contains('collapsed');
@@ -2108,7 +2117,7 @@ CLAIMS.forEach(function(c,i){
   if(!collapsing){
    var lis=d.querySelectorAll('.ev li');
    lis.forEach(function(li,j){li.classList.remove('in');setTimeout(function(){li.classList.add('in');},reduce?0:j*120);});
-   setTimeout(function(){slamStamp(d,true);},reduce?0:lis.length*120+100);
+   setTimeout(function(){slamStamp(d,false);},reduce?0:lis.length*120+100);
   }
  });
  d.querySelector('.verify').addEventListener('click',function(){
@@ -2303,7 +2312,7 @@ document.getElementById('egghot').addEventListener('click',function(){
 });
 document.getElementById('eggclose').addEventListener('click',function(){document.getElementById('egg').classList.remove('show');});
 document.getElementById('egg').addEventListener('click',function(e){if(e.target===this)this.classList.remove('show');});
-document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v3.36 \u00b7 Aug 17 2026\nBuilt by the candidate, on a phone. Ships updates.');});
+document.getElementById('vb').addEventListener('click',function(){alert('Interactive r\u00e9sum\u00e9 \u2014 v3.37 \u00b7 Aug 17 2026\nBuilt by the candidate, on a phone. Ships updates.');});
 })();
 </script>
 <script>
